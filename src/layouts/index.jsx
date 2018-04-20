@@ -1,24 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { injectGlobal } from 'styled-components'
 import { navigateTo } from 'gatsby-link'
 
-import 'typeface-source-sans-pro';
-
-// ugh, @import wasn't working from index.css
-// note, could have used normalize.css
-injectGlobal`
-  html {
-    font-family: 'Source Sans Pro';
-    font-size: 10px; /* set for rem */
-    font-weight: 100;
-  }
-
-  body {
-    margin: 0;
-    padding: 0;
-  }
-`
+import 'typeface-source-sans-pro'; // ugh
+import './index.css';
 
 export default class Layout extends React.Component {
   static propTypes = {

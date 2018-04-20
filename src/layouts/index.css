@@ -1,0 +1,10 @@
+html {
+  font-family: 'Source Sans Pro';
+  font-size: 10px; /* set for rem */
+  font-weight: 100;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}

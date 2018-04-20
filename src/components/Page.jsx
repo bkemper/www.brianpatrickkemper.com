@@ -33,7 +33,7 @@ const Container = styled.div`
 `;
 
 const Item = styled.div`
-  animation: ${keyframes.SHOW} 1s linear;
+  animation: ${keyframes.SHOW} 2s ease-in;
 `;
 
 export default function Page({ children, title }) {
