@@ -4,13 +4,13 @@ module.exports = {
     'gatsby-plugin-react-next',
     'gatsby-plugin-styled-components',
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: 'gatsby-plugin-google-tagmanager',
       options: {
-        trackingId: 'UA-20171245-4',
-        head: false, // Puts tracking script in the head instead of the body
-        anonymize: true, // Setting this parameter is optional
-        respectDNT: true, // Setting this parameter is also optional
-      },
+        id: 'GTM-T4N486D',
+        // Include GTM in development.
+        // Defaults to false meaning GTM will only be loaded in production.
+        includeInDevelopment: false,
+      }
     },
     {
       resolve: 'gatsby-plugin-favicon',
