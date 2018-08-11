@@ -1,7 +1,9 @@
 module.exports = {
+  siteMetadata: {
+    // title: 'Gatsby Default Starter',
+  },
   plugins: [
     'gatsby-plugin-react-helmet',
-    'gatsby-plugin-react-next',
     'gatsby-plugin-styled-components',
     {
       resolve: 'gatsby-plugin-google-tagmanager',
@@ -15,7 +17,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-favicon',
       options: {
-        logo: './logo.png',
+        logo: './src/images/logo.png',
         injectHTML: true,
         icons: {
           android: false,

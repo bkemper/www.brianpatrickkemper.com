@@ -1,8 +1,5 @@
-import React from 'react';
-import Helmet from 'react-helmet'
 import styled from 'styled-components';
-import * as colors from '../constants/colors';
-import * as keyframes from '../constants/keyframes';
+import * as colors from '../../constants/colors';
 
 // SEE: https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 // SEE: https://medium.freecodecamp.org/the-100-correct-way-to-do-css-breakpoints-88d6a5ba1862
@@ -32,17 +29,4 @@ const Container = styled.div`
   @media (min-width: 1800px) {}
 `;
 
-const Item = styled.div`
-  animation: ${keyframes.SHOW} 2s ease-in;
-`;
-
-export default function Page({ children, title }) {
-  return (
-    <Container>
-      <Item>
-        <Helmet title={title} />
-        {children}
-      </Item>
-    </Container>
-  );
-}
+export default Container;

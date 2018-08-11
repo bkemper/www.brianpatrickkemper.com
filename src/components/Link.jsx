@@ -1,7 +1,7 @@
 import React from 'react';
 import * as icons from 'react-feather';
 import styled from 'styled-components';
-import { OutboundLink } from 'gatsby-plugin-google-analytics'
+import { OutboundLink } from 'gatsby-plugin-google-analytics';
 import * as colors from '../constants/colors';
 
 const Anchor = styled(OutboundLink)`

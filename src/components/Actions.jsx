@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import * as colors from '../constants/colors';
 
 const Container = styled.div`
   display: flex;
