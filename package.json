@@ -7,7 +7,7 @@
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write '**/*.js'",
-    "server": "gatsby server"
+    "serve": "gatsby serve"
   },
   "dependencies": {
     "babel-plugin-styled-components": "^1.5.1",
@@ -15,6 +15,8 @@
     "gatsby-plugin-favicon": "next",
     "gatsby-plugin-google-analytics": "next",
     "gatsby-plugin-google-tagmanager": "next",
+    "gatsby-plugin-manifest": "next",
+    "gatsby-plugin-offline": "next",
     "gatsby-plugin-react-helmet": "next",
     "gatsby-plugin-styled-components": "next",
     "react": "next",
