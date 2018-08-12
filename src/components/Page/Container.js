@@ -1,11 +1,9 @@
 import styled from 'styled-components';
-import * as colors from '../../constants/colors';
 
 // SEE: https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 // SEE: https://medium.freecodecamp.org/the-100-correct-way-to-do-css-breakpoints-88d6a5ba1862
 const Container = styled.div`
   align-items: center;
-  background-color: ${colors.DARK_BLUE};
   display: flex;
   font-size: 1em;
   height: 100vh;

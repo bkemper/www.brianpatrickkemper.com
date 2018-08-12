@@ -4,15 +4,15 @@ import { push } from 'gatsby';
 import PropTypes from 'prop-types';
 import Container from './Container';
 import ContainerItem from './ContainerItem';
+import * as colors from '../../constants/colors';
 
-import 'typeface-source-sans-pro'; // ugh
 
 const style = `
   html {
-    background: grey;
-    font-family: 'Source Sans Pro';
+    background: ${colors.DARK_BLUE};
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 10px; /* set for rem */
-    font-weight: 100;
+    font-weight: 200;
   }
 
   body {
@@ -51,6 +51,7 @@ export default class Page extends React.Component {
         <Helmet>
           <html lang="en" />
           <title>{this.props.title}</title>
+          <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i" rel="stylesheet" />
           <style type="text/css">{style}</style>
         </Helmet>
         <Container>
