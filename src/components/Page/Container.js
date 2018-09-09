@@ -2,16 +2,18 @@ import styled from 'styled-components';
 
 // SEE: https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 // SEE: https://medium.freecodecamp.org/the-100-correct-way-to-do-css-breakpoints-88d6a5ba1862
-const Container = styled.div`
-  align-items: center;
+const Container = styled.main`
+  align-items: flex-end;
   display: flex;
   font-size: 1em;
-  height: 100vh;
+  height: 50vh;
   justify-content: center;
+  transition: font-size 0.3s;
 
   /* for phone only */
   @media (max-width: 599px) {
     font-size: .7em;
+    transition: font-size 0.3s;
   }
 
   /* for tablet portrait */

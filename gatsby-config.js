@@ -1,12 +1,12 @@
 const colors = require('./src/constants/colors');
-// console.log(colors);
 
 module.exports = {
   siteMetadata: {
     // title: 'Gatsby Default Starter',
   },
   plugins: [
-    // SEE: https://next.gatsbyjs.org/tutorial/part-eight/#-using-gatsby-plugin-manifest
+    'gatsby-plugin-root-import',
+    // see, https://next.gatsbyjs.org/tutorial/part-eight/#-using-gatsby-plugin-manifest
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -19,8 +19,9 @@ module.exports = {
         icon: "src/images/logo.png"
       }
     },
-    // SEE: https://next.gatsbyjs.org/tutorial/part-eight/#-using-gatsby-plugin-offline
+    // see, https://next.gatsbyjs.org/tutorial/part-eight/#-using-gatsby-plugin-offline
     'gatsby-plugin-offline',
+    // see, https://www.netlify.com/blog/2018/06/28/5-pro-tips-and-plugins-for-optimizing-your-gatsby---netlify-site/
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-styled-components',
     {

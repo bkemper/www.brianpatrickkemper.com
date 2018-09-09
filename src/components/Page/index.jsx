@@ -53,7 +53,7 @@ export default class Page extends React.Component {
   // see, https://dequeuniversity.com/assets/html/jquery-summit/html5/slides/landmarks.html
   render() {
     return (
-      <main>
+      <React.Fragment>
         <Helmet>
           <html lang="en" />
           <title>{this.props.title}</title>
@@ -66,7 +66,7 @@ export default class Page extends React.Component {
         <Container>
           <ContainerItem>{this.props.children}</ContainerItem>
         </Container>
-      </main>
+      </React.Fragment>
     )
   }
 }
