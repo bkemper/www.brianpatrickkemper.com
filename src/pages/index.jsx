@@ -14,7 +14,7 @@ const HomePage = (props) => (
       Software Engineer <Link color="orange" href="//twitter.com/SparkPost" text="@SparkPost" />
     </Subhead>
     <Actions>
-      <Link href="//github.com/bkemper" icon="Github" />
+      <Link href="//github.com/bkemper" icon="GitHub" />
       <Link href="//www.linkedin.com/in/brianpatrickkemper" icon="Linkedin" />
       <Link href="//twitter.com/aBrianKemper" icon="Twitter" />
     </Actions>
