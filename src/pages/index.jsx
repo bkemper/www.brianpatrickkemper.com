@@ -1,17 +1,18 @@
-import React from 'react';
-import Actions from 'src/components/Actions';
-import Headline from 'src/components/Headline';
-import HeartRate from 'src/components/HeartRate';
-import Link from 'src/components/Link';
-import Page from 'src/components/Page';
-import Subhead from 'src/components/Subhead';
+import React from 'react'
+import Actions from 'src/components/Actions'
+import Headline from 'src/components/Headline'
+import HeartRate from 'src/components/HeartRate'
+import Link from 'src/components/Link'
+import Page from 'src/components/Page'
+import Subhead from 'src/components/Subhead'
 
 // @see https://hackernoon.com/react-stateless-functional-components-nine-wins-you-might-have-overlooked-997b0d933dbc
-const HomePage = (props) => (
+const HomePage = props => (
   <Page title="Brian Patrick Kemper">
-    <Headline>Brian Patrick Kemper</Headline>
+    <Headline>GO</Headline>
     <Subhead>
-      Software Engineer <Link color="orange" href="//twitter.com/SparkPost" text="@SparkPost" />
+      Software Engineer{' '}
+      <Link color="orange" href="//twitter.com/SparkPost" text="@SparkPost" />
     </Subhead>
     <Actions>
       <Link href="//github.com/bkemper" icon="GitHub" />
@@ -20,6 +21,6 @@ const HomePage = (props) => (
     </Actions>
     <HeartRate />
   </Page>
-);
+)
 
-export default HomePage;
+export default HomePage
