@@ -9,9 +9,9 @@ import Subhead from 'src/components/Subhead'
 // @see https://hackernoon.com/react-stateless-functional-components-nine-wins-you-might-have-overlooked-997b0d933dbc
 const HomePage = props => (
   <Page title="Brian Patrick Kemper">
-    <Headline>Brian Patrick Kemper</Headline>
+    <Headline>The Real, Brian Patrick Kemper</Headline>
     <Subhead>
-      Not a Software Engineer{' '}
+      Software Engineer
       <Link color="orange" href="//twitter.com/SparkPost" text="@SparkPost" />
     </Subhead>
     <Actions>
