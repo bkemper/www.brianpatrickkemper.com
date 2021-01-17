@@ -5,7 +5,14 @@ module.exports = {
     // author: `@gatsbyjs`,
   },
   plugins: [
-    '@chakra-ui/gatsby-plugin',
+    {
+      resolve: '@chakra-ui/gatsby-plugin',
+      options: {
+        isResettingCSS: true,
+        isUsingColorMode: true,
+        portalZIndex: 40,
+      },
+    },
     // {
     //   resolve: 'gatsby-plugin-root-import',
     //   options: {

@@ -2,9 +2,7 @@ import React from 'react';
 import {
   Badge,
   Box,
-  ChakraProvider,
   Container,
-  extendTheme,
   Heading,
   Link,
   Stack,
@@ -12,18 +10,9 @@ import {
 import { motion } from 'framer-motion';
 import Helmet from 'react-helmet'
 
-const theme = extendTheme({
-  colors: {
-    brand: {
-      blue: '#1273e6',
-      orange: '#fa6423',
-    },
-  },
-});
-
 const HomePage = () => {
   return (
-    <ChakraProvider theme={theme}>
+    <React.Fragment>
       <Helmet>
         <html lang="en" />
         <title>Brian Patrick Kemper</title>
@@ -47,7 +36,7 @@ const HomePage = () => {
           </motion.div>
         </Container>
       </main>
-    </ChakraProvider>
+    </React.Fragment>
   );
 };
 
