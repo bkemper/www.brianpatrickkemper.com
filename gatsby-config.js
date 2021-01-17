@@ -40,23 +40,5 @@ module.exports = {
         includeInDevelopment: false,
       },
     },
-    {
-      resolve: 'gatsby-plugin-favicon',
-      options: {
-        logo: './src/images/logo.png',
-        injectHTML: true,
-        icons: {
-          android: false,
-          appleIcon: false,
-          appleStartup: false,
-          coast: false,
-          favicons: true,
-          firefox: false,
-          twitter: false,
-          yandex: false,
-          windows: false,
-        },
-      },
-    },
   ],
 };
