@@ -1,13 +1,13 @@
 import React from 'react';
-// import {
-//   Badge,
-//   Box,
-//   Container,
-//   Heading,
-//   Link,
-//   Stack,
-// } from '@chakra-ui/react';
-// import { motion } from 'framer-motion';
+import {
+  Badge,
+  Box,
+  Container,
+  Heading,
+  Link,
+  Stack,
+} from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 import Helmet from 'react-helmet'
 
 const HomePage = () => {
@@ -18,8 +18,7 @@ const HomePage = () => {
         <title>Brian Patrick Kemper</title>
       </Helmet>
       <main>
-        Hi
-        {/* <Container marginTop="96" maxWidth="5xl">
+        <Container marginTop="96" maxWidth="5xl">
           <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
             <Stack spacing="2">
               <Heading as="h1" fontWeight="lighter" size="4xl">
@@ -35,7 +34,7 @@ const HomePage = () => {
               </Box>
             </Stack>
           </motion.div>
-        </Container> */}
+        </Container>
       </main>
     </React.Fragment>
   );
