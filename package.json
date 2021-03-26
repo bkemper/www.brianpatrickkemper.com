@@ -23,6 +23,7 @@
     "@chakra-ui/react": "^1.1.4",
     "@emotion/react": "^11.1.4",
     "@emotion/styled": "^11.0.0",
+    "@fontsource/raleway": "^4.2.2",
     "@sparkpost/design-tokens": "^4.8.0",
     "framer-motion": "^3.2.1",
     "gatsby": "^2.30.3",

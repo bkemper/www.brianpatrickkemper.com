@@ -16,6 +16,10 @@ const tokens = meta.reduce(
 const theme = extendTheme({
   colors: tokens.color,
   components: {},
+  fonts: {
+    heading: 'Raleway',
+    body: 'Raleway',
+  },
 });
 
 export default theme;
