@@ -2,40 +2,84 @@ import React from 'react';
 import {
   Badge,
   Box,
-  Container,
+  Button,
+  Flex,
+  Grid,
+  GridItem,
   Heading,
-  Link,
   Stack,
+  Text,
 } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
-import Helmet from 'react-helmet'
+import Helmet from 'react-helmet';
+import Cookie from '../components/Cookie';
+import Link from '../components/Link';
+import OptionalText from '../components/OptionalText';
+import useCookieConsent from '../hooks/useCookieConsent';
 
 const HomePage = () => {
+  const { consent, hasConsent } = useCookieConsent('bpk-cookie-consent');
+
   return (
     <React.Fragment>
       <Helmet>
         <html lang="en" />
         <title>Brian Patrick Kemper</title>
       </Helmet>
-      <main>
-        <Container marginTop="96" maxWidth="5xl">
-          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-            <Stack spacing="2">
-              <Heading as="h1" fontWeight="lighter" size="4xl">
-                Brian Patrick Kemper
-              </Heading>
-              <Box>
-                <Badge fontSize="md">
-                  Software Engineering Manager{' '}
-                  <Link color="brand.blue" href="//twitter.com/SparkPost">
-                    @SparkPost
-                  </Link>
-                </Badge>
-              </Box>
-            </Stack>
-          </motion.div>
-        </Container>
-      </main>
+      <Grid gap={0} minHeight="100vh" templateColumns="repeat(16, 1fr)">
+        <GridItem
+          borderColor="color-gray-300"
+          borderLeftWidth="1px"
+          borderRightWidth="1px"
+          borderStyle="dashed"
+          colStart={2}
+          colSpan={10}
+        >
+          <Flex direction="column" minHeight="100vh" padding="4">
+            <Flex as="main" alignItems="center" flexGrow="2">
+              <Stack marginBottom="8">
+                <Heading as="h1" fontWeight="hairline" size="4xl">
+                  Brian <OptionalText>Patrick</OptionalText> Kemper
+                </Heading>
+                <Box>
+                  <Badge
+                    fontSize={['xs', 'xs', 'xs', 'sm']}
+                    fontWeight="light"
+                    transition=".5s"
+                  >
+                    <OptionalText>Software Engineering</OptionalText>
+                    Manager{' '}
+                    <Link href="//twitter.com/SparkPost">@SparkPost</Link>
+                  </Badge>
+                </Box>
+              </Stack>
+            </Flex>
+            <Box as="footer">
+              <Text color="color-gray-600">
+                Built with{' '}
+                <Link href="//chakra-ui.com/">
+                  {'<'}Chakra {'/>'}
+                </Link>{' '}
+                and{' '}
+                <Link href="//design.sparkpost.com/">
+                  {'{'} Matchbox {'}'}
+                </Link>
+                . Uses <Cookie /> for Google Analytics.{' '}
+                {!hasConsent && (
+                  <Button
+                    size="xs"
+                    onClick={() => {
+                      consent();
+                    }}
+                  >
+                    COOL?
+                  </Button>
+                )}
+              </Text>
+            </Box>
+          </Flex>
+        </GridItem>
+        <GridItem colSpan={5}>{/* space for fun */}</GridItem>
+      </Grid>
     </React.Fragment>
   );
 };

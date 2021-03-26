@@ -1,12 +1,21 @@
 import { extendTheme } from '@chakra-ui/react';
+import { meta } from '@sparkpost/design-tokens';
+
+// group tokens by type
+const tokens = meta.reduce(
+  (acc, { name, type, value }) => ({
+    ...acc,
+    [type]: {
+      ...acc[type],
+      [name]: value,
+    },
+  }),
+  {}
+);
 
 const theme = extendTheme({
-  colors: {
-    brand: {
-      blue: '#1273e6',
-      orange: '#fa6423',
-    },
-  },
+  colors: tokens.color,
+  components: {},
 });
 
 export default theme;
