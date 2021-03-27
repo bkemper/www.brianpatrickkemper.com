@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Badge,
   Box,
   Button,
   Flex,
@@ -8,12 +7,14 @@ import {
   GridItem,
   Heading,
   Stack,
+  Tag,
   Text,
 } from '@chakra-ui/react';
 import Helmet from 'react-helmet';
 import Cookie from '../components/Cookie';
 import Link from '../components/Link';
 import OptionalText from '../components/OptionalText';
+import TextLink from '../components/TextLink';
 import useCookieConsent from '../hooks/useCookieConsent';
 
 // yuck!
@@ -52,7 +53,7 @@ const HomePage = () => {
           borderRightWidth="1px"
           borderStyle="dashed"
           colStart={2}
-          colSpan={10}
+          colSpan={11}
         >
           <Flex direction="column" minHeight="100vh" padding="4">
             <Flex as="main" alignItems="center" flexGrow="2">
@@ -61,28 +62,19 @@ const HomePage = () => {
                   Brian <OptionalText>Patrick</OptionalText> Kemper
                 </Heading>
                 <Box>
-                  <Badge
-                    fontSize={['xs', 'xs', 'xs', 'sm']}
-                    fontWeight="light"
-                    transition=".5s"
-                  >
-                    <OptionalText>Software Engineering</OptionalText>
-                    Manager{' '}
-                    <Link href="//twitter.com/SparkPost">@SparkPost</Link>
-                  </Badge>
+                  <Tag fontSize={['sm', 'sm', 'sm', 'md']} transition=".5s">
+                    <Link href="//www.linkedin.com/in/brianpatrickkemper/">
+                      <OptionalText>Software Engineering</OptionalText>
+                      Manager at SparkPost
+                    </Link>
+                  </Tag>
                 </Box>
               </Stack>
             </Flex>
             <Box as="footer">
               <Text color="color-gray-600">
-                Built with{' '}
-                <Link href="//chakra-ui.com/">
-                  {'<'}Chakra {'/>'}
-                </Link>{' '}
-                and{' '}
-                <Link href="//design.sparkpost.com/">
-                  {'{'} Matchbox {'}'}
-                </Link>
+                Built with <TextLink href="//chakra-ui.com/">Chakra</TextLink>{' '}
+                and <TextLink href="//design.sparkpost.com/">Matchbox</TextLink>
                 . Uses <Cookie /> for Google Analytics.{' '}
                 {!hasConsent && (
                   <Button
@@ -98,7 +90,7 @@ const HomePage = () => {
             </Box>
           </Flex>
         </GridItem>
-        <GridItem colSpan={5}>{/* space for fun */}</GridItem>
+        <GridItem colSpan={3}>{/* space for fun */}</GridItem>
       </Grid>
     </React.Fragment>
   );
