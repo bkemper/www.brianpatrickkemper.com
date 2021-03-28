@@ -8,7 +8,7 @@ const Link = ({ _focus, _hover, children, href, ...props }) => {
   return (
     <ChakraLink
       {...props}
-      color="color-blue-600"
+      color="color-blue-700"
       fontWeight="medium"
       href={href}
       rel={isExternal ? 'noopener' : undefined}
