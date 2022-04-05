@@ -1,6 +1,7 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Image from 'next/image';
 import {
   Box,
   Button,
@@ -19,6 +20,7 @@ import OptionalText from '../components/OptionalText';
 import TextLink from '../components/TextLink';
 import useCookieConsent from '../hooks/useCookieConsent';
 import fadeIn from '../keyframes/fadeIn';
+import logo from '../public/logo.png';
 
 const Home: NextPage = () => {
   const { consent, hasConsent } = useCookieConsent('bpk-cookie-consent');
@@ -48,12 +50,21 @@ const Home: NextPage = () => {
         <link rel="icon" href="/logo.png" />
       </Head>
       <Grid gap={0} minHeight="100vh" templateColumns="repeat(16, 1fr)">
+        <GridItem colSpan={1}>
+          <Box padding="25%">
+            <Image
+              alt="Brian Patrick Kemper"
+              height="75%"
+              src={logo}
+              width="75%"
+            />
+          </Box>
+        </GridItem>
         <GridItem
           borderColor="color-gray-300"
           borderLeftWidth="1px"
           borderRightWidth="1px"
           borderStyle="dashed"
-          colStart={2}
           colSpan={11}
         >
           <Flex direction="column" minHeight="100vh" padding="4">
