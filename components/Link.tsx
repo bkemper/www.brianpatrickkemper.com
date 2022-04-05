@@ -1,8 +1,15 @@
-import React from 'react';
-import { Link as ChakraLink } from '@chakra-ui/react';
+import { PropsWithChildren } from 'react';
+import {
+  Link as ChakraLink,
+  LinkProps as ChakraLinkProps,
+} from '@chakra-ui/react';
 import { ArrowUpIcon } from '@chakra-ui/icons';
 
-const Link = ({ _focus, _hover, children, href, ...props }) => {
+export type LinkProps = PropsWithChildren<
+  ChakraLinkProps & Omit<ChakraLinkProps, 'as' | 'href'> & { href: string }
+>;
+
+const Link = ({ _focus, _hover, children, href, ...props }: LinkProps) => {
   const isExternal = /^(http|\/\/)/.test(href);
 
   return (
