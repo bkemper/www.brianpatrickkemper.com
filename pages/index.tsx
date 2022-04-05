@@ -23,6 +23,8 @@ import fadeIn from '../keyframes/fadeIn';
 const Home: NextPage = () => {
   const { consent, hasConsent } = useCookieConsent('bpk-cookie-consent');
 
+  console.log('env', process.env);
+
   React.useEffect(() => {
     const gtmId = process.env.GOOGLE_TAG_MANAGER_ID;
 
