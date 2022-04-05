@@ -17,8 +17,8 @@ const theme = extendTheme({
   colors: tokens.color,
   components: {},
   fonts: {
-    heading: 'Raleway',
-    body: 'Raleway',
+    heading: 'Raleway, sans-serif',
+    body: 'Raleway, sans-serif',
   },
 });
 
