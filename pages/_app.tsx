@@ -3,6 +3,7 @@ import Script from 'next/script';
 import { ChakraProvider } from '@chakra-ui/react';
 import TagManager from 'react-gtm-module';
 import theme from '../theme';
+import isSSR from '../utils/isSSR';
 
 // yuck!
 import '@fontsource/raleway/100.css';
@@ -26,7 +27,7 @@ import '@fontsource/raleway/900-italic.css';
 
 const gtmId = process.env.GOOGLE_TAG_MANAGER_ID;
 
-if (typeof window !== 'undefined' && gtmId) {
+if (!isSSR() && gtmId) {
   TagManager.initialize({ gtmId });
 }
 

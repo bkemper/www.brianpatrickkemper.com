@@ -21,8 +21,6 @@ import useCookieConsent from '../hooks/useCookieConsent';
 const Home: NextPage = () => {
   const { consent, hasConsent } = useCookieConsent('bpk-cookie-consent');
 
-  console.log(consent, hasConsent);
-
   return (
     <>
       <Head>
