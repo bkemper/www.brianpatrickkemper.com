@@ -39,55 +39,52 @@ const Home: NextPage = () => {
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
         <link rel="icon" href="/logo.png" />
       </Head>
-      <main>
-        <Grid gap={0} minHeight="100vh" templateColumns="repeat(16, 1fr)">
-          <GridItem
-            borderColor="color-gray-300"
-            borderLeftWidth="1px"
-            borderRightWidth="1px"
-            borderStyle="dashed"
-            colStart={2}
-            colSpan={11}
-          >
-            <Flex direction="column" minHeight="100vh" padding="4">
-              <Flex as="main" alignItems="center" flexGrow="2">
-                <Stack marginBottom="8">
-                  <Heading as="h1" fontWeight="hairline" size="4xl">
-                    Brian <OptionalText>Patrick</OptionalText> Kemper
-                  </Heading>
-                  <Box>
-                    <Tag fontSize={['sm', 'sm', 'sm', 'md']} transition=".5s">
-                      <Link href="//www.linkedin.com/in/brianpatrickkemper/">
-                        <OptionalText>Software Engineering</OptionalText>
-                        Manager at SparkPost
-                      </Link>
-                    </Tag>
-                  </Box>
-                </Stack>
-              </Flex>
-              <Box as="footer">
-                <Text color="color-gray-600">
-                  Built with <TextLink href="//chakra-ui.com/">Chakra</TextLink>{' '}
-                  and{' '}
-                  <TextLink href="//design.sparkpost.com/">Matchbox</TextLink>
-                  . Uses <Cookie /> for Google Analytics.{' '}
-                  {!hasConsent && (
-                    <Button
-                      size="xs"
-                      onClick={() => {
-                        consent();
-                      }}
-                    >
-                      COOL?
-                    </Button>
-                  )}
-                </Text>
-              </Box>
+      <Grid gap={0} minHeight="100vh" templateColumns="repeat(16, 1fr)">
+        <GridItem
+          borderColor="color-gray-300"
+          borderLeftWidth="1px"
+          borderRightWidth="1px"
+          borderStyle="dashed"
+          colStart={2}
+          colSpan={11}
+        >
+          <Flex direction="column" minHeight="100vh" padding="4">
+            <Flex as="main" alignItems="center" grow={1}>
+              <Stack marginBottom="8">
+                <Heading as="h1" fontWeight="hairline" size="4xl">
+                  Brian <OptionalText>Patrick</OptionalText> Kemper
+                </Heading>
+                <Box>
+                  <Tag fontSize={['sm', 'sm', 'sm', 'md']} transition=".5s">
+                    <Link href="//www.linkedin.com/in/brianpatrickkemper/">
+                      <OptionalText>Software Engineering</OptionalText>
+                      Manager at SparkPost
+                    </Link>
+                  </Tag>
+                </Box>
+              </Stack>
             </Flex>
-          </GridItem>
-          <GridItem colSpan={3}>{/* space for fun */}</GridItem>
-        </Grid>
-      </main>
+            <Box as="footer">
+              <Text color="color-gray-600">
+                Built with <TextLink href="//chakra-ui.com/">Chakra</TextLink>{' '}
+                and <TextLink href="//design.sparkpost.com/">Matchbox</TextLink>
+                . Uses <Cookie /> for Google Analytics.{' '}
+                {!hasConsent && (
+                  <Button
+                    size="xs"
+                    onClick={() => {
+                      consent();
+                    }}
+                  >
+                    COOL?
+                  </Button>
+                )}
+              </Text>
+            </Box>
+          </Flex>
+        </GridItem>
+        <GridItem colSpan={3}>{/* space for fun */}</GridItem>
+      </Grid>
     </>
   );
 };
