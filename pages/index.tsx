@@ -1,6 +1,6 @@
+import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-// import Image from 'next/image';
 import {
   Box,
   Button,
@@ -12,14 +12,24 @@ import {
   Tag,
   Text,
 } from '@chakra-ui/react';
+import TagManager from 'react-gtm-module';
 import Cookie from '../components/Cookie';
 import Link from '../components/Link';
 import OptionalText from '../components/OptionalText';
 import TextLink from '../components/TextLink';
 import useCookieConsent from '../hooks/useCookieConsent';
+import fadeIn from '../keyframes/fadeIn';
 
 const Home: NextPage = () => {
   const { consent, hasConsent } = useCookieConsent('bpk-cookie-consent');
+
+  React.useEffect(() => {
+    const gtmId = process.env.GOOGLE_TAG_MANAGER_ID;
+
+    if (hasConsent === 'yes' && gtmId) {
+      TagManager.initialize({ gtmId });
+    }
+  }, [hasConsent]);
 
   return (
     <>
@@ -67,14 +77,15 @@ const Home: NextPage = () => {
                 Built with <TextLink href="//chakra-ui.com/">Chakra</TextLink>{' '}
                 and <TextLink href="//design.sparkpost.com/">Matchbox</TextLink>
                 . Uses <Cookie /> for Google Analytics.{' '}
-                {!hasConsent && (
+                {hasConsent === 'no' && (
                   <Button
+                    animation={`${fadeIn} 1s`} // Fade is a block element
                     size="xs"
                     onClick={() => {
                       consent();
                     }}
                   >
-                    COOL?
+                    Cool?
                   </Button>
                 )}
               </Text>
