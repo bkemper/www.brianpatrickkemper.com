@@ -23,10 +23,14 @@ import fadeIn from '../keyframes/fadeIn';
 const Home: NextPage = () => {
   const { consent, hasConsent } = useCookieConsent('bpk-cookie-consent');
 
-  console.log('env', process.env);
+  console.log('GOOGLE_TAG_MANAGER_ID', process.env.GOOGLE_TAG_MANAGER_ID);
+  console.log(
+    'NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID',
+    process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID
+  );
 
   React.useEffect(() => {
-    const gtmId = process.env.GOOGLE_TAG_MANAGER_ID;
+    const gtmId = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID;
 
     if (hasConsent === 'yes' && gtmId) {
       TagManager.initialize({ gtmId });
