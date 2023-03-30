@@ -76,8 +76,8 @@ const Home: NextPage = () => {
                 <Box>
                   <Tag fontSize={['sm', 'sm', 'sm', 'md']} transition=".5s">
                     <Link href="//www.linkedin.com/in/brianpatrickkemper/">
-                      <OptionalText>Software Engineering</OptionalText>
-                      Manager at SparkPost
+                      <OptionalText>Staff Front End</OptionalText>
+                      Engineer at Facet
                     </Link>
                   </Tag>
                 </Box>
