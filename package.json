@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "favicon": "magick -density 256x256 -background transparent -fill \"#607D8B\" public/logo.svg -define icon:auto-resize -colors 256 app/favicon.ico",
+    "favicon": "magick -background transparent public/logo.png -define icon:auto-resize=16,24,32,48,64,72,96,128,256 app/favicon.ico",
     "lint": "next lint",
     "start": "next start"
   },
