@@ -11,7 +11,7 @@ const MODES = ["system", "light", "dark"] as const;
 
 const DarkModeToggle = () => {
   const [mode, setMode] = useLocalStorage<(typeof MODES)[number]>("color-scheme", "system");
-  const mediaQuery = useMediaQuery("(prefers-color-scheme: dark)");
+  const matches = useMediaQuery("(prefers-color-scheme: dark)");
 
   const toggle = useCallback(() => {
     setMode((prevMode) => {
@@ -24,9 +24,9 @@ const DarkModeToggle = () => {
   }, [setMode]);
 
   useEffect(() => {
-    const colorScheme = mode === "system" ? (mediaQuery?.matches ? "dark" : "light") : mode;
+    const colorScheme = mode === "system" ? (matches ? "dark" : "light") : mode;
     document.documentElement.dataset.colorScheme = colorScheme;
-  }, [mediaQuery, mode]);
+  }, [matches, mode]);
 
   const icons = {
     dark: <MoonIcon height="1rem" width="1rem" />,
