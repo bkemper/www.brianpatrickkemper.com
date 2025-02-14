@@ -18,10 +18,6 @@ const lato = Lato({
 
 const fontClassName = [caveat.variable, lato.variable].join(" ");
 
-export const metadata: Metadata = {
-  title: "Brian Patrick Kemper",
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
