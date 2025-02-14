@@ -1,5 +1,4 @@
 import "./globals.css";
-import type { Metadata } from "next";
 import { Caveat, Lato } from "next/font/google";
 import * as Tooltip from "@radix-ui/react-tooltip";
 
