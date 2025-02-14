@@ -12,10 +12,10 @@ export default function Home() {
     <div className="bg-day dark:bg-night min-h-screen min-w-screen relative">
       <header className="flex gap-4 items-center justify-end px-6 py-2">
         <div>
-          <DarkModeToggle />
+          <Clock />
         </div>
         <div>
-          <Clock />
+          <DarkModeToggle />
         </div>
       </header>
       <main className="flex flex-col gap-6 h-[65vh] justify-center px-16 md:px-32 py-8">
