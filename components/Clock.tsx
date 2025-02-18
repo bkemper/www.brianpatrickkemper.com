@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import ms from "ms";
 import withClient from "./withClient";
 
@@ -13,12 +13,16 @@ const SECONDS_IN_MINUTE = 60;
 const getNow = () => new Date();
 
 const Clock = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [isPending, startTransition] = useTransition();
   const [now, setNow] = useState(getNow);
 
   useEffect(() => {
     const msToMinute = (SECONDS_IN_MINUTE - now.getSeconds()) * ms("1000") - REFRESH_RATE_OFFSET;
     const timeoutId = window.setTimeout(() => {
-      setNow(getNow);
+      startTransition(() => {
+        setNow(getNow);
+      });
     }, msToMinute);
 
     return () => clearTimeout(timeoutId);
