@@ -7,7 +7,7 @@ import VisualLeaseLogo from "@/components/logos/VisualLeaseLogo";
 import Clock from "@/components/Clock";
 import { ArrowTopRightIcon } from "@radix-ui/react-icons";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <div className="bg-day dark:bg-night min-h-screen min-w-screen relative">
       <header className="flex gap-4 items-center justify-end px-6 py-2">
