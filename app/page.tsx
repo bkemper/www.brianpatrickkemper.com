@@ -35,7 +35,6 @@ export default function HomePage() {
               ease-in-out
               gap-1
               inline-flex
-              outline-0
               px-6
               py-1
               rounded-full
