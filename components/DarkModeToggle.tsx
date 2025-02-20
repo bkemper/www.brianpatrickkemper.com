@@ -42,7 +42,6 @@ const DarkModeToggle = () => {
             duration-700
             ease-in-out
             focus:bg-night dark:focus:bg-day hover:bg-night dark:hover:bg-day
-            outline-0
             p-2
             rounded-full
             text-night dark:text-day focus:text-day dark:focus:text-night hover:text-day dark:hover:text-night

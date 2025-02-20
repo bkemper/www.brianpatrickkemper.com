@@ -12,7 +12,6 @@ const LogoLink = ({ children, href }: LogoLinkProps) => {
         block
         duration-500
         ease-in-out
-        outline-0
         px-4
         py-1
         focus:scale-110 hover:scale-110

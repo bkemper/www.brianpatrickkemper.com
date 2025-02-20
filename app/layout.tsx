@@ -1,7 +1,8 @@
 import "./globals.css";
-import type { Metadata } from "next";
 import { Caveat, Lato } from "next/font/google";
 import * as Tooltip from "@radix-ui/react-tooltip";
+import { WindowContextProvider } from "@/context/WindowContext";
+import OfflineOverlay from "@/components/OfflineOverlay";
 
 const caveat = Caveat({
   display: "swap",
@@ -18,10 +19,6 @@ const lato = Lato({
 
 const fontClassName = [caveat.variable, lato.variable].join(" ");
 
-export const metadata: Metadata = {
-  title: "Brian Patrick Kemper",
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -30,7 +27,12 @@ export default function RootLayout({
   return (
     <html className={fontClassName} lang="en">
       <body>
-        <Tooltip.Provider delayDuration={100}>{children}</Tooltip.Provider>
+        <Tooltip.Provider delayDuration={100}>
+          <WindowContextProvider>
+            {children}
+            <OfflineOverlay />
+          </WindowContextProvider>
+        </Tooltip.Provider>
       </body>
     </html>
   );

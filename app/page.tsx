@@ -7,18 +7,21 @@ import VisualLeaseLogo from "@/components/logos/VisualLeaseLogo";
 import Clock from "@/components/Clock";
 import { ArrowTopRightIcon } from "@radix-ui/react-icons";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <div className="bg-day dark:bg-night min-h-screen min-w-screen relative">
       <header className="flex gap-4 items-center justify-end px-6 py-2">
         <div>
-          <DarkModeToggle />
+          <Clock />
         </div>
         <div>
-          <Clock />
+          <DarkModeToggle />
         </div>
       </header>
       <main className="flex flex-col gap-6 h-[65vh] justify-center px-16 md:px-32 py-8">
+        <title>Brian Patrick Kemper</title>
+        <meta name="keywords" content="software, engineer" />
+
         <h1 className="font-sign text-8xl text-night dark:text-day">
           Brian <span className="hidden lg:inline">Patrick</span>{" "}
           <span className="hidden sm:inline">Kemper</span>
@@ -32,7 +35,6 @@ export default function Home() {
               ease-in-out
               gap-1
               inline-flex
-              outline-0
               px-6
               py-1
               rounded-full
