@@ -1,7 +1,39 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-:focus-visible {
-  @apply outline-0;
+@custom-variant dark (&:where([data-color-scheme="dark"], [data-color-scheme="dark"] *));
+
+@theme {
+  --color-day: hsl(220 100% 98%);
+  --color-gray: hsl(231 10% 45%);
+  --color-muted: hsl(231 10% 75%);
+  --color-night: hsl(220 46% 16%);
+
+  --font-mono: var(--font-lato);
+  --font-sans: var(--font-lato);
+  --font-sign: var(--font-caveat);
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes puff {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+}
+
+@layer base {
+  :focus-visible {
+    outline: none;
+  }
 }
