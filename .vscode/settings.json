@@ -1,0 +1,13 @@
+{
+  "cSpell.words": ["autoincrement", "datasource"],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  // disabled to avoid conflict with Prettier
+  "eslint.format.enable": false,
+  // needed to detect the correct configuration
+  "eslint.workingDirectories": [{ "mode": "auto" }],
+  "prettier.enable": true,
+  "prettier.requireConfig": false,
+  "prettier.useEditorConfig": false
+}
