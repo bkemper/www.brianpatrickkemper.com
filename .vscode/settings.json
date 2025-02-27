@@ -9,5 +9,10 @@
   "eslint.workingDirectories": [{ "mode": "auto" }],
   "prettier.enable": true,
   "prettier.requireConfig": false,
-  "prettier.useEditorConfig": false
+  "prettier.useEditorConfig": true,
+
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.suggest.preview": true
+  }
 }
