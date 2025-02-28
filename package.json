@@ -9,6 +9,7 @@
     "favicon": "magick -background transparent public/logo.png -define icon:auto-resize=16,24,32,48,64,72,96,128,256 app/favicon.ico",
     "lint": "next lint",
     "set:timezone": "sudo systemsetup -settimezone",
+    "sso": "aws sso login --profile brianpatrickkemper-sandbox",
     "start": "next start"
   },
   "dependencies": {
