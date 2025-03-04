@@ -19,9 +19,8 @@ export default function HomePage() {
         </div>
       </header>
       <main className="flex flex-col gap-6 h-[65vh] justify-center px-16 md:px-32 py-8">
-        <h1 className="font-sign text-8xl text-night dark:text-day">
-          Brian <span className="hidden lg:inline">Patrick</span>{" "}
-          <span className="hidden sm:inline">Kemper</span>
+        <h1 className="font-sign h-[1em] overflow-hidden text-8xl text-night text-wrap dark:text-day">
+          Brian Patrick Kemper
         </h1>
         <p>
           <a
