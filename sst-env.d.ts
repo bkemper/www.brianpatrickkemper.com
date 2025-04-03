@@ -5,9 +5,13 @@
 
 declare module "sst" {
   export interface Resource {
-    "MyWeb": {
-      "type": "sst.aws.Nextjs"
+    "BpkService": {
+      "service": string
+      "type": "sst.aws.Service"
       "url": string
+    }
+    "BpkVpc": {
+      "type": "sst.aws.Vpc"
     }
   }
 }

@@ -1,7 +1,9 @@
 export async function GET() {
   return Response.json({
     data: {
-      message: "What up homie",
+      name: "Brian Patrick Kemper",
+      title: "Software Engineer",
+      url: "//www.linkedin.com/in/brianpatrickkemper/",
     },
   });
 }
