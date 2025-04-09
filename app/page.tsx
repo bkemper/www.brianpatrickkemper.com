@@ -5,7 +5,7 @@ import SparkpostLogo from "@/components/logos/SparkpostLogo";
 import StaqLogo from "@/components/logos/StaqLogo";
 import VisualLeaseLogo from "@/components/logos/VisualLeaseLogo";
 import Clock from "@/components/Clock";
-import { ArrowTopRightIcon } from "@radix-ui/react-icons";
+import Link from "@/components/Link";
 
 export default function HomePage() {
   return (
@@ -18,13 +18,14 @@ export default function HomePage() {
           <DarkModeToggle />
         </div>
       </header>
-      <main className="flex flex-col gap-6 h-[65vh] justify-center px-16 md:px-32 py-8">
-        <h1 className="font-sign h-[1em] overflow-hidden text-8xl text-night text-wrap dark:text-day">
-          Brian Patrick Kemper
-        </h1>
-        <p>
-          <a
-            className="
+      <main>
+        <section className="flex flex-col gap-6 h-[65vh] justify-center px-16 md:px-32 py-8">
+          <h1 className="font-sign h-[1em] overflow-hidden text-8xl text-night text-wrap dark:text-day">
+            Brian Patrick Kemper
+          </h1>
+          <p>
+            <a
+              className="
               focus:bg-night dark:focus:bg-day hover:bg-night dark:hover:bg-day
               border border-muted focus:border-night dark:focus:border-day hover:border-night dark:hover:border-day
               duration-700
@@ -38,14 +39,13 @@ export default function HomePage() {
               text-sm
               transition-color
             "
-            href="//www.linkedin.com/in/brianpatrickkemper/"
-            rel="noopener noreferrer"
-          >
-            Software Engineer <ArrowTopRightIcon height="1rem" width="1rem" />
-          </a>
-        </p>
-      </main>
-      <footer>
+              href="//www.linkedin.com/in/brianpatrickkemper/"
+              rel="noopener noreferrer"
+            >
+              Software Engineer
+            </a>
+          </p>
+        </section>
         <section>
           <h2 className="sr-only">Company Logos</h2>
           <ul className="flex flex-wrap-reverse gap-16 justify-center p-16">
@@ -71,6 +71,13 @@ export default function HomePage() {
             </li>
           </ul>
         </section>
+      </main>
+      <footer>
+        <ul className="flex gap-4 justify-center p-16 text-sm text-gray">
+          <li>
+            {new Date().getFullYear()} &copy; <Link href="//github.com/bkemper">bkemper</Link>
+          </li>
+        </ul>
       </footer>
     </div>
   );
