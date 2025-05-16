@@ -5,9 +5,11 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "deploy": "sst deploy --stage main",
-    "dev": "sst dev",
-    "diff": "sst diff --stage main",
+    "cdk:bootstrap": "cdk bootstrap",
+    "cdk:deploy": "cdk deploy",
+    "cdk:diff": "cdk diff",
+    "cdk:synth": "cdk synth",
+    "dev": "next dev",
     "favicon": "magick -background transparent public/logo.png -define icon:auto-resize=16,24,32,48,64,72,96,128,256 app/favicon.ico",
     "lint": "next lint",
     "login": "aws sso login --profile brianpatrickkemper-sandbox",
@@ -25,7 +27,6 @@
     "next": "^15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "sst": "3.9.19",
     "usehooks-ts": "^3.1.1"
   },
   "devDependencies": {
@@ -36,10 +37,14 @@
     "@types/node": "^22.13.2",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
+    "aws-cdk": "^2.131.0",
+    "aws-cdk-lib": "^2.131.0",
+    "constructs": "^10.3.0",
     "eslint": "^9.21.0",
     "eslint-config-next": "^15.1.7",
     "postcss": "^8",
     "tailwindcss": "^4.0.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   },
   "engines": {
