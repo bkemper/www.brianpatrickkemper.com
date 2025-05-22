@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# see, https://docs.localstack.cloud/user-guide/integrations/aws-cli/
+
+aws configure set profile.local.aws_access_key_id test
+aws configure set profile.local.aws_secret_access_key test
+aws configure set profile.local.endpoint_url http://localhost:4566
+aws configure set profile.local.output json
+aws configure set profile.local.region us-east-1

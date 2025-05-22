@@ -1,89 +1,43 @@
-import * as cdk from "aws-cdk-lib";
+import { Stack, StackProps } from "aws-cdk-lib";
 import { Construct } from "constructs";
+import {
+  DefaultInstanceTenancy,
+  IpAddresses,
+  IpProtocol,
+  SubnetType,
+  Vpc,
+} from "aws-cdk-lib/aws-ec2";
 
-export class WebsiteStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+export class WebsiteStack extends Stack {
+  constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    // // Create a VPC with public subnets in us-east-1a and us-east-1b
-    // // (supported by CloudFront's VPC origins)
-    // const vpc = new ec2.Vpc(this, "BpkVpc", {
-    //   maxAzs: 2,
-    //   subnetConfiguration: [
-    //     {
-    //       name: "public",
-    //       subnetType: ec2.SubnetType.PUBLIC,
-    //     },
-    //   ],
-    //   vpcName: "BpkVpc",
-    // });
-
-    // // Create an ECS Cluster
-    // const cluster = new ecs.Cluster(this, "BpkCluster", {
-    //   vpc,
-    //   clusterName: "BpkCluster",
-    // });
-
-    // // Create a Fargate service running the Next.js app
-    // const loadBalancedFargateService = new ecsPatterns.ApplicationLoadBalancedFargateService(
-    //   this,
-    //   "BpkService",
-    //   {
-    //     cluster,
-    //     desiredCount: 1,
-    //     cpu: 512,
-    //     memoryLimitMiB: 1024,
-    //     taskImageOptions: {
-    //       image: ecs.ContainerImage.fromAsset(path.resolve(__dirname, "../..")),
-    //       containerPort: 3000,
-    //     },
-    //     publicLoadBalancer: true,
-    //   }
-    // );
-
-    // // Create an ACM certificate
-    // const certificate = new acm.Certificate(this, "BpkCertificate", {
-    //   domainName: "brianpatrickkemper.com",
-    //   subjectAlternativeNames: ["www.brianpatrickkemper.com"],
-    //   validation: acm.CertificateValidation.fromDns(),
-    // });
-
-    // // Create a CloudFront cache policy
-    // const cachePolicy = new cloudfront.CachePolicy(this, "BpkCachePolicy", {
-    //   cachePolicyName: "BpkCachePolicy",
-    //   defaultTtl: cdk.Duration.seconds(3600),
-    //   maxTtl: cdk.Duration.seconds(86400),
-    //   minTtl: cdk.Duration.seconds(0),
-    //   enableAcceptEncodingGzip: true,
-    //   enableAcceptEncodingBrotli: true,
-    // });
-
-    // // Create a CloudFront distribution
-    // const distribution = new cloudfront.Distribution(this, "BpkCdn", {
-    //   defaultBehavior: {
-    //     origin: new origins.LoadBalancerV2Origin(loadBalancedFargateService.loadBalancer, {
-    //       protocolPolicy: cloudfront.OriginProtocolPolicy.HTTP_ONLY,
-    //     }),
-    //     cachePolicy,
-    //     allowedMethods: cloudfront.AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
-    //     viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-    //     compress: true,
-    //   },
-    //   domainNames: ["brianpatrickkemper.com", "www.brianpatrickkemper.com"],
-    //   certificate,
-    //   priceClass: cloudfront.PriceClass.PRICE_CLASS_200,
-    // });
-
-    // // Output the CloudFront distribution URL
-    // new cdk.CfnOutput(this, "DistributionUrl", {
-    //   value: `https://${distribution.distributionDomainName}`,
-    //   description: "The URL of the CloudFront distribution",
-    // });
-
-    // // Output the load balancer URL
-    // new cdk.CfnOutput(this, "LoadBalancerUrl", {
-    //   value: loadBalancedFargateService.loadBalancer.loadBalancerDnsName,
-    //   description: "The URL of the load balancer",
-    // });
+    // a Virtual Private Cloud (VPC) is virtual network associated to a single AWS Region that defines
+    // the boundary around deployed AWS services and resources, public and private subnets are created in each
+    // availability zone, use network ACLs to restrict inbound and outbound traffic on subnets
+    // internet gateway, use route table to define rules for where network traffic is directed
+    new Vpc(this, "BpkVpc", {
+      // must be in one of the AWS Regions that are supported for VPC origins
+      // see, https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-vpc-origins.html#vpc-origins-supported-regions
+      availabilityZones: [`${this.region}a`, `${this.region}b`],
+      // $$$ for dedicated hardware
+      defaultInstanceTenancy: DefaultInstanceTenancy.DEFAULT,
+      // a Classless Inter-Domain Routing (CIDR) range defines a range of IP addresses
+      ipAddresses: IpAddresses.cidr("10.0.0.0/16"),
+      // $$$ for dual stack (IPv4 and IPv6)
+      ipProtocol: IpProtocol.IPV4_ONLY,
+      //
+      subnetConfiguration: [
+        {
+          //
+          name: "BpkSubnetPublic",
+          subnetType: SubnetType.PUBLIC,
+        },
+        {
+          name: "BpkSubnetPrivate",
+          subnetType: SubnetType.PRIVATE_ISOLATED,
+        },
+      ],
+    });
   }
 }

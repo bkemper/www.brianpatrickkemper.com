@@ -7,6 +7,7 @@
     "inlineSources": true,
     "lib": ["es2022"],
     "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "noFallthroughCasesInSwitch": false,
     "noImplicitAny": true,
     "noImplicitReturns": true,
@@ -19,5 +20,5 @@
     "target": "ES2022",
     "typeRoots": ["./node_modules/@types"]
   },
-  "exclude": ["cdk.out", "node_modules"]
+  "exclude": ["node_modules", "cdk.out"]
 }
