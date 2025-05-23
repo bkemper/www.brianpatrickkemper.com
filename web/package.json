@@ -6,6 +6,8 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
+    "docker:build": "docker build -t bpk-web .",
+    "docker:run": "docker run --publish 3000:3000 --rm bpk-web",
     "favicon": "magick -background transparent public/logo.png -define icon:auto-resize=16,24,32,48,64,72,96,128,256 app/favicon.ico",
     "lint": "next lint",
     "set:timezone": "sudo systemsetup -settimezone",
