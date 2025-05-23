@@ -22,14 +22,16 @@ export class WebsiteStack extends Stack {
       availabilityZones: [`${this.region}a`, `${this.region}b`],
       // $$$ for dedicated hardware
       defaultInstanceTenancy: DefaultInstanceTenancy.DEFAULT,
+      // enable logging of network flow information for a VPC, subnet, or network interface and store it CloudWatch
+      flowLogs: {
+        BpkFlowLog: {},
+      },
       // a Classless Inter-Domain Routing (CIDR) range defines a range of IP addresses
       ipAddresses: IpAddresses.cidr("10.0.0.0/16"),
       // $$$ for dual stack (IPv4 and IPv6)
       ipProtocol: IpProtocol.IPV4_ONLY,
-      //
       subnetConfiguration: [
         {
-          //
           name: "BpkSubnetPublic",
           subnetType: SubnetType.PUBLIC,
         },
