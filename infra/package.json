@@ -1,0 +1,36 @@
+{
+  "name": "@bpk/infra",
+  "version": "0.0.0",
+  "bin": {
+    "cdk-init": "bin/cdk-init.js"
+  },
+  "scripts": {
+    "cdk": "cdk --profile brianpatrickkemper-sandbox",
+    "local:auth": "localstack auth set-token",
+    "local:bootstrap": "cdklocal bootstrap --profile local",
+    "local:deploy": "cdklocal deploy --profile local",
+    "local:destroy": "cdklocal destroy --profile local",
+    "local:install": "brew install localstack/tap/localstack-cli",
+    "local:setup": "./bin/setup-local",
+    "local:start": "LOCALSTACK_USE_SSL=1 localstack start --detached",
+    "local:stop": "localstack stop",
+    "local:update": "localstack update"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.195.0",
+    "cdk-nag": "^2.35.102",
+    "constructs": "^10.0.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/lodash": "^4.17.17",
+    "@types/node": "22.7.9",
+    "aws-cdk": "2.1016.0",
+    "aws-cdk-local": "^3.0.1",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.6.3"
+  }
+}
