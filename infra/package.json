@@ -19,10 +19,12 @@
   "dependencies": {
     "aws-cdk-lib": "2.195.0",
     "cdk-nag": "^2.35.102",
-    "constructs": "^10.0.0"
+    "constructs": "^10.0.0",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
+    "@types/lodash": "^4.17.17",
     "@types/node": "22.7.9",
     "aws-cdk": "2.1016.0",
     "aws-cdk-local": "^3.0.1",
