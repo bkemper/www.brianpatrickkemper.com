@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "astro": "pnpm --filter astro",
     "infra": "pnpm --filter infra",
     "login": "aws sso login --profile brianpatrickkemper-sandbox",
     "web": "pnpm --filter web"
