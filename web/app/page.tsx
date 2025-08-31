@@ -1,11 +1,13 @@
 import DarkModeToggle from "@/components/DarkModeToggle";
 import LogoLink from "@/components/LogoLink";
 import FacetLogo from "@/components/logos/FacetLogo";
+import PieInsuranceLogo from "@/components/logos/PieInsuranceLogo";
 import SparkpostLogo from "@/components/logos/SparkpostLogo";
 import StaqLogo from "@/components/logos/StaqLogo";
 import VisualLeaseLogo from "@/components/logos/VisualLeaseLogo";
 import Clock from "@/components/Clock";
 import Link from "@/components/Link";
+import TimelineTick from "@/components/TimelineTick";
 
 export default function HomePage() {
   return (
@@ -19,44 +21,44 @@ export default function HomePage() {
         </div>
       </header>
       <main>
-        <section className="flex flex-col gap-6 h-[65vh] justify-center px-16 md:px-32 py-8">
+        <section className="flex flex-col gap-6 h-[55vh] justify-center px-16 md:px-32">
           <h1 className="font-sign h-[1em] overflow-hidden text-8xl text-night text-wrap dark:text-day">
             Brian Patrick Kemper
           </h1>
           <p>
             <a
               className="
-              focus:bg-night dark:focus:bg-day hover:bg-night dark:hover:bg-day
-              border border-muted focus:border-night dark:focus:border-day hover:border-night dark:hover:border-day
-              duration-700
-              ease-in-out
-              gap-1
-              inline-flex
-              px-6
-              py-1
-              rounded-full
-              text-night dark:text-day focus:text-day dark:focus:text-night hover:text-day dark:hover:text-night
-              text-sm
-              transition-color
-            "
+                focus:bg-night dark:focus:bg-day hover:bg-night dark:hover:bg-day
+                border border-muted focus:border-night dark:focus:border-day hover:border-night dark:hover:border-day
+                duration-700
+                ease-in-out
+                gap-1
+                inline-flex
+                px-6
+                py-1
+                rounded-full
+                text-night dark:text-day focus:text-day dark:focus:text-night hover:text-day dark:hover:text-night
+                text-sm
+                transition-color
+              "
               href="//www.linkedin.com/in/brianpatrickkemper/"
               rel="noopener noreferrer"
             >
-              Software Engineer
+              Product Software Engineer
             </a>
           </p>
         </section>
-        <section>
+        <section className="p-16 md:px-32">
           <h2 className="sr-only">Company Logos</h2>
-          <ul className="flex flex-wrap-reverse gap-16 justify-center p-16">
+          <ul className="flex flex-row-reverse flex-wrap gap-4 justify-center-safe">
             <li>
-              <LogoLink href="//www.linkedin.com/company/staq/">
-                <StaqLogo />
+              <LogoLink href="//www.linkedin.com/company/pieinsurance/">
+                <PieInsuranceLogo />
               </LogoLink>
             </li>
             <li>
-              <LogoLink href="//www.linkedin.com/company/sparkpost/">
-                <SparkpostLogo />
+              <LogoLink href="//www.linkedin.com/company/visual-lease/">
+                <VisualLeaseLogo />
               </LogoLink>
             </li>
             <li>
@@ -65,8 +67,13 @@ export default function HomePage() {
               </LogoLink>
             </li>
             <li>
-              <LogoLink href="//www.linkedin.com/company/visual-lease/">
-                <VisualLeaseLogo />
+              <LogoLink href="//www.linkedin.com/company/sparkpost/">
+                <SparkpostLogo />
+              </LogoLink>
+            </li>
+            <li>
+              <LogoLink href="//www.linkedin.com/company/staq/">
+                <StaqLogo />
               </LogoLink>
             </li>
           </ul>

@@ -15,7 +15,7 @@ const LogoLink = ({ children, href }: LogoLinkProps) => {
         px-4
         py-1
         focus:scale-110 hover:scale-110
-        text-7xl
+        text-6xl
         text-muted focus:text-night dark:focus:text-day hover:text-night dark:hover:text-day
         transition-all
       "
