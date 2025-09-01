@@ -7,7 +7,6 @@ import StaqLogo from "@/components/logos/StaqLogo";
 import VisualLeaseLogo from "@/components/logos/VisualLeaseLogo";
 import Clock from "@/components/Clock";
 import Link from "@/components/Link";
-import TimelineTick from "@/components/TimelineTick";
 
 export default function HomePage() {
   return (
