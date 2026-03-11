@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "authenticate": "aws sso login --profile brianpatrickkemper-sandbox",
     "infra": "pnpm --filter infra",
-    "login": "aws sso login --profile brianpatrickkemper-sandbox",
     "web": "pnpm --filter web"
   },
   "engines": {
