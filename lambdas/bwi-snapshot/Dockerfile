@@ -1,4 +1,4 @@
-FROM public.ecr.aws/lambda/nodejs:20 AS builder
+FROM public.ecr.aws/lambda/nodejs:24 AS builder
 
 WORKDIR /var/task
 
@@ -9,7 +9,7 @@ COPY tsconfig.json ./
 COPY src ./src
 RUN pnpm exec tsc && pnpm prune --prod
 
-FROM public.ecr.aws/lambda/nodejs:20
+FROM public.ecr.aws/lambda/nodejs:24
 
 WORKDIR /var/task
 
