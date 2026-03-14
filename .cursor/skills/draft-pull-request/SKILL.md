@@ -1,15 +1,17 @@
 ---
 name: draft-pull-request
-description: Draft pull request titles and descriptions from branch changes, then create a draft PR with gh if none exists. Use when the user asks to draft a PR, write a pull request, summarize changes for a PR, or create a PR description.
+description: Draft or update pull request titles and descriptions from branch changes; create a draft PR with gh if none exists. Use when the user asks to draft a PR, write a pull request, update or revise the PR title or description, summarize changes for a PR, or create a PR description.
 ---
 
 # Draft Pull Request
 
-Draft PR title and body from the current branch and diff, then use GitHub CLI (`gh`) to create a draft PR if one doesn't already exist. Gather context first, then fill the template, then create.
+Draft or update PR title and body from the current branch and diff; use GitHub CLI (`gh`) to create a draft PR if one doesn't already exist. Gather context first, then fill the template.
+
+**Updating an existing PR**: When the user asks to update or revise the title/description, use the current PR body (e.g. `gh pr view --json body,title`) plus the latest diff as context, then redraft using the same template and guidelines.
 
 ## Workflow
 
-1. **Gather context**: Branch name, base branch, and the diff (e.g. `git diff main...HEAD` or `git log main..HEAD --oneline`). Read changed files as needed to summarize behavior.
+1. **Gather context**: Branch name, base branch, and the diff (e.g. `git diff main...HEAD` or `git log main..HEAD --oneline`). If updating, also fetch current title/body with `gh pr view`. Read changed files as needed to summarize behavior.
 2. **Draft title**: Short, imperative, under ~72 chars. Prefer scope prefix when clear (e.g. `feat(bwi-snapshot): add S3 upload`).
 3. **Draft body**: Use the template below. Omit sections that don’t apply.
 
