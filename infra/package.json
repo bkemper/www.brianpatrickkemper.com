@@ -5,6 +5,7 @@
     "cdk-init": "bin/cdk-init.js"
   },
   "scripts": {
+    "cdk": "cdk",
     "cdk:local": "cdk --profile brianpatrickkemper-sandbox"
   },
   "dependencies": {
