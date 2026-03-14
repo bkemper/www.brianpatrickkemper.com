@@ -8,7 +8,7 @@ export class WorkflowStack extends Stack {
     super(scope, id, props);
 
     const audience = "sts.amazonaws.com";
-    const subject = `repo:bkemper/www.brianpatrickkemper.com:ref:refs/heads/tsa`;
+    const subject = `repo:bkemper/www.brianpatrickkemper.com:environment:production`;
     const url = "https://token.actions.githubusercontent.com";
 
     const provider = new iam.OpenIdConnectProvider(this, "GitHubProvider", {
@@ -38,7 +38,8 @@ export class WorkflowStack extends Stack {
     NagSuppressions.addResourceSuppressions(role, [
       {
         id: "AwsSolutions-IAM4",
-        reason: "Deploy role intentionally uses AdministratorAccess for full CDK deploy scope.",
+        reason:
+          "Deploy role intentionally uses AdministratorAccess for full CDK deploy scope.",
         appliesTo: [
           "Policy::arn:<AWS::Partition>:iam::aws:policy/AdministratorAccess",
         ],
