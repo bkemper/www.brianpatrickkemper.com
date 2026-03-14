@@ -40,5 +40,6 @@ jobs:
 
       - name: Deploy production
         env:
+          CDK_DISABLE_TELEMETRY: 1
           CDK_ENV: production
-        run: pnpm infra cdk deploy --require-approval never
+        run: pnpm infra cdk deploy ProductionBwiSnapshotStack --require-approval never
