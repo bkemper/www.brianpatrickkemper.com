@@ -39,14 +39,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Deploy changed stacks (production)
-        if: steps.changed.outputs.stacks != '[]'
-        working-directory: infra
+      - name: Deploy production
         env:
           CDK_ENV: production
-        run: |
-          STACKS='${{ steps.changed.outputs.stacks }}'
-          for stack in $(echo "$STACKS" | jq -r '.[]'); do
-            echo "Deploying $stack-${CDK_ENV}..."
-            pnpm exec cdk deploy "$stack-${CDK_ENV}" --require-approval never
-          done
+        run: pnpm infra exec cdk deploy --require-approval never

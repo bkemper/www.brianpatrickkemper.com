@@ -36,7 +36,7 @@ import path from "node:path";
 import { availabilityZone, globalBucketName } from "../utils/format";
 
 interface WebsiteStackProps extends StackProps {
-  environmentName: string;
+  stage: string;
 }
 
 export class WebsiteStack extends Stack {
@@ -77,11 +77,7 @@ export class WebsiteStack extends Stack {
     });
 
     const myLogBucket = new Bucket(this, "BpkLogBucket", {
-      bucketName: globalBucketName(
-        this,
-        "bpk-website-logs",
-        props.environmentName,
-      ),
+      bucketName: globalBucketName(this, "bpk-website-logs", props.stage),
       blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
       enforceSSL: true,
       objectOwnership: ObjectOwnership.BUCKET_OWNER_PREFERRED,

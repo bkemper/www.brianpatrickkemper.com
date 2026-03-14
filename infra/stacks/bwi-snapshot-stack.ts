@@ -18,7 +18,7 @@ import path from "node:path";
 import { globalBucketName } from "../utils/format";
 
 interface BwiSnapshotStackProps extends StackProps {
-  environmentName: string;
+  stage: string;
 }
 
 export class BwiSnapshotStack extends Stack {
@@ -26,11 +26,7 @@ export class BwiSnapshotStack extends Stack {
     super(scope, id, props);
 
     const logBucket = new Bucket(this, "BwiSnapshotLogBucket", {
-      bucketName: globalBucketName(
-        this,
-        "bwi-snapshot-logs",
-        props.environmentName,
-      ),
+      bucketName: globalBucketName(this, "bwi-snapshot-logs", props.stage),
       blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
       encryption: BucketEncryption.S3_MANAGED,
       enforceSSL: true,
@@ -47,7 +43,7 @@ export class BwiSnapshotStack extends Stack {
     ]);
 
     const snapshotBucket = new Bucket(this, "BwiSnapshotBucket", {
-      bucketName: globalBucketName(this, "bwi-snapshot", props.environmentName),
+      bucketName: globalBucketName(this, "bwi-snapshot", props.stage),
       blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
       encryption: BucketEncryption.S3_MANAGED,
       enforceSSL: true,

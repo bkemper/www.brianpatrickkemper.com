@@ -1,44 +1,53 @@
 import * as cdk from "aws-cdk-lib";
 import { WebsiteStack } from "./stacks/website-stack";
 import { BwiSnapshotStack } from "./stacks/bwi-snapshot-stack";
+import { WorkflowStack } from "./stacks/workflows-stack";
 import { AwsSolutionsChecks } from "cdk-nag";
 import { pascalCase } from "./utils/format";
 
 const app = new cdk.App();
 
-const environments = ["preview", "production"];
-const environmentName =
-  process.env.CDK_ENV ?? app.node.tryGetContext("environmentName");
+const env = {
+  account: process.env.CDK_DEFAULT_ACCOUNT,
+  region: process.env.CDK_DEFAULT_REGION,
+};
+const stage = process.env.CDK_ENV;
+const stages = ["preview", "production"];
 
-if (!environmentName) {
-  throw new Error(
-    `Requires environmentName, choose either ${environments.join(" or ")}`,
-  );
+if (!stage) {
+  throw new Error(`Requires CDK_ENV, choose either ${stages.join(" or ")}`);
 }
 
-if (!environments.includes(environmentName)) {
+if (!stages.includes(stage)) {
   throw new Error(
-    `Unknown "${environmentName}" environmentName, choose either ${environments.join(" or ")}`,
+    `Unknown "${stage}" CDK_ENV, choose either ${stages.join(" or ")}`,
   );
 }
 
 // see, https://aws.amazon.com/blogs/devops/manage-application-security-and-compliance-with-the-aws-cloud-development-kit-and-cdk-nag/
 cdk.Aspects.of(app).add(new AwsSolutionsChecks({ verbose: true }));
 
-new WebsiteStack(app, pascalCase(`${environmentName}WebsiteStack`), {
-  env: {
-    account: process.env.CDK_DEFAULT_ACCOUNT,
-    region: process.env.CDK_DEFAULT_REGION,
-  },
-  environmentName,
+//
+//
+//
+new BwiSnapshotStack(app, pascalCase(`${stage}BwiSnapshotStack`), {
+  env,
+  stage,
 });
 
-new BwiSnapshotStack(app, pascalCase(`${environmentName}BwiSnapshotStack`), {
-  env: {
-    account: process.env.CDK_DEFAULT_ACCOUNT,
-    region: process.env.CDK_DEFAULT_REGION,
-  },
-  environmentName,
+//
+// The infrastructure for the www.brianpatrickkemper.com site
+//
+new WebsiteStack(app, pascalCase(`${stage}WebsiteStack`), {
+  env,
+  stage,
+});
+
+//
+// The identity provider needed to run CDK in GitHub workflows
+//
+new WorkflowStack(app, "WorkflowStack", {
+  env,
 });
 
 app.synth();
