@@ -40,6 +40,7 @@ jobs:
 
       - name: Deploy production
         env:
+          CDK_DEFAULT_REGION: ${{ vars.AWS_REGION || 'us-east-1' }}
           CDK_DISABLE_TELEMETRY: 1
           CDK_ENV: production
-        run: pnpm infra cdk deploy ProductionBwiSnapshotStack --require-approval never
+        run: pnpm infra run cdk deploy ProductionBwiSnapshotStack --require-approval never

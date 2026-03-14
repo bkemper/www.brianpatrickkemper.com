@@ -5,16 +5,7 @@
     "cdk-init": "bin/cdk-init.js"
   },
   "scripts": {
-    "cdk": "cdk --profile brianpatrickkemper-sandbox",
-    "local:auth": "localstack auth set-token",
-    "local:bootstrap": "cdklocal bootstrap --profile local",
-    "local:deploy": "cdklocal deploy --profile local",
-    "local:destroy": "cdklocal destroy --profile local",
-    "local:install": "brew install localstack/tap/localstack-cli",
-    "local:setup": "./bin/setup-local",
-    "local:start": "LOCALSTACK_USE_SSL=1 localstack start --detached",
-    "local:stop": "localstack stop",
-    "local:update": "localstack update"
+    "cdk:local": "cdk --profile brianpatrickkemper-sandbox"
   },
   "dependencies": {
     "aws-cdk-lib": "2.195.0",
