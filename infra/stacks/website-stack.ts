@@ -1,6 +1,9 @@
 import { Duration, Stack, StackProps } from "aws-cdk-lib";
 import { Construct } from "constructs";
-import { Certificate, CertificateValidation } from "aws-cdk-lib/aws-certificatemanager";
+import {
+  Certificate,
+  CertificateValidation,
+} from "aws-cdk-lib/aws-certificatemanager";
 import {
   AllowedMethods,
   CachePolicy,
@@ -20,7 +23,11 @@ import {
   SubnetType,
   Vpc,
 } from "aws-cdk-lib/aws-ec2";
-import { ContainerImage, ContainerInsights, Cluster } from "aws-cdk-lib/aws-ecs";
+import {
+  ContainerImage,
+  ContainerInsights,
+  Cluster,
+} from "aws-cdk-lib/aws-ecs";
 import { Platform } from "aws-cdk-lib/aws-ecr-assets";
 import { ApplicationLoadBalancedFargateService } from "aws-cdk-lib/aws-ecs-patterns";
 import { BlockPublicAccess, Bucket, ObjectOwnership } from "aws-cdk-lib/aws-s3";
@@ -28,8 +35,12 @@ import { NagSuppressions } from "cdk-nag";
 import path from "node:path";
 import { availabilityZone, globalBucketName } from "../utils/format";
 
+interface WebsiteStackProps extends StackProps {
+  stage: string;
+}
+
 export class WebsiteStack extends Stack {
-  constructor(scope: Construct, id: string, props?: StackProps) {
+  constructor(scope: Construct, id: string, props: WebsiteStackProps) {
     super(scope, id, props);
 
     // a Virtual Private Cloud (VPC) is virtual network associated to a single AWS Region that defines
@@ -39,7 +50,10 @@ export class WebsiteStack extends Stack {
     const myVpc = new Vpc(this, "BpkVpc", {
       // must be in one of the AWS Regions that are supported for VPC origins
       // see, https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-vpc-origins.html#vpc-origins-supported-regions
-      availabilityZones: [availabilityZone(this, "a"), availabilityZone(this, "b")],
+      availabilityZones: [
+        availabilityZone(this, "a"),
+        availabilityZone(this, "b"),
+      ],
       // $$$ for dedicated hardware
       defaultInstanceTenancy: DefaultInstanceTenancy.DEFAULT,
       // enable logging of network flow information for a VPC, subnet, or network interface and store it CloudWatch
@@ -63,7 +77,7 @@ export class WebsiteStack extends Stack {
     });
 
     const myLogBucket = new Bucket(this, "BpkLogBucket", {
-      bucketName: globalBucketName(this, "bpk-website-logs"),
+      bucketName: globalBucketName(this, "bpk-website-logs", props.stage),
       blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
       enforceSSL: true,
       objectOwnership: ObjectOwnership.BUCKET_OWNER_PREFERRED,
@@ -90,55 +104,73 @@ export class WebsiteStack extends Stack {
 
     const myWebServicePort = 80;
 
-    const myWebService = new ApplicationLoadBalancedFargateService(this, "BpkWebService", {
-      assignPublicIp: true,
-      cluster: myWebCluster,
-      cpu: 512,
-      desiredCount: 1,
-      listenerPort: myWebServicePort,
-      memoryLimitMiB: 1024,
-      openListener: false,
-      publicLoadBalancer: false,
-      redirectHTTP: false,
-      taskImageOptions: {
-        containerPort: 3000,
-        environment: {},
-        image: ContainerImage.fromAsset(path.resolve(__dirname, "../../web"), {
-          platform: Platform.LINUX_AMD64,
-        }),
+    const myWebService = new ApplicationLoadBalancedFargateService(
+      this,
+      "BpkWebService",
+      {
+        assignPublicIp: true,
+        cluster: myWebCluster,
+        cpu: 512,
+        desiredCount: 1,
+        listenerPort: myWebServicePort,
+        memoryLimitMiB: 1024,
+        openListener: false,
+        publicLoadBalancer: false,
+        redirectHTTP: false,
+        taskImageOptions: {
+          containerPort: 3000,
+          environment: {},
+          image: ContainerImage.fromAsset(
+            path.resolve(__dirname, "../../web"),
+            {
+              platform: Platform.LINUX_AMD64,
+            },
+          ),
+        },
       },
-    });
+    );
 
-    myWebService.loadBalancer.connections.allowFrom(Peer.anyIpv4(), Port.tcp(80));
+    myWebService.loadBalancer.connections.allowFrom(
+      Peer.anyIpv4(),
+      Port.tcp(80),
+    );
 
     NagSuppressions.addResourceSuppressions(
       myWebService.loadBalancer,
       [
         {
           id: "AwsSolutions-EC23",
-          reason: "TODO: restrict this load balancer from anyIpv4 to a specific IP address range",
+          reason:
+            "TODO: restrict this load balancer from anyIpv4 to a specific IP address range",
         },
       ],
-      true
+      true,
     );
 
     myWebService.loadBalancer.logAccessLogs(myLogBucket, "alb-access-logs");
-    myWebService.loadBalancer.logConnectionLogs(myLogBucket, "alb-connection-logs");
+    myWebService.loadBalancer.logConnectionLogs(
+      myLogBucket,
+      "alb-connection-logs",
+    );
 
     NagSuppressions.addResourceSuppressions(
       myWebService.taskDefinition.executionRole!,
       [{ id: "AwsSolutions-IAM5", reason: "TODO: fix this" }],
-      true
+      true,
     );
 
-    const myDistroCachePolicy = new CachePolicy(this, "BpkDistributionCachePolicy", {
-      cachePolicyName: "BpkDistributionCachePolicy",
-      defaultTtl: Duration.seconds(3600),
-      enableAcceptEncodingBrotli: true,
-      enableAcceptEncodingGzip: true,
-      maxTtl: Duration.seconds(86400),
-      minTtl: Duration.seconds(0),
-    });
+    const myDistroCachePolicy = new CachePolicy(
+      this,
+      "BpkDistributionCachePolicy",
+      {
+        cachePolicyName: "BpkDistributionCachePolicy",
+        defaultTtl: Duration.seconds(3600),
+        enableAcceptEncodingBrotli: true,
+        enableAcceptEncodingGzip: true,
+        maxTtl: Duration.seconds(86400),
+        minTtl: Duration.seconds(0),
+      },
+    );
 
     const [myDistroDomainName, ...myDistroAlternativeDomainNames] =
       this.account === "137068238831"
@@ -159,10 +191,13 @@ export class WebsiteStack extends Stack {
         allowedMethods: AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
         cachePolicy: myDistroCachePolicy,
         compress: true,
-        origin: VpcOrigin.withApplicationLoadBalancer(myWebService.loadBalancer, {
-          httpPort: myWebServicePort,
-          protocolPolicy: OriginProtocolPolicy.HTTP_ONLY,
-        }),
+        origin: VpcOrigin.withApplicationLoadBalancer(
+          myWebService.loadBalancer,
+          {
+            httpPort: myWebServicePort,
+            protocolPolicy: OriginProtocolPolicy.HTTP_ONLY,
+          },
+        ),
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
       },
       domainNames: myDistroDomainName
