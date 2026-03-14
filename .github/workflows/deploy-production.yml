@@ -1,0 +1,52 @@
+name: Deploy production
+
+on:
+  push:
+    branches: [tsa]
+
+concurrency:
+  group: production
+  cancel-in-progress: false
+
+jobs:
+  deploy-production:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_PRODUCTION_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION || 'us-east-1' }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Deploy changed stacks (production)
+        if: steps.changed.outputs.stacks != '[]'
+        working-directory: infra
+        env:
+          CDK_ENV: production
+        run: |
+          STACKS='${{ steps.changed.outputs.stacks }}'
+          for stack in $(echo "$STACKS" | jq -r '.[]'); do
+            echo "Deploying $stack-${CDK_ENV}..."
+            pnpm exec cdk deploy "$stack-${CDK_ENV}" --require-approval never
+          done

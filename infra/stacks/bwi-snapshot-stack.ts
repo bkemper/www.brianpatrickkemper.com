@@ -17,12 +17,20 @@ import { NagSuppressions } from "cdk-nag";
 import path from "node:path";
 import { globalBucketName } from "../utils/format";
 
+interface BwiSnapshotStackProps extends StackProps {
+  environmentName: string;
+}
+
 export class BwiSnapshotStack extends Stack {
-  constructor(scope: Construct, id: string, props?: StackProps) {
+  constructor(scope: Construct, id: string, props: BwiSnapshotStackProps) {
     super(scope, id, props);
 
     const logBucket = new Bucket(this, "BwiSnapshotLogBucket", {
-      bucketName: globalBucketName(this, "bwi-snapshot-logs"),
+      bucketName: globalBucketName(
+        this,
+        "bwi-snapshot-logs",
+        props.environmentName,
+      ),
       blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
       encryption: BucketEncryption.S3_MANAGED,
       enforceSSL: true,
@@ -39,7 +47,7 @@ export class BwiSnapshotStack extends Stack {
     ]);
 
     const snapshotBucket = new Bucket(this, "BwiSnapshotBucket", {
-      bucketName: globalBucketName(this, "bwi-snapshot"),
+      bucketName: globalBucketName(this, "bwi-snapshot", props.environmentName),
       blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
       encryption: BucketEncryption.S3_MANAGED,
       enforceSSL: true,
