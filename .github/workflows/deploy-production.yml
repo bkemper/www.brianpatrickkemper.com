@@ -41,4 +41,4 @@ jobs:
       - name: Deploy production
         env:
           CDK_ENV: production
-        run: pnpm infra exec cdk deploy --require-approval never
+        run: pnpm infra cdk deploy --require-approval never
