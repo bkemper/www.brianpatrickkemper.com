@@ -21,7 +21,6 @@ export class BwiSnapshotStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    // Dedicated log bucket for the snapshot bucket (satisfies cdk-nag AwsSolutions-S1)
     const logBucket = new Bucket(this, "BwiSnapshotLogBucket", {
       bucketName: globalBucketName(this, "bwi-snapshot-logs"),
       blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
@@ -39,25 +38,17 @@ export class BwiSnapshotStack extends Stack {
       },
     ]);
 
-    // Dedicated bucket for BWI Airport DOM and screenshot snapshots
     const snapshotBucket = new Bucket(this, "BwiSnapshotBucket", {
       bucketName: globalBucketName(this, "bwi-snapshot"),
       blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
       encryption: BucketEncryption.S3_MANAGED,
       enforceSSL: true,
-      lifecycleRules: [
-        {
-          // Expire snapshots after 90 days to control storage costs
-          expiration: Duration.days(90),
-        },
-      ],
       objectOwnership: ObjectOwnership.BUCKET_OWNER_ENFORCED,
       removalPolicy: RemovalPolicy.RETAIN,
       serverAccessLogsBucket: logBucket,
       serverAccessLogsPrefix: "s3-access-logs/",
     });
 
-    // Docker-based Lambda: bundles Playwright + Chromium without layer size constraints
     const snapshotFn = new DockerImageFunction(this, "BwiSnapshotFn", {
       architecture: Architecture.X86_64,
       code: DockerImageCode.fromImageAsset(
@@ -73,7 +64,6 @@ export class BwiSnapshotStack extends Stack {
       timeout: Duration.minutes(5),
     });
 
-    // Least-privilege: only allow the Lambda to put objects in the snapshot bucket
     snapshotBucket.grantPut(snapshotFn);
 
     NagSuppressions.addResourceSuppressions(
@@ -98,11 +88,10 @@ export class BwiSnapshotStack extends Stack {
       true,
     );
 
-    // EventBridge scheduled rule: trigger Lambda every 30 minutes
     new Rule(this, "BwiSnapshotSchedule", {
       description: "Triggers BWI Airport snapshot Lambda every 30 minutes",
       schedule: Schedule.cron({
-        minute: "0/10", // every 10 minutes at :00, :10, :20, ...
+        minute: "0/10", // every 10 minutes at :00, :10, :20, etc.
       }),
       targets: [new LambdaFunction(snapshotFn)],
     });
