@@ -64,6 +64,8 @@ export class BwiSnapshotStack extends Stack {
       handler: "handler",
     });
 
+    snapshotBucket.grantReadWrite(parserFunction);
+
     const snapshotFunction = new DockerImageFunction(this, "BwiSnapshotFn", {
       architecture: Architecture.X86_64,
       code: DockerImageCode.fromImageAsset(

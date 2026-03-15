@@ -4,7 +4,7 @@
     "alwaysStrict": true,
     "declaration": true,
     "lib": ["es2022"],
-    "types": ["node"],
+    "types": ["node", "jest"],
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
@@ -14,6 +14,6 @@
     "strictNullChecks": true,
     "target": "ES2022"
   },
-  "include": ["src"],
+  "include": ["src", "test"],
   "exclude": ["node_modules", "dist"]
 }
