@@ -7,12 +7,15 @@ import {
   DockerImageCode,
   DockerImageFunction,
 } from "aws-cdk-lib/aws-lambda";
+import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 import {
   BlockPublicAccess,
   Bucket,
   BucketEncryption,
+  EventType,
   ObjectOwnership,
 } from "aws-cdk-lib/aws-s3";
+import { LambdaDestination } from "aws-cdk-lib/aws-s3-notifications";
 import { NagSuppressions } from "cdk-nag";
 import path from "node:path";
 import { globalBucketName } from "../utils/format";
@@ -53,7 +56,17 @@ export class BwiSnapshotStack extends Stack {
       serverAccessLogsPrefix: "s3-access-logs/",
     });
 
-    const snapshotFn = new DockerImageFunction(this, "BwiSnapshotFn", {
+    const parserFunction = new NodejsFunction(this, "BwiSnapshotParserFn", {
+      entry: path.resolve(
+        __dirname,
+        "../../lambdas/bwi-snapshot-parser/src/handler.ts",
+      ),
+      handler: "handler",
+    });
+
+    snapshotBucket.grantReadWrite(parserFunction);
+
+    const snapshotFunction = new DockerImageFunction(this, "BwiSnapshotFn", {
       architecture: Architecture.X86_64,
       code: DockerImageCode.fromImageAsset(
         path.resolve(__dirname, "../../lambdas/bwi-snapshot"),
@@ -68,10 +81,15 @@ export class BwiSnapshotStack extends Stack {
       timeout: Duration.minutes(5),
     });
 
-    snapshotBucket.grantPut(snapshotFn);
+    snapshotBucket.grantPut(snapshotFunction);
+
+    snapshotBucket.addEventNotification(
+      EventType.OBJECT_CREATED_PUT,
+      new LambdaDestination(parserFunction),
+    );
 
     NagSuppressions.addResourceSuppressions(
-      snapshotFn,
+      snapshotFunction,
       [
         {
           id: "AwsSolutions-IAM4",
@@ -97,7 +115,7 @@ export class BwiSnapshotStack extends Stack {
       schedule: Schedule.cron({
         minute: "0/10", // every 10 minutes at :00, :10, :20, etc.
       }),
-      targets: [new LambdaFunction(snapshotFn)],
+      targets: [new LambdaFunction(snapshotFunction)],
     });
   }
 }
