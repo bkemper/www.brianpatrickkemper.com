@@ -31,7 +31,7 @@
     "@eslint/js": "^9.20.0",
     "@tailwindcss/postcss": "^4.0.0",
     "@types/ms": "^0.7.34",
-    "@types/node": "^22.13.2",
+    "@types/node": "^24.0.0",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "eslint": "^9.21.0",
@@ -41,7 +41,7 @@
     "typescript": "^5.7.3"
   },
   "engines": {
-    "node": "^22.10.0"
+    "node": "^24.0.0"
   },
   "packageManager": "pnpm@10.10.0+sha512.d615db246fe70f25dcfea6d8d73dee782ce23e2245e3c4f6f888249fb568149318637dca73c2c5c8ef2a4ca0d5657fb9567188bfab47f566d1ee6ce987815c39"
 }
