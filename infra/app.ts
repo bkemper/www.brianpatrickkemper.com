@@ -1,6 +1,5 @@
 import * as cdk from "aws-cdk-lib";
 import { WebsiteStack } from "./stacks/website-stack";
-import { BwiSnapshotStack } from "./stacks/bwi-snapshot-stack";
 import { WorkflowStack } from "./stacks/workflows-stack";
 import { AwsSolutionsChecks } from "cdk-nag";
 import { pascalCase } from "./utils/format";
@@ -26,14 +25,6 @@ if (!stages.includes(stage)) {
 
 // see, https://aws.amazon.com/blogs/devops/manage-application-security-and-compliance-with-the-aws-cloud-development-kit-and-cdk-nag/
 cdk.Aspects.of(app).add(new AwsSolutionsChecks({ verbose: true }));
-
-//
-//
-//
-new BwiSnapshotStack(app, pascalCase(`${stage}BwiSnapshotStack`), {
-  env,
-  stage,
-});
 
 //
 // The infrastructure for the www.brianpatrickkemper.com site
