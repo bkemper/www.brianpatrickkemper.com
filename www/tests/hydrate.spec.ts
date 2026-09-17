@@ -32,6 +32,36 @@ test("hydrated clock shows America/New_York time without a wrong-time flash", as
   await expect(clock).toHaveAttribute("datetime", /.+/);
 });
 
+test("time-zone note is visible for the same zone or an ahead/behind offset", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  await expect(
+    page.getByText(
+      /Nice! I work in the same time zone as you\.|I'm \d+ hours(?: and \d+ minutes)? (?:ahead|behind) you\./,
+    ),
+  ).toBeVisible();
+});
+
+test("clock schedules a refresh for the next minute boundary", async ({
+  page,
+}) => {
+  // Freeze just before a minute rollover so the refresh delay is short and exact.
+  await page.clock.install({ time: new Date("2024-06-15T16:00:45.000Z") });
+  await page.goto("/");
+
+  const clock = page.locator("time");
+  await expect(clock).toBeVisible();
+  const before = await clock.getAttribute("datetime");
+
+  await page.clock.fastForward(15_000);
+
+  await expect
+    .poll(async () => clock.getAttribute("datetime"))
+    .not.toBe(before);
+});
+
 test("color-scheme cycles system → light → dark and persists as color-scheme", async ({
   page,
 }) => {
@@ -82,6 +112,27 @@ test("color-scheme control has a Toggle Color Scheme tooltip", async ({
   await toggle.hover();
 
   await expect(page.getByText("Toggle Color Scheme")).toBeVisible();
+});
+
+test("color-scheme control shows visible keyboard focus", async ({ page }) => {
+  await page.goto("/");
+
+  const toggle = page.getByRole("button");
+  await expect(toggle).toBeVisible();
+
+  const unfocusedBackground = await toggle.evaluate((el) => {
+    (el as HTMLElement).blur();
+    return getComputedStyle(el).backgroundColor;
+  });
+
+  await toggle.focus();
+  await expect(toggle).toBeFocused();
+
+  await expect
+    .poll(async () =>
+      toggle.evaluate((el) => getComputedStyle(el).backgroundColor),
+    )
+    .not.toBe(unfocusedBackground);
 });
 
 test("offline overlay shows Lost Connection and dismisses when online", async ({

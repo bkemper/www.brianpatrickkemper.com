@@ -8,13 +8,11 @@ const PieInsuranceLogo = ({ className }: LogoProps) => (
     fill="none"
     height="1em"
     viewBox="0 0 851 252"
-    // width="851"
     xmlns="http://www.w3.org/2000/svg"
   >
     <g clipPath="url(#clip0_2003_124)">
       <mask
         id="mask0_2003_124"
-        // style="mask-type:luminance"
         maskUnits="userSpaceOnUse"
         x="0"
         y="69"

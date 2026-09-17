@@ -8,7 +8,6 @@ const VisualLeaseLogo = ({ className }: LogoProps) => (
     fill="none"
     height="1em"
     viewBox="0 0 372 110"
-    // width="372"
     xmlns="http://www.w3.org/2000/svg"
   >
     <g id="Visual Lease" clipPath="url(#clip0_34_52)">

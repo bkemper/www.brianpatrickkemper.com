@@ -1,6 +1,5 @@
 import * as Popover from "@radix-ui/react-popover";
 import { RefObject, useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
-import ms from "ms";
 import withClient from "./withClient";
 import classNames from "classnames";
 import { useEventListener } from "usehooks-ts";
@@ -35,8 +34,7 @@ const Clock = () => {
   const timeRef = useRef<HTMLTimeElement>(null);
   const [isAnimated, setIsAnimated] = useState(false);
   const [now, setNow] = useState(getNow);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
 
   const minutesOffset = useMemo(() => {
     const myOffset = getTimeZoneOffset(MY_TIME_ZONE);
@@ -57,7 +55,7 @@ const Clock = () => {
   }, [startTransition, setIsAnimated, setNow]);
 
   useEffect(() => {
-    const msToMinute = (SECONDS_IN_MINUTE - now.getSeconds()) * ms("1000");
+    const msToMinute = (SECONDS_IN_MINUTE - now.getSeconds()) * 1000;
 
     const timeoutId = window.setTimeout(refreshTime, msToMinute);
 
@@ -71,7 +69,6 @@ const Clock = () => {
     () => {
       setIsAnimated(false);
     },
-    // @todo, remove type assertion, see https://github.com/juliencrn/usehooks-ts/pull/675
     timeRef as RefObject<HTMLTimeElement>,
   );
 
@@ -96,6 +93,10 @@ const Clock = () => {
     return time;
   }
 
+  const absOffset = Math.abs(minutesOffset);
+  const hoursOffset = Math.floor(absOffset / 60);
+  const remainderMinutes = absOffset % 60;
+
   return (
     <Popover.Root defaultOpen open modal={false}>
       <Popover.Trigger asChild>{time}</Popover.Trigger>
@@ -112,8 +113,8 @@ const Clock = () => {
         <p className="max-w-40 p-1 text-center text-xs text-gray">
           {minutesOffset === 0
             ? "Nice! I work in the same time zone as you."
-            : `I'm ${Math.abs(Math.floor(minutesOffset / 60))} hours ${
-                minutesOffset % 60 !== 0 ? `and ${minutesOffset % 60} minutes` : ""
+            : `I'm ${hoursOffset} hours ${
+                remainderMinutes !== 0 ? `and ${remainderMinutes} minutes` : ""
               } ${minutesOffset > 0 ? "behind" : "ahead"} you.`}
         </p>
       </Popover.Content>

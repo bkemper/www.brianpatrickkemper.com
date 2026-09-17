@@ -32,9 +32,6 @@ importers:
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
-      ms:
-        specifier: ^2.1.3
-        version: 2.1.3
       react:
         specifier: ^19.0.0
         version: 19.3.0
@@ -51,9 +48,6 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.3.3
         version: 4.3.3(vite@8.3.0(@types/node@24.13.5)(jiti@2.7.0))
-      '@types/ms':
-        specifier: ^0.7.34
-        version: 0.7.34
       '@types/node':
         specifier: ^24.0.0
         version: 24.13.5
@@ -784,9 +778,6 @@ packages:
   '@tanstack/virtual-file-routes@1.162.0':
     resolution: {integrity: sha512-uhOeFyxLcU41HzvrxsGpiWdcMbScY1EDgbZ5K7DVRMYInbLYWAC0EA/kx9wXAoSM8q82bUG2hRl8+EAjE6XAbA==}
     engines: {node: '>=20.19'}
-
-  '@types/ms@0.7.34':
-    resolution: {integrity: sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==}
 
   '@types/node@24.13.5':
     resolution: {integrity: sha512-TXyindR+lBr22aJIdMQzCFHPHR6cR4js838mRDCSz5hOKWZvZwsXSSiXDmjRj4iJmgl+sR9O+1mkoVBSMadNug==}
@@ -2446,8 +2437,6 @@ snapshots:
   '@tanstack/store@0.11.1': {}
 
   '@tanstack/virtual-file-routes@1.162.0': {}
-
-  '@types/ms@0.7.34': {}
 
   '@types/node@24.13.5':
     dependencies:

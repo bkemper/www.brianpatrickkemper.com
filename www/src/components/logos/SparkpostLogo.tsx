@@ -5,7 +5,6 @@ interface LogoProps {
 const SparkpostLogo = ({ className }: LogoProps) => (
   <svg
     className={className}
-    // width="349"
     height="1em"
     viewBox="0 0 349 110"
     fill="none"

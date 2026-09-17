@@ -3,6 +3,7 @@ frontend:
   phases:
     preBuild:
       commands:
+        - nvm use 24
         - npm install -g pnpm@10.10.0
         - pnpm install --frozen-lockfile
     build:

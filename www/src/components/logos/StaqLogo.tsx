@@ -8,7 +8,6 @@ const StaqLogo = ({ className }: LogoProps) => (
     fill="none"
     height="1em"
     viewBox="0 0 249 110"
-    // width="249"
     xmlns="http://www.w3.org/2000/svg"
   >
     <g id="STAQ">

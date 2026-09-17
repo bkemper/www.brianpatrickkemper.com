@@ -24,6 +24,21 @@ test("prerendered / shows the Site heading without JavaScript", async ({
   ).toBeVisible();
 });
 
+test("prerendered / still shows the heading after reload without JavaScript", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await expect(
+    page.getByRole("heading", { level: 1, name: "Brian Patrick Kemper" }),
+  ).toBeVisible();
+
+  await page.reload();
+
+  await expect(
+    page.getByRole("heading", { level: 1, name: "Brian Patrick Kemper" }),
+  ).toBeVisible();
+});
+
 test("prerendered / includes the LinkedIn role control", async ({ page }) => {
   await page.goto("/");
 
