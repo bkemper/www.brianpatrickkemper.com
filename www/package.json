@@ -1,0 +1,33 @@
+{
+  "name": "@bpk/www",
+  "description": "You found me!",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite dev",
+    "static-preview": "serve dist/client --listen 4173 --no-clipboard --no-port-switching",
+    "test": "playwright test"
+  },
+  "dependencies": {
+    "@tanstack/react-router": "^1.170.38",
+    "@tanstack/react-start": "^1.168.56",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.1",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "serve": "^14.2.6",
+    "typescript": "^5.7.3",
+    "vite": "^8.3.0"
+  },
+  "engines": {
+    "node": "^24.0.0"
+  },
+  "packageManager": "pnpm@10.10.0+sha512.d615db246fe70f25dcfea6d8d73dee782ce23e2245e3c4f6f888249fb568149318637dca73c2c5c8ef2a4ca0d5657fb9567188bfab47f566d1ee6ce987815c39"
+}

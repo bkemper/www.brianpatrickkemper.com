@@ -6,7 +6,8 @@
   "scripts": {
     "authenticate": "aws sso login --profile brianpatrickkemper-sandbox",
     "infra": "pnpm --filter infra",
-    "web": "pnpm --filter web"
+    "web": "pnpm --filter web",
+    "www": "pnpm --filter @bpk/www"
   },
   "engines": {
     "node": "^24.0.0"
