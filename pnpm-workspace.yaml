@@ -1,4 +1,3 @@
 packages:
   - "infra"
-  - "lambdas/*"
   - "web"
