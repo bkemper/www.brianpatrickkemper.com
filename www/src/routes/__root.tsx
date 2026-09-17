@@ -4,7 +4,10 @@ import {
   Scripts,
   createRootRoute,
 } from "@tanstack/react-router";
+import * as Tooltip from "@radix-ui/react-tooltip";
 import type { ReactNode } from "react";
+import OfflineOverlay from "../components/OfflineOverlay";
+import { WindowContextProvider } from "../context/WindowContext";
 import appCss from "../styles.css?url";
 
 const canonicalOrigin = "https://www.brianpatrickkemper.com";
@@ -44,7 +47,12 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <RootDocument>
-      <Outlet />
+      <Tooltip.Provider delayDuration={100}>
+        <WindowContextProvider>
+          <Outlet />
+          <OfflineOverlay />
+        </WindowContextProvider>
+      </Tooltip.Provider>
     </RootDocument>
   );
 }

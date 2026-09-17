@@ -1,4 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import Clock from "../components/Clock";
+import DarkModeToggle from "../components/DarkModeToggle";
 import Link from "../components/Link";
 import LogoLink from "../components/LogoLink";
 import FacetLogo from "../components/logos/FacetLogo";
@@ -14,7 +16,14 @@ export const Route = createFileRoute("/")({
 function Home() {
   return (
     <div className="bg-day dark:bg-night min-h-screen min-w-screen relative">
-      <header className="flex gap-4 items-center justify-end px-6 py-2" />
+      <header className="flex gap-4 items-center justify-end px-6 py-2">
+        <div>
+          <Clock />
+        </div>
+        <div>
+          <DarkModeToggle />
+        </div>
+      </header>
       <main>
         <section className="flex flex-col gap-6 h-[55vh] justify-center px-16 md:px-32">
           <h1 className="font-sign h-[1em] overflow-hidden text-8xl text-night text-wrap dark:text-day">
