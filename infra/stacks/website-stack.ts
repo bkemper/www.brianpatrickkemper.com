@@ -29,7 +29,7 @@ import { ApplicationLoadBalancedFargateService } from "aws-cdk-lib/aws-ecs-patte
 import { BlockPublicAccess, Bucket, ObjectOwnership } from "aws-cdk-lib/aws-s3";
 import { NagSuppressions } from "cdk-nag";
 import path from "node:path";
-import { availabilityZone, globalBucketName } from "../utils/format";
+import { availabilityZone } from "../utils/format";
 
 interface WebsiteStackProps extends StackProps {
   stage: string;
@@ -73,7 +73,8 @@ export class WebsiteStack extends Stack {
     });
 
     const myLogBucket = new Bucket(this, "BpkLogBucket", {
-      bucketName: globalBucketName(this, "bpk-website-logs", props.stage),
+      // Keep historical name (no stage prefix) so updates do not replace the bucket.
+      bucketName: ["bpk-website-logs", this.account, this.region].join("-"),
       blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
       enforceSSL: true,
       objectOwnership: ObjectOwnership.BUCKET_OWNER_PREFERRED,

@@ -28,10 +28,10 @@ if (!stages.includes(stage)) {
 cdk.Aspects.of(app).add(new AwsSolutionsChecks({ verbose: true }));
 
 //
-// Legacy Fargate Site (cloudfront.net only; custom domain moved to AmplifyStack).
-// Retire after Amplify DNS cutover soaks.
+// Legacy Fargate Site (stack id must stay "WebsiteStack" — already deployed).
+// Custom domain moved to AmplifyStack; retire this stack after Amplify DNS cutover soaks.
 //
-new WebsiteStack(app, pascalCase(`${stage}WebsiteStack`), {
+new WebsiteStack(app, "WebsiteStack", {
   env,
   stage,
 });

@@ -1,5 +1,5 @@
 import * as amplify from "@aws-cdk/aws-amplify-alpha";
-import { CfnApp } from "aws-cdk-lib/aws-amplify";
+import { CfnApp, CfnDomain } from "aws-cdk-lib/aws-amplify";
 import { CfnOutput, SecretValue, Stack, StackProps } from "aws-cdk-lib";
 import { Construct } from "constructs";
 
@@ -70,13 +70,18 @@ export class AmplifyStack extends Stack {
       stage: "PRODUCTION",
     });
 
-    // Amplify-managed cert. WebsiteStack must drop CloudFront aliases first or
-    // Amplify hits CNAMEAlreadyExistsException.
+    // Amplify-managed cert. WebsiteStack CloudFront aliases must be released
+    // first or Amplify hits CNAMEAlreadyExistsException.
     const domain = site.addDomain(SITE_DOMAIN_NAME, {
       domainName: SITE_DOMAIN_NAME,
     });
     domain.mapRoot(main);
     domain.mapSubDomain(main, "www");
+
+    // addDomain wires App.grantPrincipal into AutoSubDomainIAMRole even when
+    // auto-subdomains are off; clear it after removing the Role child above.
+    const cfnDomain = domain.node.defaultChild as CfnDomain;
+    cfnDomain.autoSubDomainIamRole = undefined;
 
     new CfnOutput(this, "AmplifyAppId", {
       value: site.appId,
