@@ -1,6 +1,5 @@
 import * as cdk from "aws-cdk-lib";
 import { AmplifyStack } from "./stacks/amplify-stack";
-import { WebsiteStack } from "./stacks/website-stack";
 import { WorkflowStack } from "./stacks/workflows-stack";
 import { AwsSolutionsChecks } from "cdk-nag";
 import { pascalCase } from "./utils/format";
@@ -26,15 +25,6 @@ if (!stages.includes(stage)) {
 
 // see, https://aws.amazon.com/blogs/devops/manage-application-security-and-compliance-with-the-aws-cloud-development-kit-and-cdk-nag/
 cdk.Aspects.of(app).add(new AwsSolutionsChecks({ verbose: true }));
-
-//
-// Legacy Fargate Site (stack id must stay "WebsiteStack" — already deployed).
-// Custom domain moved to AmplifyStack; retire this stack after Amplify DNS cutover soaks.
-//
-new WebsiteStack(app, "WebsiteStack", {
-  env,
-  stage,
-});
 
 //
 // Amplify Hosting for the Site (static WEB). Production only — custom domain + PR previews.
