@@ -8,7 +8,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 const MODES = ["system", "light", "dark"] as const;
 
 const DarkModeToggle = () => {
-  const [mode, setMode] = useLocalStorage<(typeof MODES)[number]>("color-scheme", "system");
+  const [mode, setMode] = useLocalStorage<(typeof MODES)[number]>("color-scheme", "dark");
   const matches = useMediaQuery("(prefers-color-scheme: dark)");
 
   const toggle = useCallback(() => {
@@ -36,15 +36,19 @@ const DarkModeToggle = () => {
     <Tooltip.Root>
       <Tooltip.Trigger asChild>
         <Toggle.Root
+          aria-label="Toggle Color Scheme"
           className="
-            duration-700
-            ease-in-out
-            focus:bg-night dark:focus:bg-day hover:bg-night dark:hover:bg-day
+            duration-300
+            ease-out
+            bg-cream/10
+            focus-visible:bg-cobalt hover:bg-cobalt
             p-2
             rounded-full
-            text-night dark:text-day focus:text-day dark:focus:text-night hover:text-day dark:hover:text-night
+            text-cream focus-visible:text-cream hover:text-cream
             text-base
-            transition-color
+            transition-[background-color,color,transform]
+            hover:scale-105
+            focus-visible:scale-105
           "
           onClick={toggle}
         >
@@ -53,11 +57,11 @@ const DarkModeToggle = () => {
       </Tooltip.Trigger>
       <Tooltip.Portal>
         <Tooltip.Content
-          className="bg-night dark:bg-day p-2 rounded-sm text-day dark:text-night text-xs"
+          className="bg-ink dark:bg-cream p-2 rounded-full text-cream dark:text-ink text-xs"
           sideOffset={5}
         >
           Toggle Color Scheme
-          <Tooltip.Arrow className="fill-night dark:fill-day" />
+          <Tooltip.Arrow className="fill-ink dark:fill-cream" />
         </Tooltip.Content>
       </Tooltip.Portal>
     </Tooltip.Root>

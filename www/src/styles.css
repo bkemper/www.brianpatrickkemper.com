@@ -2,15 +2,57 @@
 
 @custom-variant dark (&:where([data-color-scheme="dark"], [data-color-scheme="dark"] *));
 
-@theme {
-  --color-day: hsl(220 100% 98%);
-  --color-gray: hsl(231 10% 45%);
-  --color-muted: hsl(231 10% 75%);
-  --color-night: hsl(220 46% 16%);
+/*
+  Shape lock: pill controls only (rounded-full) for buttons, toggles, and CTAs.
+  Logo marks and text links stay unrounded.
+*/
 
-  --font-mono: var(--font-lato);
-  --font-sans: var(--font-lato);
-  --font-sign: var(--font-caveat);
+@font-face {
+  font-family: "Outfit";
+  src: url("/fonts/outfit-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("/fonts/outfit-latin-500-normal.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("/fonts/outfit-latin-600-normal.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("/fonts/outfit-latin-700-normal.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --color-day: hsl(40 33% 96%);
+  --color-cream: hsl(40 33% 96%);
+  --color-ink: hsl(240 6% 10%);
+  --color-surface: hsl(240 6% 10%);
+  --color-surface-elevated: hsl(240 5% 14%);
+  --color-gray: hsl(240 5% 46%);
+  --color-muted: hsl(240 5% 64%);
+  --color-night: hsl(240 6% 10%);
+  --color-cobalt: hsl(217 91% 52%);
+  --color-cobalt-deep: hsl(217 80% 40%);
+
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Outfit", ui-sans-serif, system-ui, sans-serif;
 
   @keyframes fadeIn {
     0% {
@@ -21,31 +63,131 @@
     }
   }
 
-  @keyframes puff {
-    0%,
-    100% {
-      transform: scale(1);
+  @keyframes heroRise {
+    0% {
+      opacity: 0;
+      transform: translateY(1.25rem);
     }
-    50% {
-      transform: scale(1.1);
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes logoReveal {
+    0% {
+      opacity: 0;
+      transform: translateY(0.75rem) scale(0.96);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
   }
 }
 
 @layer base {
   :root {
-    --font-caveat: "Caveat", cursive;
-    --font-lato: "Lato", sans-serif;
-    color-scheme: light;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-  }
-
-  [data-color-scheme="dark"] {
-    color-scheme: dark;
+    color-scheme: light dark;
   }
 
   :focus-visible {
-    outline: none;
+    outline: 2px solid var(--color-cobalt);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .hero-enter {
+    animation: heroRise 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .hero-enter-delay-1 {
+    animation-delay: 80ms;
+  }
+
+  .hero-enter-delay-2 {
+    animation-delay: 160ms;
+  }
+
+  .hero-enter-delay-3 {
+    animation-delay: 240ms;
+  }
+
+  .hero-enter-delay-4 {
+    animation-delay: 320ms;
+  }
+
+  .logo-stagger {
+    opacity: 0;
+  }
+
+  .logo-stagger.is-inview {
+    animation: logoReveal 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .logo-stagger.is-inview:nth-child(1) {
+    animation-delay: 0ms;
+  }
+
+  .logo-stagger.is-inview:nth-child(2) {
+    animation-delay: 70ms;
+  }
+
+  .logo-stagger.is-inview:nth-child(3) {
+    animation-delay: 140ms;
+  }
+
+  .logo-stagger.is-inview:nth-child(4) {
+    animation-delay: 210ms;
+  }
+
+  .logo-stagger.is-inview:nth-child(5) {
+    animation-delay: 280ms;
+  }
+
+  .cta-physics {
+    transition-property: transform, background-color, box-shadow, color;
+    transition-duration: 220ms;
+    transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .cta-physics:hover,
+  .cta-physics:focus-visible {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 10px 28px -12px hsl(217 91% 52% / 0.55);
+  }
+
+  .cta-physics:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-enter,
+    .logo-stagger.is-inview {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+
+    .cta-physics,
+    .cta-physics:hover,
+    .cta-physics:focus-visible,
+    .cta-physics:active {
+      transition: none;
+      transform: none;
+      box-shadow: none;
+    }
   }
 }

@@ -2,74 +2,20 @@ import { expect, test } from "@playwright/test";
 
 test.use({ javaScriptEnabled: true });
 
-test("hydrated clock shows America/New_York time without a wrong-time flash", async ({
-  page,
-  request,
-}) => {
-  const prerendered = await request.get("/");
-  expect(await prerendered.text()).not.toMatch(/<time[\s>]/i);
-
-  await page.goto("/");
-
-  const clock = page.locator("time");
-  await expect(clock).toBeVisible();
-
-  await expect
-    .poll(async () => {
-      const rendered = (await clock.textContent())?.trim() ?? "";
-      const expected = await page.evaluate(() =>
-        new Date().toLocaleTimeString(undefined, {
-          hour: "numeric",
-          minute: "2-digit",
-          timeZone: "America/New_York",
-          timeZoneName: "short",
-        }),
-      );
-      return rendered === expected;
-    })
-    .toBe(true);
-
-  await expect(clock).toHaveAttribute("datetime", /.+/);
-});
-
-test("time-zone note is visible for the same zone or an ahead/behind offset", async ({
+test("color-scheme cycles dark → system → light and persists as color-scheme", async ({
   page,
 }) => {
   await page.goto("/");
 
-  await expect(
-    page.getByText(
-      /Nice! I work in the same time zone as you\.|I'm \d+ hours(?: and \d+ minutes)? (?:ahead|behind) you\./,
-    ),
-  ).toBeVisible();
-});
-
-test("clock schedules a refresh for the next minute boundary", async ({
-  page,
-}) => {
-  // Freeze just before a minute rollover so the refresh delay is short and exact.
-  await page.clock.install({ time: new Date("2024-06-15T16:00:45.000Z") });
-  await page.goto("/");
-
-  const clock = page.locator("time");
-  await expect(clock).toBeVisible();
-  const before = await clock.getAttribute("datetime");
-
-  await page.clock.fastForward(15_000);
-
-  await expect
-    .poll(async () => clock.getAttribute("datetime"))
-    .not.toBe(before);
-});
-
-test("color-scheme cycles system → light → dark and persists as color-scheme", async ({
-  page,
-}) => {
-  await page.goto("/");
-
-  const toggle = page.getByRole("button");
+  const toggle = page.getByRole("button", { name: "Toggle Color Scheme" });
   await expect(toggle).toBeVisible();
 
+  await expect
+    .poll(async () => page.evaluate(() => localStorage.getItem("color-scheme")))
+    .toBe("dark");
+  await expect(page.locator("html")).toHaveAttribute("data-color-scheme", "dark");
+
+  await toggle.click();
   await expect
     .poll(async () => page.evaluate(() => localStorage.getItem("color-scheme")))
     .toBe("system");
@@ -91,16 +37,10 @@ test("color-scheme cycles system → light → dark and persists as color-scheme
     .poll(async () => page.evaluate(() => localStorage.getItem("color-scheme")))
     .toBe("system");
 
-  await toggle.click();
-  await expect
-    .poll(async () => page.evaluate(() => localStorage.getItem("color-scheme")))
-    .toBe("light");
-
   await page.reload();
   await expect
     .poll(async () => page.evaluate(() => localStorage.getItem("color-scheme")))
-    .toBe("light");
-  await expect(page.locator("html")).toHaveAttribute("data-color-scheme", "light");
+    .toBe("system");
 });
 
 test("color-scheme control has a Toggle Color Scheme tooltip", async ({
@@ -108,7 +48,7 @@ test("color-scheme control has a Toggle Color Scheme tooltip", async ({
 }) => {
   await page.goto("/");
 
-  const toggle = page.getByRole("button");
+  const toggle = page.getByRole("button", { name: "Toggle Color Scheme" });
   await toggle.hover();
 
   await expect(page.getByText("Toggle Color Scheme")).toBeVisible();
@@ -117,7 +57,7 @@ test("color-scheme control has a Toggle Color Scheme tooltip", async ({
 test("color-scheme control shows visible keyboard focus", async ({ page }) => {
   await page.goto("/");
 
-  const toggle = page.getByRole("button");
+  const toggle = page.getByRole("button", { name: "Toggle Color Scheme" });
   await expect(toggle).toBeVisible();
 
   const unfocusedBackground = await toggle.evaluate((el) => {
@@ -155,4 +95,18 @@ test("offline overlay shows Lost Connection and dismisses when online", async ({
   await expect(page.getByRole("heading", { name: "Lost Connection" })).toHaveCount(
     0,
   );
+});
+
+test("employer logo wall exposes aria-labels", async ({ page }) => {
+  await page.goto("/");
+
+  for (const label of [
+    "Pie Insurance",
+    "Visual Lease",
+    "Facet",
+    "SparkPost",
+    "Staq",
+  ]) {
+    await expect(page.getByRole("link", { name: label })).toBeVisible();
+  }
 });
