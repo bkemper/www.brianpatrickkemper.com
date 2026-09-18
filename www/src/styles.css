@@ -35,16 +35,11 @@
 }
 
 @theme {
-  /* Cool deep forest + bone + restrained amber */
-  --color-day: hsl(45 18% 94%);
-  --color-bone: hsl(42 22% 96%);
-  --color-forest: hsl(152 28% 14%);
-  --color-forest-mid: hsl(154 22% 22%);
-  --color-forest-mist: hsl(150 14% 32%);
-  --color-amber: hsl(38 72% 48%);
-  --color-gray: hsl(150 8% 42%);
-  --color-muted: hsl(150 10% 58%);
-  --color-night: hsl(155 32% 8%);
+  /* Day / night blues */
+  --color-day: hsl(220 100% 98%);
+  --color-gray: hsl(231 10% 45%);
+  --color-muted: hsl(231 10% 75%);
+  --color-night: hsl(220 46% 16%);
 
   --font-sans: var(--font-outfit);
   --font-display: var(--font-outfit);
@@ -64,6 +59,16 @@
     }
     100% {
       opacity: 1;
+    }
+  }
+
+  @keyframes puff {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
     }
   }
 
@@ -93,8 +98,12 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-amber);
+    outline: 2px solid var(--color-night);
     outline-offset: 3px;
+  }
+
+  [data-color-scheme="dark"] :focus-visible {
+    outline-color: var(--color-day);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -117,13 +126,13 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: 180px 180px;
-    opacity: 0.07;
+    opacity: 0.05;
     mix-blend-mode: multiply;
   }
 
   .dark .paper-grain,
   [data-color-scheme="dark"] .paper-grain {
-    opacity: 0.1;
+    opacity: 0.08;
     mix-blend-mode: soft-light;
   }
 

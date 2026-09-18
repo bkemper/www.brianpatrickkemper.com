@@ -19,10 +19,10 @@ const LogoLink = ({ "aria-label": ariaLabel, children, href }: LogoLinkProps) =>
         transition-colors
         duration-500
         ease-out
-        hover:text-forest
-        focus-visible:text-forest
-        dark:hover:text-bone
-        dark:focus-visible:text-bone
+        hover:text-night
+        focus-visible:text-night
+        dark:hover:text-day
+        dark:focus-visible:text-day
         md:text-5xl
       "
       href={href}

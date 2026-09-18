@@ -40,18 +40,18 @@ const DarkModeToggle = () => {
           className="
             p-2
             text-base
-            text-forest
+            text-night
             transition-colors
             duration-500
             ease-out
-            hover:bg-forest
-            hover:text-bone
-            focus-visible:bg-forest
-            focus-visible:text-bone
-            dark:text-bone
-            dark:hover:bg-bone
+            hover:bg-night
+            hover:text-day
+            focus-visible:bg-night
+            focus-visible:text-day
+            dark:text-day
+            dark:hover:bg-day
             dark:hover:text-night
-            dark:focus-visible:bg-bone
+            dark:focus-visible:bg-day
             dark:focus-visible:text-night
           "
           onClick={toggle}
@@ -61,11 +61,11 @@ const DarkModeToggle = () => {
       </Tooltip.Trigger>
       <Tooltip.Portal>
         <Tooltip.Content
-          className="bg-forest p-2 text-xs text-bone dark:bg-bone dark:text-night"
+          className="bg-night p-2 text-xs text-day dark:bg-day dark:text-night"
           sideOffset={5}
         >
           Toggle Color Scheme
-          <Tooltip.Arrow className="fill-forest dark:fill-bone" />
+          <Tooltip.Arrow className="fill-night dark:fill-day" />
         </Tooltip.Content>
       </Tooltip.Portal>
     </Tooltip.Root>
