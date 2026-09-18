@@ -34,8 +34,8 @@ importers:
         specifier: ^24.0.0
         version: 24.13.5
       aws-cdk:
-        specifier: 2.1016.0
-        version: 2.1016.0
+        specifier: 2.1142.0
+        version: 2.1142.0
       aws-cdk-local:
         specifier: ^3.0.1
         version: 3.0.4
@@ -459,9 +459,9 @@ packages:
     resolution: {integrity: sha512-u8c62rfZNGqB9oW+RSW8YAqLLFAcgc5y2aQrgqQTBUVKLTN6r54g/IUbTq/dM1fqvT1GqtylzQjQ8ytACMSGTQ==}
     hasBin: true
 
-  aws-cdk@2.1016.0:
-    resolution: {integrity: sha512-zdJ/tQp0iE/s8l8zLQPgdUJUHpS6KblkzdP5nOYC/NbD5OCdhS8QS7vLBkT8M7mNyZh3Ep3C+/m6NsxrurRe0A==}
-    engines: {node: '>= 14.15.0'}
+  aws-cdk@2.1142.0:
+    resolution: {integrity: sha512-gNOeii+avTJmOwfR8tVgraZ5A2EBC/529EXg7e+yBp8Zl608dAv5CtFRoJt8QoKiruiCwYr4HF6ClNAse/NkSg==}
+    engines: {node: '>= 18.0.0'}
     hasBin: true
 
   babel-jest@29.7.0:
@@ -681,11 +681,6 @@ packages:
 
   fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
-
-  fsevents@2.3.2:
-    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
-    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
-    os: [darwin]
 
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
@@ -1851,9 +1846,7 @@ snapshots:
       diff: 5.2.0
       semver: 7.8.5
 
-  aws-cdk@2.1016.0:
-    optionalDependencies:
-      fsevents: 2.3.2
+  aws-cdk@2.1142.0: {}
 
   babel-jest@29.7.0(@babel/core@7.27.1):
     dependencies:
@@ -2077,9 +2070,6 @@ snapshots:
       path-exists: 4.0.0
 
   fs.realpath@1.0.0: {}
-
-  fsevents@2.3.2:
-    optional: true
 
   fsevents@2.3.3:
     optional: true
