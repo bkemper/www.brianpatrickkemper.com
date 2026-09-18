@@ -32,11 +32,11 @@ function Home() {
             Brian Patrick Kemper
           </h1>
           <p className="max-w-xl text-lg leading-relaxed text-gray dark:text-muted">
-            A{" "}
+            I'm a{" "}
             <span className="font-bold italic text-night dark:text-day">
               Product Software Engineer
             </span>{" "}
-            who builds digital products that make your work life easier by
+            building digital products that make work life easier by
             understanding your domain and leading teams to deliver a thoughtful
             user experience.
           </p>
