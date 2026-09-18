@@ -28,7 +28,8 @@ if (!stages.includes(stage)) {
 cdk.Aspects.of(app).add(new AwsSolutionsChecks({ verbose: true }));
 
 //
-// The infrastructure for the www.brianpatrickkemper.com site (Fargate; retire after Amplify cutover)
+// Legacy Fargate Site (cloudfront.net only; custom domain moved to AmplifyStack).
+// Retire after Amplify DNS cutover soaks.
 //
 new WebsiteStack(app, pascalCase(`${stage}WebsiteStack`), {
   env,
@@ -36,7 +37,7 @@ new WebsiteStack(app, pascalCase(`${stage}WebsiteStack`), {
 });
 
 //
-// Amplify Hosting for the Site (static WEB). Production only — one app, PR previews on main.
+// Amplify Hosting for the Site (static WEB). Production only — custom domain + PR previews.
 //
 if (stage === "production") {
   new AmplifyStack(app, pascalCase(`${stage}AmplifyStack`), {

@@ -1,10 +1,6 @@
 import { Duration, Stack, StackProps } from "aws-cdk-lib";
 import { Construct } from "constructs";
 import {
-  Certificate,
-  CertificateValidation,
-} from "aws-cdk-lib/aws-certificatemanager";
-import {
   AllowedMethods,
   CachePolicy,
   Distribution,
@@ -172,21 +168,10 @@ export class WebsiteStack extends Stack {
       },
     );
 
-    const [myDistroDomainName, ...myDistroAlternativeDomainNames] =
-      this.account === "137068238831"
-        ? ["brianpatrickkemper.com", "www.brianpatrickkemper.com"]
-        : [];
-
-    const myDistroCertificate = myDistroDomainName
-      ? new Certificate(this, "BpkCertificate", {
-          domainName: myDistroDomainName,
-          subjectAlternativeNames: myDistroAlternativeDomainNames,
-          validation: CertificateValidation.fromDns(),
-        })
-      : undefined;
-
+    // Custom hostnames moved to AmplifyStack. Dropping CloudFront aliases here
+    // so Amplify can claim brianpatrickkemper.com / www (CNAME uniqueness).
+    // Distribution remains on *.cloudfront.net until WebsiteStack is torn down.
     const myDistro = new Distribution(this, "BpkDistribution", {
-      certificate: myDistroCertificate,
       defaultBehavior: {
         allowedMethods: AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
         cachePolicy: myDistroCachePolicy,
@@ -200,9 +185,6 @@ export class WebsiteStack extends Stack {
         ),
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
       },
-      domainNames: myDistroDomainName
-        ? [myDistroDomainName, ...myDistroAlternativeDomainNames]
-        : undefined,
       enableLogging: true,
       enabled: true,
       logBucket: myLogBucket,
@@ -211,17 +193,17 @@ export class WebsiteStack extends Stack {
       priceClass: PriceClass.PRICE_CLASS_100,
     });
 
-    if (!myDistroCertificate) {
-      NagSuppressions.addResourceSuppressions(myDistro, [
-        {
-          id: "AwsSolutions-CFR4",
-          reason: "SSL is not required for non-production environments.",
-        },
-        {
-          id: "AwsSolutions-CFR5",
-          reason: "SSL is not required for non-production environments.",
-        },
-      ]);
-    }
+    NagSuppressions.addResourceSuppressions(myDistro, [
+      {
+        id: "AwsSolutions-CFR4",
+        reason:
+          "Custom domain TLS moved to Amplify Hosting; this distribution is cloudfront.net-only until WebsiteStack teardown.",
+      },
+      {
+        id: "AwsSolutions-CFR5",
+        reason:
+          "Custom domain TLS moved to Amplify Hosting; this distribution is cloudfront.net-only until WebsiteStack teardown.",
+      },
+    ]);
   }
 }
