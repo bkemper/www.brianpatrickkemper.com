@@ -1,4 +1,3 @@
-import * as Popover from "@radix-ui/react-popover";
 import { RefObject, useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
 import withClient from "./withClient";
 import classNames from "classnames";
@@ -90,35 +89,25 @@ const Clock = () => {
   );
 
   if (minutesOffset === undefined) {
-    return time;
+    return <div className="flex flex-col items-end gap-1">{time}</div>;
   }
 
   const absOffset = Math.abs(minutesOffset);
   const hoursOffset = Math.floor(absOffset / 60);
   const remainderMinutes = absOffset % 60;
 
+  const note =
+    minutesOffset === 0
+      ? "Nice! I work in the same time zone as you."
+      : `I'm ${hoursOffset} hours ${
+          remainderMinutes !== 0 ? `and ${remainderMinutes} minutes` : ""
+        } ${minutesOffset > 0 ? "behind" : "ahead"} you.`;
+
   return (
-    <Popover.Root defaultOpen open modal={false}>
-      <Popover.Trigger asChild>{time}</Popover.Trigger>
-      <Popover.Content
-        align="center"
-        alignOffset={0}
-        arrowPadding={0}
-        avoidCollisions
-        collisionPadding={0}
-        side="bottom"
-        sideOffset={0}
-        sticky="always"
-      >
-        <p className="max-w-40 p-1 text-center text-xs text-gray">
-          {minutesOffset === 0
-            ? "Nice! I work in the same time zone as you."
-            : `I'm ${hoursOffset} hours ${
-                remainderMinutes !== 0 ? `and ${remainderMinutes} minutes` : ""
-              } ${minutesOffset > 0 ? "behind" : "ahead"} you.`}
-        </p>
-      </Popover.Content>
-    </Popover.Root>
+    <div className="flex flex-col items-end gap-1 max-w-[14rem] text-right">
+      {time}
+      <p className="text-xs text-gray leading-snug">{note}</p>
+    </div>
   );
 };
 

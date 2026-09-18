@@ -5,6 +5,7 @@
 @theme {
   --color-day: hsl(220 100% 98%);
   --color-gray: hsl(231 10% 45%);
+  --color-ink-soft: hsl(231 12% 42%);
   --color-muted: hsl(231 10% 75%);
   --color-night: hsl(220 46% 16%);
 
@@ -39,6 +40,22 @@
   }
 
   :focus-visible {
-    outline: none;
+    outline: 2px solid var(--color-night);
+    outline-offset: 3px;
+  }
+
+  [data-color-scheme="dark"] :focus-visible {
+    outline-color: var(--color-day);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }

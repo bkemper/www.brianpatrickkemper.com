@@ -10,13 +10,14 @@ const LogoLink = ({ children, href }: LogoLinkProps) => {
     <a
       className="
         block
-        duration-500
+        duration-300
         ease-in-out
-        px-4
+        px-2
         py-1
-        focus:scale-110 hover:scale-110
-        text-6xl
-        text-muted focus:text-night dark:focus:text-day hover:text-night dark:hover:text-day
+        sm:px-3
+        motion-safe:focus:scale-105 motion-safe:hover:scale-105
+        text-[clamp(2.25rem,8vw,3.75rem)]
+        text-ink-soft dark:text-day/80 focus:text-night dark:focus:text-day hover:text-night dark:hover:text-day
         transition-all
       "
       href={href}

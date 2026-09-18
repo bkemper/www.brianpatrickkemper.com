@@ -36,6 +36,7 @@ const DarkModeToggle = () => {
     <Tooltip.Root>
       <Tooltip.Trigger asChild>
         <Toggle.Root
+          aria-label="Switch appearance"
           className="
             duration-700
             ease-in-out
@@ -56,7 +57,7 @@ const DarkModeToggle = () => {
           className="bg-night dark:bg-day p-2 rounded-sm text-day dark:text-night text-xs"
           sideOffset={5}
         >
-          Toggle Color Scheme
+          Switch appearance
           <Tooltip.Arrow className="fill-night dark:fill-day" />
         </Tooltip.Content>
       </Tooltip.Portal>
