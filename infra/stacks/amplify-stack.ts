@@ -19,16 +19,21 @@ export class AmplifyStack extends Stack {
   constructor(scope: Construct, id: string, props: StackProps) {
     super(scope, id, props);
 
-    // amplify-alpha's default role has trust only — Amplify Hosting builds fail
-    // with "Unable to assume specified IAM Role" unless the role also has
-    // AdministratorAccess-Amplify (AWS Amplify service-role docs).
-    const serviceRole = new iam.Role(this, "ServiceRole", {
-      assumedBy: new iam.ServicePrincipal("amplify.amazonaws.com"),
-      description: "Amplify Hosting service role for the Site",
-    });
-    serviceRole.addManagedPolicy(
-      iam.ManagedPolicy.fromAwsManagedPolicyName("AdministratorAccess-Amplify"),
+    const amplifyPrincipals = new iam.CompositePrincipal(
+      new iam.ServicePrincipal("amplify.amazonaws.com"),
+      new iam.ServicePrincipal(`amplify.${this.region}.amazonaws.com`),
     );
+
+    const serviceRole = new iam.Role(this, "ServiceRole", {
+      description: "Amplify Hosting service role for the Site",
+      assumedBy: amplifyPrincipals,
+      managedPolicies: [
+        iam.ManagedPolicy.fromAwsManagedPolicyName(
+          "AdministratorAccess-Amplify",
+        ),
+      ],
+    });
+
     NagSuppressions.addResourceSuppressions(serviceRole, [
       {
         id: "AwsSolutions-IAM4",
@@ -47,7 +52,9 @@ export class AmplifyStack extends Stack {
       sourceCodeProvider: new amplify.GitHubSourceCodeProvider({
         owner: "bkemper",
         repository: "www.brianpatrickkemper.com",
-        oauthToken: SecretValue.secretsManager(AMPLIFY_GITHUB_TOKEN_SECRET_NAME),
+        oauthToken: SecretValue.secretsManager(
+          AMPLIFY_GITHUB_TOKEN_SECRET_NAME,
+        ),
       }),
       // Build settings live in repo amplify.yml (pnpm → www/dist/client).
       autoBranchDeletion: true,
