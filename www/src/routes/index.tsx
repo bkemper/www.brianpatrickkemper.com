@@ -45,6 +45,7 @@ function Home() {
               className="inline-flex border border-night bg-transparent px-7 py-3 text-sm font-medium tracking-wide text-night transition-colors duration-500 ease-out hover:bg-night hover:text-day focus-visible:bg-night focus-visible:text-day dark:border-day dark:text-day dark:hover:bg-day dark:hover:text-night dark:focus-visible:bg-day dark:focus-visible:text-night"
               href="//www.linkedin.com/in/brianpatrickkemper/"
               rel="noopener noreferrer"
+              target="_blank"
             >
               Connect
             </a>
