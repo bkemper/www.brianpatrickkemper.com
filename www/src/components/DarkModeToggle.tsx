@@ -61,7 +61,7 @@ const DarkModeToggle = () => {
       </Tooltip.Trigger>
       <Tooltip.Portal>
         <Tooltip.Content
-          className="bg-night p-2 text-xs text-day dark:bg-day dark:text-night"
+          className="z-[60] bg-night p-2 text-xs text-day dark:bg-day dark:text-night"
           sideOffset={5}
         >
           Toggle Color Scheme
