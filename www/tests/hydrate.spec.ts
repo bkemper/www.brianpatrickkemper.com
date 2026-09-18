@@ -117,7 +117,7 @@ test("color-scheme control has a Toggle Color Scheme tooltip", async ({
 test("color-scheme control shows visible keyboard focus", async ({ page }) => {
   await page.goto("/");
 
-  const toggle = page.getByRole("button");
+  const toggle = page.getByRole("button").last();
   await expect(toggle).toBeVisible();
 
   const unfocusedBackground = await toggle.evaluate((el) => {
@@ -125,7 +125,13 @@ test("color-scheme control shows visible keyboard focus", async ({ page }) => {
     return getComputedStyle(el).backgroundColor;
   });
 
-  await toggle.focus();
+  // Prefer keyboard focus so :focus-visible styles apply (Clock may also be tabbable).
+  for (let i = 0; i < 6; i++) {
+    await page.keyboard.press("Tab");
+    if (await toggle.evaluate((el) => el === document.activeElement)) {
+      break;
+    }
+  }
   await expect(toggle).toBeFocused();
 
   await expect

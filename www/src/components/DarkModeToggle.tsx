@@ -39,12 +39,12 @@ const DarkModeToggle = () => {
           className="
             duration-700
             ease-in-out
-            focus:bg-night dark:focus:bg-day hover:bg-night dark:hover:bg-day
+            focus-visible:bg-night dark:focus-visible:bg-day hover:bg-night dark:hover:bg-day
             p-2
             rounded-full
-            text-night dark:text-day focus:text-day dark:focus:text-night hover:text-day dark:hover:text-night
+            text-night dark:text-day focus-visible:text-day dark:focus-visible:text-night hover:text-day dark:hover:text-night
             text-base
-            transition-color
+            transition-[background-color,color]
           "
           onClick={toggle}
         >

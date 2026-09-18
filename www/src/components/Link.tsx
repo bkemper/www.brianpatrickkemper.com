@@ -8,7 +8,7 @@ interface LinkProps {
 const Link = ({ children, href }: LinkProps) => {
   return (
     <a
-      className="decoration-dotted underline focus:decoration-solid hover:decoration-solid"
+      className="decoration-dotted underline focus-visible:decoration-solid hover:decoration-solid"
       href={href}
       rel={/^(https?:)?\/\//.test(href) ? "noopener noreferrer" : undefined}
     >

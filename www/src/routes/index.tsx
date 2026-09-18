@@ -32,8 +32,8 @@ function Home() {
           <p>
             <a
               className="
-                focus:bg-night dark:focus:bg-day hover:bg-night dark:hover:bg-day
-                border border-muted focus:border-night dark:focus:border-day hover:border-night dark:hover:border-day
+                focus-visible:bg-night dark:focus-visible:bg-day hover:bg-night dark:hover:bg-day
+                border border-muted focus-visible:border-night dark:focus-visible:border-day hover:border-night dark:hover:border-day
                 duration-700
                 ease-in-out
                 gap-1
@@ -41,9 +41,9 @@ function Home() {
                 px-6
                 py-1
                 rounded-full
-                text-night dark:text-day focus:text-day dark:focus:text-night hover:text-day dark:hover:text-night
+                text-night dark:text-day focus-visible:text-day dark:focus-visible:text-night hover:text-day dark:hover:text-night
                 text-sm
-                transition-color
+                transition-[background-color,border-color,color]
               "
               href="//www.linkedin.com/in/brianpatrickkemper/"
               rel="noopener noreferrer"
