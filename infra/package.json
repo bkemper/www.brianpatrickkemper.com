@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@aws-cdk/aws-amplify-alpha": "2.195.0-alpha.0",
-    "aws-cdk-lib": "2.195.0",
+    "aws-cdk-lib": "2.260.0",
     "cdk-nag": "^2.35.102",
     "constructs": "^10.0.0",
     "lodash": "^4.17.21"
