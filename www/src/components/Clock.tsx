@@ -102,7 +102,7 @@ const Clock = () => {
     <div className="relative">
       {time}
       <p
-        className="pointer-events-none absolute top-full left-1/2 z-0 mt-1 w-max max-w-40 -translate-x-1/2 p-1 text-center text-xs text-gray"
+        className="pointer-events-none absolute top-full left-1/2 z-0 mt-1 w-max max-w-40 -translate-x-1/2 p-1 text-center text-xs text-gray dark:text-muted"
         id={noteId}
       >
         {minutesOffset === 0

@@ -28,15 +28,15 @@ function Home() {
 
       <main className="relative z-10">
         <section className="flex flex-col gap-8 px-6 pb-16 pt-6 md:px-12 md:pb-24 md:pt-10 lg:max-w-4xl lg:px-20">
-          <h1 className="font-display text-[clamp(2.75rem,8vw,5.5rem)] leading-[0.95] font-medium tracking-tight text-balance">
+          <h1 className="font-display text-[clamp(2.75rem,8vw,5.5rem)] leading-[0.95] font-normal tracking-tight text-balance">
             Brian Patrick Kemper
           </h1>
           <p className="max-w-xl text-lg leading-relaxed text-gray dark:text-muted">
-            A{" "}
-            <span className="font-bold italic text-night dark:text-day">
+            I'm a{" "}
+            <span className="font-bold text-night dark:text-day">
               Product Software Engineer
             </span>{" "}
-            who builds digital products that make your work life easier by
+            building digital products that make work life easier by
             understanding your domain and leading teams to deliver a thoughtful
             user experience.
           </p>

@@ -14,7 +14,7 @@ const LogoLink = ({ "aria-label": ariaLabel, children, href }: LogoLinkProps) =>
         block
         px-1
         py-1
-        text-4xl
+        text-5xl
         text-muted
         transition-colors
         duration-500
@@ -23,7 +23,7 @@ const LogoLink = ({ "aria-label": ariaLabel, children, href }: LogoLinkProps) =>
         focus-visible:text-night
         dark:hover:text-day
         dark:focus-visible:text-day
-        md:text-5xl
+        md:text-6xl
       "
       href={href}
       rel="noopener noreferrer"

@@ -38,6 +38,7 @@ const DarkModeToggle = () => {
         <Toggle.Root
           aria-label="Toggle color scheme"
           className="
+            cursor-pointer
             p-2
             text-base
             text-night
