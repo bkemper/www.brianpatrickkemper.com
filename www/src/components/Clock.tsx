@@ -1,4 +1,3 @@
-import * as Popover from "@radix-ui/react-popover";
 import { RefObject, useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
 import withClient from "./withClient";
 import classNames from "classnames";
@@ -72,53 +71,38 @@ const Clock = () => {
     timeRef as RefObject<HTMLTimeElement>,
   );
 
-  const time = (
-    <time
-      className={classNames("text-sm", "text-night", "dark:text-day", {
-        "animate-[puff_1s_ease-in-out_1] inline-block": isAnimated,
-      })}
-      dateTime={now.toISOString()}
-      ref={timeRef}
-    >
-      {now.toLocaleTimeString(LOCALES, {
-        hour: "numeric",
-        minute: "2-digit",
-        timeZone: MY_TIME_ZONE,
-        timeZoneName: "short",
-      })}
-    </time>
-  );
-
-  if (minutesOffset === undefined) {
-    return time;
+  let note: string | null = null;
+  if (minutesOffset !== undefined) {
+    if (minutesOffset === 0) {
+      note = "Nice! I work in the same time zone as you.";
+    } else {
+      const absOffset = Math.abs(minutesOffset);
+      const hoursOffset = Math.floor(absOffset / 60);
+      const remainderMinutes = absOffset % 60;
+      note = `I'm ${hoursOffset} hours ${
+        remainderMinutes !== 0 ? `and ${remainderMinutes} minutes` : ""
+      } ${minutesOffset > 0 ? "behind" : "ahead"} you.`;
+    }
   }
 
-  const absOffset = Math.abs(minutesOffset);
-  const hoursOffset = Math.floor(absOffset / 60);
-  const remainderMinutes = absOffset % 60;
-
   return (
-    <Popover.Root defaultOpen open modal={false}>
-      <Popover.Trigger asChild>{time}</Popover.Trigger>
-      <Popover.Content
-        align="center"
-        alignOffset={0}
-        arrowPadding={0}
-        avoidCollisions
-        collisionPadding={0}
-        side="bottom"
-        sideOffset={0}
-        sticky="always"
+    <div className="max-w-56 text-right">
+      <time
+        className={classNames("text-sm text-ink", {
+          "inline-block animate-[puff_1s_ease-in-out_1]": isAnimated,
+        })}
+        dateTime={now.toISOString()}
+        ref={timeRef}
       >
-        <p className="max-w-40 p-1 text-center text-xs text-gray">
-          {minutesOffset === 0
-            ? "Nice! I work in the same time zone as you."
-            : `I'm ${hoursOffset} hours ${
-                remainderMinutes !== 0 ? `and ${remainderMinutes} minutes` : ""
-              } ${minutesOffset > 0 ? "behind" : "ahead"} you.`}
-        </p>
-      </Popover.Content>
-    </Popover.Root>
+        {now.toLocaleTimeString(LOCALES, {
+          hour: "numeric",
+          minute: "2-digit",
+          timeZone: MY_TIME_ZONE,
+          timeZoneName: "short",
+        })}
+      </time>
+      {note ? <p className="mt-1 text-xs leading-snug text-muted-ink">{note}</p> : null}
+    </div>
   );
 };
 

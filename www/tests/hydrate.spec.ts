@@ -103,15 +103,13 @@ test("color-scheme cycles system → light → dark and persists as color-scheme
   await expect(page.locator("html")).toHaveAttribute("data-color-scheme", "light");
 });
 
-test("color-scheme control has a Toggle Color Scheme tooltip", async ({
-  page,
-}) => {
+test("color-scheme control has an Appearance tooltip", async ({ page }) => {
   await page.goto("/");
 
-  const toggle = page.getByRole("button");
+  const toggle = page.getByRole("button", { name: "Appearance" });
   await toggle.hover();
 
-  await expect(page.getByText("Toggle Color Scheme")).toBeVisible();
+  await expect(page.getByRole("tooltip", { name: "Appearance" })).toBeVisible();
 });
 
 test("color-scheme control shows visible keyboard focus", async ({ page }) => {
@@ -146,9 +144,7 @@ test("offline overlay shows Lost Connection and dismisses when online", async ({
   await context.setOffline(true);
   await expect(page.getByRole("heading", { name: "Lost Connection" })).toBeVisible();
   await expect(
-    page.getByText(
-      "It is a bummer that you lost your internet connection. Try shaking your mouse, yelling at your internet service provider, or restart your computer 3 times.",
-    ),
+    page.getByText("Check your network connection, then reload this page."),
   ).toBeVisible();
 
   await context.setOffline(false);

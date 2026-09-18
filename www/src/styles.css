@@ -3,14 +3,31 @@
 @custom-variant dark (&:where([data-color-scheme="dark"], [data-color-scheme="dark"] *));
 
 @theme {
-  --color-day: hsl(220 100% 98%);
-  --color-gray: hsl(231 10% 45%);
-  --color-muted: hsl(231 10% 75%);
-  --color-night: hsl(220 46% 16%);
+  --color-field: var(--site-field);
+  --color-ink: var(--site-ink);
+  --color-rule: var(--site-rule);
+  --color-accent: var(--site-accent);
+  --color-muted-ink: var(--site-muted-ink);
 
-  --font-mono: var(--font-lato);
-  --font-sans: var(--font-lato);
+  /* Legacy aliases used by logo knockouts */
+  --color-day: var(--site-field);
+  --color-night: var(--site-ink);
+  --color-gray: var(--site-muted-ink);
+  --color-muted: var(--site-rule);
+
+  --font-serif: var(--font-literata);
+  --font-sans: var(--font-literata);
   --font-sign: var(--font-caveat);
+  --font-mono: var(--font-literata);
+
+  @keyframes letterIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 
   @keyframes fadeIn {
     0% {
@@ -34,11 +51,25 @@
 
 @layer base {
   :root {
+    --site-field: hsl(200 12% 94%);
+    --site-ink: hsl(210 25% 14%);
+    --site-rule: hsl(210 10% 70%);
+    --site-accent: hsl(350 55% 38%);
+    --site-muted-ink: hsl(210 12% 38%);
     --font-caveat: "Caveat", cursive;
-    --font-lato: "Lato", sans-serif;
+    --font-literata: "Literata", serif;
+  }
+
+  [data-color-scheme="dark"] {
+    --site-field: hsl(210 20% 9%);
+    --site-ink: hsl(200 12% 92%);
+    --site-rule: hsl(210 10% 38%);
+    --site-accent: hsl(350 50% 62%);
+    --site-muted-ink: hsl(200 8% 62%);
   }
 
   :focus-visible {
-    outline: none;
+    outline: 2px solid var(--site-ink);
+    outline-offset: 3px;
   }
 }

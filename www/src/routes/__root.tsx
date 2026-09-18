@@ -37,7 +37,7 @@ export const Route = createRootRoute({
       },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Caveat&family=Lato:wght@100;300;400;700;900&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Caveat&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap",
       },
     ],
   }),
@@ -63,7 +63,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       <head>
         <HeadContent />
       </head>
-      <body className="font-sans">
+      <body className="bg-field font-serif text-ink antialiased">
         {children}
         <Scripts />
       </body>

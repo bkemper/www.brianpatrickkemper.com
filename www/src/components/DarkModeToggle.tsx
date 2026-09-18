@@ -36,15 +36,17 @@ const DarkModeToggle = () => {
     <Tooltip.Root>
       <Tooltip.Trigger asChild>
         <Toggle.Root
+          aria-label="Appearance"
           className="
-            duration-700
-            ease-in-out
-            focus:bg-night dark:focus:bg-day hover:bg-night dark:hover:bg-day
+            rounded-sm
             p-2
-            rounded-full
-            text-night dark:text-day focus:text-day dark:focus:text-night hover:text-day dark:hover:text-night
-            text-base
-            transition-color
+            text-ink
+            transition-colors
+            duration-300
+            hover:bg-rule/40
+            focus:bg-ink
+            focus:text-field
+            focus-visible:outline-none
           "
           onClick={toggle}
         >
@@ -53,11 +55,11 @@ const DarkModeToggle = () => {
       </Tooltip.Trigger>
       <Tooltip.Portal>
         <Tooltip.Content
-          className="bg-night dark:bg-day p-2 rounded-sm text-day dark:text-night text-xs"
+          className="bg-ink px-2 py-1.5 text-xs text-field"
           sideOffset={5}
         >
-          Toggle Color Scheme
-          <Tooltip.Arrow className="fill-night dark:fill-day" />
+          Appearance
+          <Tooltip.Arrow className="fill-ink" />
         </Tooltip.Content>
       </Tooltip.Portal>
     </Tooltip.Root>
