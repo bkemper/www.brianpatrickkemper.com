@@ -44,7 +44,7 @@ test("prerendered / includes the Connect CTA and role text", async ({ page }) =>
 
   await expect(
     page.getByText(
-      /A Product Software Engineer who builds digital products that make your work life easier by understanding your domain and leading teams to deliver the ideal user experience./,
+      /A Product Software Engineer who builds digital products that make your work life easier by understanding your domain and leading teams to deliver a thoughtful user experience./,
     ),
   ).toBeVisible();
 
@@ -94,7 +94,7 @@ test("prerendered / document metadata matches the public Site", async ({
   const description = page.locator('meta[name="description"]');
   await expect(description).toHaveAttribute(
     "content",
-    "A Product Software Engineer who builds digital products that make your work life easier by understanding your domain and leading teams to deliver the ideal user experience.",
+    "A Product Software Engineer who builds digital products that make your work life easier by understanding your domain and leading teams to deliver a thoughtful user experience.",
   );
 
   const keywords = page.locator('meta[name="keywords"]');

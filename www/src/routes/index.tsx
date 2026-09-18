@@ -28,13 +28,17 @@ function Home() {
 
       <main className="relative z-10">
         <section className="flex flex-col gap-8 px-6 pb-16 pt-6 md:px-12 md:pb-24 md:pt-10 lg:max-w-4xl lg:px-20">
-          <h1 className="reveal font-display text-[clamp(2.75rem,8vw,5.5rem)] leading-[0.95] font-semibold tracking-tight text-balance">
+          <h1 className="reveal font-display text-[clamp(2.75rem,8vw,5.5rem)] leading-[0.95] font-medium tracking-tight text-balance">
             Brian Patrick Kemper
           </h1>
           <p className="reveal reveal-delay-1 max-w-xl text-lg leading-relaxed text-gray dark:text-muted">
-            A Product Software Engineer who builds digital products that make
-            your work life easier by understanding your domain and leading teams to
-            deliver the ideal user experience.
+            A{" "}
+            <span className="font-bold italic text-night dark:text-day">
+              Product Software Engineer
+            </span>{" "}
+            who builds digital products that make your work life easier by
+            understanding your domain and leading teams to deliver a thoughtful
+            user experience.
           </p>
           <p className="reveal reveal-delay-2">
             <a
