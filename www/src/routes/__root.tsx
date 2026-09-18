@@ -16,7 +16,10 @@ export const Route = createRootRoute({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      {
+        name: "viewport",
+        content: "width=device-width, initial-scale=1, viewport-fit=cover",
+      },
       { title: "Brian Patrick Kemper" },
       {
         name: "description",
@@ -24,6 +27,12 @@ export const Route = createRootRoute({
       },
       { name: "keywords", content: "engineer, software" },
       { name: "robots", content: "index, follow" },
+      { name: "theme-color", content: "hsl(220 100% 98%)" },
+      {
+        name: "theme-color",
+        content: "hsl(220 46% 16%)",
+        media: "(prefers-color-scheme: dark)",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -34,6 +43,11 @@ export const Route = createRootRoute({
         rel: "preconnect",
         href: "https://fonts.gstatic.com",
         crossOrigin: "anonymous",
+      },
+      {
+        rel: "preload",
+        as: "style",
+        href: "https://fonts.googleapis.com/css2?family=Caveat&family=Lato:wght@100;300;400;700;900&display=swap",
       },
       {
         rel: "stylesheet",

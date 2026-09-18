@@ -36,6 +36,13 @@
   :root {
     --font-caveat: "Caveat", cursive;
     --font-lato: "Lato", sans-serif;
+    color-scheme: light;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  [data-color-scheme="dark"] {
+    color-scheme: dark;
   }
 
   :focus-visible {

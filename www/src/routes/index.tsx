@@ -15,7 +15,7 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   return (
-    <div className="bg-day dark:bg-night min-h-screen min-w-screen relative">
+    <div className="bg-day dark:bg-night min-h-screen min-w-screen relative pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)] pt-[env(safe-area-inset-top)]">
       <header className="flex gap-4 items-center justify-end px-6 py-2">
         <div>
           <Clock />
@@ -26,7 +26,7 @@ function Home() {
       </header>
       <main>
         <section className="flex flex-col gap-6 h-[55vh] justify-center px-16 md:px-32">
-          <h1 className="font-sign h-[1em] overflow-hidden text-8xl text-night text-wrap dark:text-day">
+          <h1 className="font-sign h-[1em] overflow-hidden text-8xl text-balance text-night dark:text-day">
             Brian Patrick Kemper
           </h1>
           <p>
