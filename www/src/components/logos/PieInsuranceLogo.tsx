@@ -4,6 +4,7 @@ interface LogoProps {
 
 const PieInsuranceLogo = ({ className }: LogoProps) => (
   <svg
+    aria-hidden="true"
     className={className}
     fill="none"
     height="1em"

@@ -1,13 +1,15 @@
 import { type ReactNode } from "react";
 
 interface LogoLinkProps {
+  ariaLabel: string;
   children: ReactNode;
   href: string;
 }
 
-const LogoLink = ({ children, href }: LogoLinkProps) => {
+const LogoLink = ({ ariaLabel, children, href }: LogoLinkProps) => {
   return (
     <a
+      aria-label={ariaLabel}
       className="
         block
         duration-500

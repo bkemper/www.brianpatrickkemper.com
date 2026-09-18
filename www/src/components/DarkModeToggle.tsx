@@ -27,15 +27,16 @@ const DarkModeToggle = () => {
   }, [matches, mode]);
 
   const icons = {
-    dark: <MoonIcon height="1rem" width="1rem" />,
-    light: <SunIcon height="1rem" width="1rem" />,
-    system: <GearIcon height="1rem" width="1rem" />,
+    dark: <MoonIcon aria-hidden="true" height="1rem" width="1rem" />,
+    light: <SunIcon aria-hidden="true" height="1rem" width="1rem" />,
+    system: <GearIcon aria-hidden="true" height="1rem" width="1rem" />,
   };
 
   return (
     <Tooltip.Root>
       <Tooltip.Trigger asChild>
         <Toggle.Root
+          aria-label="Toggle Color Scheme"
           className="
             duration-700
             ease-in-out

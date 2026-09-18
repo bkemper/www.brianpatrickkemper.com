@@ -4,6 +4,7 @@ interface LogoProps {
 
 const VisualLeaseLogo = ({ className }: LogoProps) => (
   <svg
+    aria-hidden="true"
     className={className}
     fill="none"
     height="1em"
