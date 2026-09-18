@@ -1,5 +1,4 @@
-import * as Popover from "@radix-ui/react-popover";
-import { RefObject, useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { RefObject, useCallback, useEffect, useId, useMemo, useRef, useState, useTransition } from "react";
 import withClient from "./withClient";
 import classNames from "classnames";
 import { useEventListener } from "usehooks-ts";
@@ -31,6 +30,7 @@ const getTimeZoneOffset = (timeZone?: string) => {
 };
 
 const Clock = () => {
+  const noteId = useId();
   const timeRef = useRef<HTMLTimeElement>(null);
   const [isAnimated, setIsAnimated] = useState(false);
   const [now, setNow] = useState(getNow);
@@ -74,6 +74,7 @@ const Clock = () => {
 
   const time = (
     <time
+      aria-describedby={minutesOffset === undefined ? undefined : noteId}
       className={classNames("text-sm", "text-night", "dark:text-day", {
         "animate-[puff_1s_ease-in-out_1] inline-block": isAnimated,
       })}
@@ -98,27 +99,19 @@ const Clock = () => {
   const remainderMinutes = absOffset % 60;
 
   return (
-    <Popover.Root defaultOpen open modal={false}>
-      <Popover.Trigger asChild>{time}</Popover.Trigger>
-      <Popover.Content
-        align="center"
-        alignOffset={0}
-        arrowPadding={0}
-        avoidCollisions
-        collisionPadding={0}
-        side="bottom"
-        sideOffset={0}
-        sticky="always"
+    <div className="relative">
+      {time}
+      <p
+        className="pointer-events-none absolute top-full left-1/2 z-0 mt-1 w-max max-w-40 -translate-x-1/2 p-1 text-center text-xs text-gray"
+        id={noteId}
       >
-        <p className="max-w-40 p-1 text-center text-xs text-gray">
-          {minutesOffset === 0
-            ? "Nice! I work in the same time zone as you."
-            : `I'm ${hoursOffset} hours ${
-                remainderMinutes !== 0 ? `and ${remainderMinutes} minutes` : ""
-              } ${minutesOffset > 0 ? "behind" : "ahead"} you.`}
-        </p>
-      </Popover.Content>
-    </Popover.Root>
+        {minutesOffset === 0
+          ? "Nice! I work in the same time zone as you."
+          : `I'm ${hoursOffset} hours ${
+              remainderMinutes !== 0 ? `and ${remainderMinutes} minutes` : ""
+            } ${minutesOffset > 0 ? "behind" : "ahead"} you.`}
+      </p>
+    </div>
   );
 };
 

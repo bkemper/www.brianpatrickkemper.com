@@ -8,12 +8,11 @@ const OfflineOverlay = () => {
   return (
     <Dialog.Root open={isWindowOnline === false}>
       <Dialog.Portal>
-        <Dialog.Overlay className="animate-[fadeIn_500ms_ease-in-out_1] backdrop-blur-[2px] bg-day/75 dark:bg-night/75 fixed inset-0" />
-        <Dialog.Content className="animate-[fadeIn_1s_ease-in-out_1] fixed max-w-md p-6 text-night dark:text-day top-0">
-          <Dialog.Title className="mb-1 text-2xl">Lost Connection</Dialog.Title>
-          <Dialog.Description className="text-sm">
-            It is a bummer that you lost your internet connection. Try shaking your mouse, yelling
-            at your internet service provider, or restart your computer 3 times.
+        <Dialog.Overlay className="animate-[fadeIn_500ms_ease-in-out_1] fixed inset-0 bg-day/80 backdrop-blur-[2px] dark:bg-night/80" />
+        <Dialog.Content className="animate-[fadeIn_1s_ease-in-out_1] fixed top-0 max-w-md border border-night/20 bg-day p-6 text-night dark:border-day/20 dark:bg-night dark:text-day">
+          <Dialog.Title className="mb-1 text-2xl font-semibold">Lost Connection</Dialog.Title>
+          <Dialog.Description className="text-sm leading-relaxed">
+            Your connection dropped. Check the network, then refresh when you are back online.
           </Dialog.Description>
         </Dialog.Content>
       </Dialog.Portal>

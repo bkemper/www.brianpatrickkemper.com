@@ -39,12 +39,18 @@ test("prerendered / still shows the heading after reload without JavaScript", as
   ).toBeVisible();
 });
 
-test("prerendered / includes the LinkedIn role control", async ({ page }) => {
+test("prerendered / includes the Connect CTA and role text", async ({ page }) => {
   await page.goto("/");
 
-  const roleLink = page.getByRole("link", { name: "Product Software Engineer" });
-  await expect(roleLink).toBeVisible();
-  await expect(roleLink).toHaveAttribute(
+  await expect(
+    page.getByText(
+      /A Product Software Engineer who builds digital products that make your work life easier by understanding your domain and leading teams to deliver a thoughtful user experience./,
+    ),
+  ).toBeVisible();
+
+  const linkedIn = page.getByRole("link", { name: "Connect" });
+  await expect(linkedIn).toBeVisible();
+  await expect(linkedIn).toHaveAttribute(
     "href",
     "//www.linkedin.com/in/brianpatrickkemper/",
   );
@@ -88,7 +94,7 @@ test("prerendered / document metadata matches the public Site", async ({
   const description = page.locator('meta[name="description"]');
   await expect(description).toHaveAttribute(
     "content",
-    "A software engineer building products that help people.",
+    "A Product Software Engineer who builds digital products that make your work life easier by understanding your domain and leading teams to deliver a thoughtful user experience.",
   );
 
   const keywords = page.locator('meta[name="keywords"]');

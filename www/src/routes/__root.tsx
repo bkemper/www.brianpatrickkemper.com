@@ -20,7 +20,7 @@ export const Route = createRootRoute({
       { title: "Brian Patrick Kemper" },
       {
         name: "description",
-        content: "A software engineer building products that help people.",
+        content: "A Product Software Engineer who builds digital products that make your work life easier by understanding your domain and leading teams to deliver a thoughtful user experience.",
       },
       { name: "keywords", content: "engineer, software" },
       { name: "robots", content: "index, follow" },
@@ -29,16 +29,6 @@ export const Route = createRootRoute({
       { rel: "stylesheet", href: appCss },
       { rel: "canonical", href: `${canonicalOrigin}/` },
       { rel: "icon", href: "/favicon.ico" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      {
-        rel: "preconnect",
-        href: "https://fonts.gstatic.com",
-        crossOrigin: "anonymous",
-      },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Caveat&family=Lato:wght@100;300;400;700;900&display=swap",
-      },
     ],
   }),
   component: RootComponent,
@@ -63,7 +53,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       <head>
         <HeadContent />
       </head>
-      <body className="font-sans">
+      <body className="font-sans antialiased">
         {children}
         <Scripts />
       </body>
