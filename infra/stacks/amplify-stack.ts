@@ -1,57 +1,51 @@
 import * as amplify from "@aws-cdk/aws-amplify-alpha";
+import { CfnApp } from "aws-cdk-lib/aws-amplify";
 import { CfnOutput, SecretValue, Stack, StackProps } from "aws-cdk-lib";
-import * as iam from "aws-cdk-lib/aws-iam";
-import { NagSuppressions } from "cdk-nag";
 import { Construct } from "constructs";
 
-/** Secrets Manager secret name for the GitHub PAT Amplify uses to clone this repo. Create before deploy. */
+/** Secrets Manager secret name for the GitHub PAT Amplify uses with the Amplify GitHub App. Create before deploy. */
 export const AMPLIFY_GITHUB_TOKEN_SECRET_NAME = "amplify/github-token";
 
 /**
  * Amplify Hosting for the Site (platform WEB, static).
  * Phase 1: app + `main` + pull-request previews. Custom domain is phase 2.
  *
- * Prerequisite: Secrets Manager secret `amplify/github-token` with a GitHub PAT
- * that can read `bkemper/www.brianpatrickkemper.com` and manage repo webhooks
- * (fine-grained: Contents + Metadata + Webhooks; or classic: admin:repo_hook).
+ * Prerequisites:
+ * - Secrets Manager secret `amplify/github-token` (classic `admin:repo_hook`, or
+ *   fine-grained Contents + Metadata + Webhooks) for CreateApp `accessToken`.
+ * - Amplify GitHub App (`aws-amplify-us-east-1`) installed on this repo — required
+ *   for PR web previews. Run `scripts/setup-amplify-github-app.sh`.
+ *
+ * No IAM service role: this repository is public. Amplify refuses PR previews on
+ * public repos when an app service role is attached (preview security restriction).
  */
 export class AmplifyStack extends Stack {
   constructor(scope: Construct, id: string, props: StackProps) {
     super(scope, id, props);
 
-    // amplify-alpha's default role has trust only — Amplify Hosting builds fail
-    // with "Unable to assume specified IAM Role" unless the role also has
-    // AdministratorAccess-Amplify (AWS Amplify service-role docs).
-    const serviceRole = new iam.Role(this, "ServiceRole", {
-      assumedBy: new iam.ServicePrincipal("amplify.amazonaws.com"),
-      description: "Amplify Hosting service role for the Site",
-    });
-    serviceRole.addManagedPolicy(
-      iam.ManagedPolicy.fromAwsManagedPolicyName("AdministratorAccess-Amplify"),
+    const githubToken = SecretValue.secretsManager(
+      AMPLIFY_GITHUB_TOKEN_SECRET_NAME,
     );
-    NagSuppressions.addResourceSuppressions(serviceRole, [
-      {
-        id: "AwsSolutions-IAM4",
-        reason:
-          "Amplify Hosting requires the AdministratorAccess-Amplify managed policy on the app service role.",
-        appliesTo: [
-          "Policy::arn:<AWS::Partition>:iam::aws:policy/AdministratorAccess-Amplify",
-        ],
-      },
-    ]);
 
     const site = new amplify.App(this, "Site", {
       appName: "bpk-site",
       platform: amplify.Platform.WEB,
-      role: serviceRole,
-      sourceCodeProvider: new amplify.GitHubSourceCodeProvider({
-        owner: "bkemper",
-        repository: "www.brianpatrickkemper.com",
-        oauthToken: SecretValue.secretsManager(AMPLIFY_GITHUB_TOKEN_SECRET_NAME),
-      }),
+      // GitHub App access (not OAuth): bind accessToken instead of oauthToken.
+      sourceCodeProvider: {
+        bind: () => ({
+          repository: "https://github.com/bkemper/www.brianpatrickkemper.com",
+          accessToken: githubToken,
+        }),
+      },
       // Build settings live in repo amplify.yml (pnpm → www/dist/client).
       autoBranchDeletion: true,
     });
+
+    // amplify-alpha always creates a Role and wires IAMServiceRole; clear it so
+    // public-repo PR previews are allowed, and drop the unused Role resource.
+    const cfnApp = site.node.defaultChild as CfnApp;
+    cfnApp.iamServiceRole = undefined;
+    site.node.tryRemoveChild("Role");
 
     site.addBranch("main", {
       branchName: "main",
