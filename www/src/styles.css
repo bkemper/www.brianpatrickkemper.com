@@ -2,15 +2,38 @@
 
 @custom-variant dark (&:where([data-color-scheme="dark"], [data-color-scheme="dark"] *));
 
-@theme {
-  --color-day: hsl(220 100% 98%);
-  --color-gray: hsl(231 10% 45%);
-  --color-muted: hsl(231 10% 75%);
-  --color-night: hsl(220 46% 16%);
+@font-face {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/outfit.woff2") format("woff2");
+}
 
-  --font-mono: var(--font-lato);
-  --font-sans: var(--font-lato);
-  --font-sign: var(--font-caveat);
+@theme {
+  --color-day: hsl(210 20% 97%);
+  --color-smoke: hsl(210 12% 88%);
+  --color-gray: hsl(215 10% 46%);
+  --color-muted: hsl(215 10% 68%);
+  --color-night: hsl(220 18% 12%);
+  --color-cobalt: hsl(215 90% 42%);
+  --color-cobalt-soft: hsl(215 80% 56%);
+
+  --radius-site: 12px;
+
+  --font-mono: "Outfit", sans-serif;
+  --font-sans: "Outfit", sans-serif;
+
+  @keyframes heroEnter {
+    0% {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
   @keyframes fadeIn {
     0% {
@@ -20,25 +43,66 @@
       opacity: 1;
     }
   }
-
-  @keyframes puff {
-    0%,
-    100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.1);
-    }
-  }
 }
 
 @layer base {
   :root {
-    --font-caveat: "Caveat", cursive;
-    --font-lato: "Lato", sans-serif;
+    --font-outfit: "Outfit", sans-serif;
+    --site-radius: 12px;
+  }
+
+  :focus {
+    outline: none;
   }
 
   :focus-visible {
-    outline: none;
+    outline: 2px solid var(--color-cobalt);
+    outline-offset: 3px;
+  }
+
+  [data-color-scheme="dark"] :focus-visible {
+    outline-color: var(--color-cobalt-soft);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  .bg-site {
+    background-color: var(--color-day);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 100% 0%, hsl(215 40% 90% / 0.55), transparent 55%),
+      linear-gradient(165deg, hsl(210 20% 97%) 0%, hsl(210 14% 93%) 48%, hsl(215 16% 95%) 100%);
+  }
+
+  [data-color-scheme="dark"] .bg-site {
+    background-color: var(--color-night);
+    background-image:
+      radial-gradient(ellipse 70% 45% at 100% 0%, hsl(215 40% 22% / 0.45), transparent 55%),
+      linear-gradient(165deg, hsl(220 18% 12%) 0%, hsl(220 16% 9%) 50%, hsl(215 14% 14%) 100%);
+  }
+
+  .animate-hero-enter {
+    animation: heroEnter 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-hero-enter-delay {
+    animation: heroEnter 700ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
+  }
+
+  .animate-hero-enter-delay-2 {
+    animation: heroEnter 700ms cubic-bezier(0.22, 1, 0.36, 1) 220ms both;
+  }
+
+  .rounded-site {
+    border-radius: var(--site-radius);
   }
 }
