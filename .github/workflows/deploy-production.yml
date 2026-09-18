@@ -42,15 +42,6 @@ jobs:
         working-directory: infra
         run: pnpm install --frozen-lockfile
 
-      # WebsiteStack first: release CloudFront aliases so Amplify can claim them.
-      # Stack id is "WebsiteStack" (historical name; not ProductionWebsiteStack).
-      - name: Deploy WebsiteStack (release custom domain aliases)
-        env:
-          CDK_DEFAULT_REGION: ${{ vars.AWS_REGION || 'us-east-1' }}
-          CDK_DISABLE_TELEMETRY: "1"
-          CDK_ENV: production
-        run: pnpm infra run cdk deploy WebsiteStack --require-approval never
-
       - name: Deploy Amplify Hosting
         env:
           CDK_DEFAULT_REGION: ${{ vars.AWS_REGION || 'us-east-1' }}

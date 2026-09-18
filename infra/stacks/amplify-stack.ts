@@ -70,8 +70,7 @@ export class AmplifyStack extends Stack {
       stage: "PRODUCTION",
     });
 
-    // Amplify-managed cert. WebsiteStack CloudFront aliases must be released
-    // first or Amplify hits CNAMEAlreadyExistsException.
+    // Amplify-managed cert for apex + www.
     const domain = site.addDomain(SITE_DOMAIN_NAME, {
       domainName: SITE_DOMAIN_NAME,
     });
