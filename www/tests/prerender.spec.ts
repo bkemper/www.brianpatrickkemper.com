@@ -39,12 +39,14 @@ test("prerendered / still shows the heading after reload without JavaScript", as
   ).toBeVisible();
 });
 
-test("prerendered / includes the LinkedIn role control", async ({ page }) => {
+test("prerendered / includes the LinkedIn CTA and role text", async ({ page }) => {
   await page.goto("/");
 
-  const roleLink = page.getByRole("link", { name: "Product Software Engineer" });
-  await expect(roleLink).toBeVisible();
-  await expect(roleLink).toHaveAttribute(
+  await expect(page.getByText("Product Software Engineer")).toBeVisible();
+
+  const linkedIn = page.getByRole("link", { name: "LinkedIn" });
+  await expect(linkedIn).toBeVisible();
+  await expect(linkedIn).toHaveAttribute(
     "href",
     "//www.linkedin.com/in/brianpatrickkemper/",
   );
