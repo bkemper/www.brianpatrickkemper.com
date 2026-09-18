@@ -28,10 +28,10 @@ function Home() {
 
       <main className="relative z-10">
         <section className="flex flex-col gap-8 px-6 pb-16 pt-6 md:px-12 md:pb-24 md:pt-10 lg:max-w-4xl lg:px-20">
-          <h1 className="reveal font-display text-[clamp(2.75rem,8vw,5.5rem)] leading-[0.95] font-medium tracking-tight text-balance">
+          <h1 className="font-display text-[clamp(2.75rem,8vw,5.5rem)] leading-[0.95] font-medium tracking-tight text-balance">
             Brian Patrick Kemper
           </h1>
-          <p className="reveal reveal-delay-1 max-w-xl text-lg leading-relaxed text-gray dark:text-muted">
+          <p className="max-w-xl text-lg leading-relaxed text-gray dark:text-muted">
             A{" "}
             <span className="font-bold italic text-night dark:text-day">
               Product Software Engineer
@@ -40,7 +40,7 @@ function Home() {
             understanding your domain and leading teams to deliver a thoughtful
             user experience.
           </p>
-          <p className="reveal reveal-delay-2">
+          <p>
             <a
               className="inline-flex border border-night bg-transparent px-7 py-3 text-sm font-medium tracking-wide text-night transition-colors duration-500 ease-out hover:bg-night hover:text-day focus-visible:bg-night focus-visible:text-day dark:border-day dark:text-day dark:hover:bg-day dark:hover:text-night dark:focus-visible:bg-day dark:focus-visible:text-night"
               href="//www.linkedin.com/in/brianpatrickkemper/"
