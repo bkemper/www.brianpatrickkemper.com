@@ -8,7 +8,10 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 const MODES = ["system", "light", "dark"] as const;
 
 const DarkModeToggle = () => {
-  const [mode, setMode] = useLocalStorage<(typeof MODES)[number]>("color-scheme", "system");
+  const [mode, setMode] = useLocalStorage<(typeof MODES)[number]>(
+    "color-scheme",
+    "system",
+  );
   const matches = useMediaQuery("(prefers-color-scheme: dark)");
 
   const toggle = useCallback(() => {
@@ -22,7 +25,8 @@ const DarkModeToggle = () => {
   }, [setMode]);
 
   useEffect(() => {
-    const colorScheme = mode === "system" ? (matches ? "dark" : "light") : mode;
+    const colorScheme =
+      mode === "system" ? (matches ? "dark" : "light") : mode;
     document.documentElement.dataset.colorScheme = colorScheme;
   }, [matches, mode]);
 
@@ -32,19 +36,29 @@ const DarkModeToggle = () => {
     system: <GearIcon height="1rem" width="1rem" />,
   };
 
+  const labels = {
+    dark: "Using dark appearance. Click for system.",
+    light: "Using light appearance. Click for dark.",
+    system: "Matching your system. Click for light.",
+  };
+
   return (
     <Tooltip.Root>
       <Tooltip.Trigger asChild>
         <Toggle.Root
+          aria-label="Change appearance"
           className="
-            duration-700
+            duration-300
             ease-in-out
-            focus:bg-night dark:focus:bg-day hover:bg-night dark:hover:bg-day
             p-2
-            rounded-full
-            text-night dark:text-day focus:text-day dark:focus:text-night hover:text-day dark:hover:text-night
+            rounded-sm
+            text-mist
+            hover:text-ink
+            dark:hover:text-day
             text-base
-            transition-color
+            transition-colors
+            focus-visible:bg-ink/5
+            dark:focus-visible:bg-day/10
           "
           onClick={toggle}
         >
@@ -53,11 +67,11 @@ const DarkModeToggle = () => {
       </Tooltip.Trigger>
       <Tooltip.Portal>
         <Tooltip.Content
-          className="bg-night dark:bg-day p-2 rounded-sm text-day dark:text-night text-xs"
+          className="bg-ink dark:bg-day p-2 rounded-sm text-day dark:text-ink text-xs"
           sideOffset={5}
         >
-          Toggle Color Scheme
-          <Tooltip.Arrow className="fill-night dark:fill-day" />
+          {labels[mode]}
+          <Tooltip.Arrow className="fill-ink dark:fill-day" />
         </Tooltip.Content>
       </Tooltip.Portal>
     </Tooltip.Root>

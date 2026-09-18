@@ -1,5 +1,12 @@
-import * as Popover from "@radix-ui/react-popover";
-import { RefObject, useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
+import {
+  RefObject,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useTransition,
+} from "react";
 import withClient from "./withClient";
 import classNames from "classnames";
 import { useEventListener } from "usehooks-ts";
@@ -13,7 +20,10 @@ const SECONDS_IN_MINUTE = 60;
 const getNow = () => new Date();
 
 const getTimeZoneOffset = (timeZone?: string) => {
-  const timeZoneName = Intl.DateTimeFormat("en-US", { timeZone, timeZoneName: "longOffset" })
+  const timeZoneName = Intl.DateTimeFormat("en-US", {
+    timeZone,
+    timeZoneName: "longOffset",
+  })
     .formatToParts()
     .find((part) => part.type === "timeZoneName")?.value;
 
@@ -21,13 +31,16 @@ const getTimeZoneOffset = (timeZone?: string) => {
     return;
   }
 
-  const [match, offset, hours, minutes] = /GMT([+-])(\d\d):(\d\d)/.exec(timeZoneName) ?? [];
+  const [match, offset, hours, minutes] =
+    /GMT([+-])(\d\d):(\d\d)/.exec(timeZoneName) ?? [];
 
   if (!match) {
     return 0;
   }
 
-  return (offset === "-" ? -1 : 1) * (parseInt(hours) * 60 + parseInt(minutes));
+  return (
+    (offset === "-" ? -1 : 1) * (parseInt(hours) * 60 + parseInt(minutes))
+  );
 };
 
 const Clock = () => {
@@ -72,53 +85,48 @@ const Clock = () => {
     timeRef as RefObject<HTMLTimeElement>,
   );
 
-  const time = (
-    <time
-      className={classNames("text-sm", "text-night", "dark:text-day", {
-        "animate-[puff_1s_ease-in-out_1] inline-block": isAnimated,
-      })}
-      dateTime={now.toISOString()}
-      ref={timeRef}
-    >
-      {now.toLocaleTimeString(LOCALES, {
-        hour: "numeric",
-        minute: "2-digit",
-        timeZone: MY_TIME_ZONE,
-        timeZoneName: "short",
-      })}
-    </time>
-  );
-
-  if (minutesOffset === undefined) {
-    return time;
-  }
-
-  const absOffset = Math.abs(minutesOffset);
-  const hoursOffset = Math.floor(absOffset / 60);
-  const remainderMinutes = absOffset % 60;
+  const note =
+    minutesOffset === undefined
+      ? null
+      : minutesOffset === 0
+        ? "Nice! I work in the same time zone as you."
+        : (() => {
+            const absOffset = Math.abs(minutesOffset);
+            const hoursOffset = Math.floor(absOffset / 60);
+            const remainderMinutes = absOffset % 60;
+            return `I'm ${hoursOffset} hours${
+              remainderMinutes !== 0 ? ` and ${remainderMinutes} minutes` : ""
+            } ${minutesOffset > 0 ? "behind" : "ahead"} you.`;
+          })();
 
   return (
-    <Popover.Root defaultOpen open modal={false}>
-      <Popover.Trigger asChild>{time}</Popover.Trigger>
-      <Popover.Content
-        align="center"
-        alignOffset={0}
-        arrowPadding={0}
-        avoidCollisions
-        collisionPadding={0}
-        side="bottom"
-        sideOffset={0}
-        sticky="always"
+    <div className="animate-[presenceIn_0.9s_ease-out_both] flex flex-col gap-3">
+      <time
+        className={classNames(
+          "font-sign",
+          "text-5xl",
+          "md:text-7xl",
+          "text-ink",
+          "dark:text-day",
+          "tracking-tight",
+          {
+            "animate-[puff_1s_ease-in-out_1] inline-block": isAnimated,
+          },
+        )}
+        dateTime={now.toISOString()}
+        ref={timeRef}
       >
-        <p className="max-w-40 p-1 text-center text-xs text-gray">
-          {minutesOffset === 0
-            ? "Nice! I work in the same time zone as you."
-            : `I'm ${hoursOffset} hours ${
-                remainderMinutes !== 0 ? `and ${remainderMinutes} minutes` : ""
-              } ${minutesOffset > 0 ? "behind" : "ahead"} you.`}
-        </p>
-      </Popover.Content>
-    </Popover.Root>
+        {now.toLocaleTimeString(LOCALES, {
+          hour: "numeric",
+          minute: "2-digit",
+          timeZone: MY_TIME_ZONE,
+          timeZoneName: "short",
+        })}
+      </time>
+      {note ? (
+        <p className="max-w-md text-lg text-mist md:text-xl">{note}</p>
+      ) : null}
+    </div>
   );
 };
 

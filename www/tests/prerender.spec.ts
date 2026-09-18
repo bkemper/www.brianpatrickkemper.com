@@ -39,12 +39,14 @@ test("prerendered / still shows the heading after reload without JavaScript", as
   ).toBeVisible();
 });
 
-test("prerendered / includes the LinkedIn role control", async ({ page }) => {
+test("prerendered / includes the LinkedIn control", async ({ page }) => {
   await page.goto("/");
 
-  const roleLink = page.getByRole("link", { name: "Product Software Engineer" });
-  await expect(roleLink).toBeVisible();
-  await expect(roleLink).toHaveAttribute(
+  await expect(page.getByText("Product Software Engineer")).toBeVisible();
+
+  const linkedInLink = page.getByRole("link", { name: "Open LinkedIn" });
+  await expect(linkedInLink).toBeVisible();
+  await expect(linkedInLink).toHaveAttribute(
     "href",
     "//www.linkedin.com/in/brianpatrickkemper/",
   );
@@ -54,7 +56,7 @@ test("prerendered / includes five company LinkedIn marks", async ({ page }) => {
   await page.goto("/");
 
   await expect(
-    page.getByRole("heading", { level: 2, name: "Company Logos" }),
+    page.getByRole("heading", { level: 2, name: "Places I've worked" }),
   ).toBeAttached();
 
   for (const path of companyLinkedInPaths) {

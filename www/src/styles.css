@@ -3,14 +3,17 @@
 @custom-variant dark (&:where([data-color-scheme="dark"], [data-color-scheme="dark"] *));
 
 @theme {
-  --color-day: hsl(220 100% 98%);
-  --color-gray: hsl(231 10% 45%);
-  --color-muted: hsl(231 10% 75%);
-  --color-night: hsl(220 46% 16%);
+  --color-day: hsl(210 40% 96%);
+  --color-ink: hsl(222 40% 12%);
+  --color-mist: hsl(215 20% 55%);
+  --color-muted: hsl(215 16% 68%);
+  --color-signal: hsl(199 70% 36%);
+  --color-night: hsl(222 35% 10%);
+  --color-gray: hsl(215 20% 55%);
 
-  --font-mono: var(--font-lato);
-  --font-sans: var(--font-lato);
-  --font-sign: var(--font-caveat);
+  --font-mono: var(--font-source-sans);
+  --font-sans: var(--font-source-sans);
+  --font-sign: var(--font-fraunces);
 
   @keyframes fadeIn {
     0% {
@@ -21,24 +24,46 @@
     }
   }
 
+  @keyframes presenceIn {
+    0% {
+      opacity: 0;
+      transform: translateY(0.4rem);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   @keyframes puff {
     0%,
     100% {
       transform: scale(1);
     }
     50% {
-      transform: scale(1.1);
+      transform: scale(1.04);
     }
   }
 }
 
 @layer base {
   :root {
-    --font-caveat: "Caveat", cursive;
-    --font-lato: "Lato", sans-serif;
+    --font-fraunces: "Fraunces", serif;
+    --font-source-sans: "Source Sans 3", sans-serif;
   }
 
   :focus-visible {
-    outline: none;
+    outline: 2px solid var(--color-signal);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }

@@ -67,7 +67,7 @@ test("color-scheme cycles system → light → dark and persists as color-scheme
 }) => {
   await page.goto("/");
 
-  const toggle = page.getByRole("button");
+  const toggle = page.getByRole("button", { name: "Change appearance" });
   await expect(toggle).toBeVisible();
 
   await expect
@@ -103,56 +103,63 @@ test("color-scheme cycles system → light → dark and persists as color-scheme
   await expect(page.locator("html")).toHaveAttribute("data-color-scheme", "light");
 });
 
-test("color-scheme control has a Toggle Color Scheme tooltip", async ({
+test("color-scheme control has a user-language appearance tooltip", async ({
   page,
 }) => {
   await page.goto("/");
 
-  const toggle = page.getByRole("button");
+  const toggle = page.getByRole("button", { name: "Change appearance" });
   await toggle.hover();
 
-  await expect(page.getByText("Toggle Color Scheme")).toBeVisible();
+  await expect(
+    page.getByText("Matching your system. Click for light."),
+  ).toBeVisible();
 });
 
 test("color-scheme control shows visible keyboard focus", async ({ page }) => {
   await page.goto("/");
 
-  const toggle = page.getByRole("button");
+  const toggle = page.getByRole("button", { name: "Change appearance" });
   await expect(toggle).toBeVisible();
 
-  const unfocusedBackground = await toggle.evaluate((el) => {
-    (el as HTMLElement).blur();
-    return getComputedStyle(el).backgroundColor;
-  });
+  await toggle.evaluate((el) => (el as HTMLElement).blur());
+  await expect
+    .poll(async () =>
+      toggle.evaluate((el) => getComputedStyle(el).outlineStyle),
+    )
+    .toBe("none");
 
   await toggle.focus();
   await expect(toggle).toBeFocused();
 
   await expect
     .poll(async () =>
-      toggle.evaluate((el) => getComputedStyle(el).backgroundColor),
+      toggle.evaluate((el) => {
+        const style = getComputedStyle(el);
+        return `${style.outlineStyle} ${style.outlineWidth}`;
+      }),
     )
-    .not.toBe(unfocusedBackground);
+    .toMatch(/solid\s+[1-9]/);
 });
 
-test("offline overlay shows Lost Connection and dismisses when online", async ({
+test("offline overlay shows direction and dismisses when online", async ({
   page,
   context,
 }) => {
   await page.goto("/");
 
-  await expect(page.getByText("Lost Connection")).toHaveCount(0);
+  await expect(page.getByText("You're offline")).toHaveCount(0);
 
   await context.setOffline(true);
-  await expect(page.getByRole("heading", { name: "Lost Connection" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "You're offline" })).toBeVisible();
   await expect(
     page.getByText(
-      "It is a bummer that you lost your internet connection. Try shaking your mouse, yelling at your internet service provider, or restart your computer 3 times.",
+      "This page needs a connection for the live clock. Check your network, then come back — I'll still be here in Eastern time.",
     ),
   ).toBeVisible();
 
   await context.setOffline(false);
-  await expect(page.getByRole("heading", { name: "Lost Connection" })).toHaveCount(
+  await expect(page.getByRole("heading", { name: "You're offline" })).toHaveCount(
     0,
   );
 });
