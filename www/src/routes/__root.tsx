@@ -20,7 +20,7 @@ export const Route = createRootRoute({
       { title: "Brian Patrick Kemper" },
       {
         name: "description",
-        content: "A Product Software Engineer who builds digital products that make your work life easier by understanding your domain and leading a team to deliver the ideal user experience.",
+        content: "A Product Software Engineer who builds digital products that make your work life easier by understanding your domain and leading teams to deliver the ideal user experience.",
       },
       { name: "keywords", content: "engineer, software" },
       { name: "robots", content: "index, follow" },

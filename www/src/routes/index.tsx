@@ -33,7 +33,7 @@ function Home() {
           </h1>
           <p className="reveal reveal-delay-1 max-w-xl text-lg leading-relaxed text-gray dark:text-muted">
             A Product Software Engineer who builds digital products that make
-            your work life easier by understanding your domain and leading a team to
+            your work life easier by understanding your domain and leading teams to
             deliver the ideal user experience.
           </p>
           <p className="reveal reveal-delay-2">
