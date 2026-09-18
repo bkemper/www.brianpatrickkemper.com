@@ -3,21 +3,28 @@ import { type ReactNode } from "react";
 interface LogoLinkProps {
   children: ReactNode;
   href: string;
+  label: string;
 }
 
-const LogoLink = ({ children, href }: LogoLinkProps) => {
+const LogoLink = ({ children, href, label }: LogoLinkProps) => {
   return (
     <a
+      aria-label={label}
       className="
         block
-        duration-500
-        ease-in-out
-        px-4
+        px-2
         py-1
-        focus:scale-110 hover:scale-110
-        text-6xl
-        text-muted focus:text-night dark:focus:text-day hover:text-night dark:hover:text-day
-        transition-all
+        text-4xl
+        text-muted
+        transition-colors
+        duration-300
+        ease-out
+        focus:text-night
+        hover:text-night
+        dark:focus:text-day
+        dark:hover:text-day
+        sm:px-3
+        sm:text-5xl
       "
       href={href}
       rel="noopener noreferrer"

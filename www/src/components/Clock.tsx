@@ -74,9 +74,12 @@ const Clock = () => {
 
   const time = (
     <time
-      className={classNames("text-sm", "text-night", "dark:text-day", {
-        "animate-[puff_1s_ease-in-out_1] inline-block": isAnimated,
-      })}
+      className={classNames(
+        "cursor-pointer text-sm font-medium text-night dark:text-day",
+        {
+          "animate-[puff_1s_ease-in-out_1] inline-block": isAnimated,
+        },
+      )}
       dateTime={now.toISOString()}
       ref={timeRef}
     >

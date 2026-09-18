@@ -39,15 +39,34 @@ test("prerendered / still shows the heading after reload without JavaScript", as
   ).toBeVisible();
 });
 
-test("prerendered / includes the LinkedIn role control", async ({ page }) => {
+test("prerendered / includes identity copy and profile links", async ({
+  page,
+}) => {
   await page.goto("/");
 
-  const roleLink = page.getByRole("link", { name: "Product Software Engineer" });
-  await expect(roleLink).toBeVisible();
-  await expect(roleLink).toHaveAttribute(
+  const heading = page.getByRole("heading", {
+    level: 1,
+    name: "Brian Patrick Kemper",
+  });
+  await expect(heading).toBeVisible();
+
+  const title = page.getByText("Senior Software Engineer");
+  await expect(title).toBeVisible();
+
+  const nameBox = await heading.boundingBox();
+  const titleBox = await title.boundingBox();
+  expect(nameBox && titleBox && nameBox.y < titleBox.y).toBe(true);
+
+  const linkedIn = page.getByRole("link", { name: "LinkedIn" }).first();
+  await expect(linkedIn).toBeVisible();
+  await expect(linkedIn).toHaveAttribute(
     "href",
     "//www.linkedin.com/in/brianpatrickkemper/",
   );
+
+  const github = page.getByRole("link", { name: "GitHub" }).first();
+  await expect(github).toBeVisible();
+  await expect(github).toHaveAttribute("href", "//github.com/bkemper");
 });
 
 test("prerendered / includes five company LinkedIn marks", async ({ page }) => {
@@ -88,7 +107,7 @@ test("prerendered / document metadata matches the public Site", async ({
   const description = page.locator('meta[name="description"]');
   await expect(description).toHaveAttribute(
     "content",
-    "A software engineer building products that help people.",
+    "Brian Patrick Kemper, senior software engineer. Work with Pie Insurance, Visual Lease, Facet, SparkPost, and STAQ.",
   );
 
   const keywords = page.locator('meta[name="keywords"]');
@@ -141,7 +160,7 @@ test("Google Search Console verification file is served", async ({
 test("favicon and public logos are served at their current paths", async ({
   request,
 }) => {
-  for (const path of ["/favicon.ico", "/logo.png", "/logo.svg"]) {
+  for (const path of ["/favicon.ico", "/logo.png", "/logo.svg", "/hero.jpg"]) {
     const response = await request.get(path);
     expect(response.ok(), path).toBe(true);
   }
