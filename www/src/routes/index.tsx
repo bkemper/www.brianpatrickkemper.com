@@ -33,7 +33,7 @@ function Home() {
           </h1>
           <p className="max-w-xl text-lg leading-relaxed text-gray dark:text-muted">
             I'm a{" "}
-            <span className="font-bold italic text-night dark:text-day">
+            <span className="font-bold text-night dark:text-day">
               Product Software Engineer
             </span>{" "}
             building digital products that make work life easier by
