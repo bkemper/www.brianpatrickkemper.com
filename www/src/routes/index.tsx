@@ -3,6 +3,7 @@ import Clock from "../components/Clock";
 import DarkModeToggle from "../components/DarkModeToggle";
 import Link from "../components/Link";
 import LogoLink from "../components/LogoLink";
+import MagneticConnect from "../components/MagneticConnect";
 import FacetLogo from "../components/logos/FacetLogo";
 import PieInsuranceLogo from "../components/logos/PieInsuranceLogo";
 import SparkpostLogo from "../components/logos/SparkpostLogo";
@@ -35,6 +36,10 @@ function Home() {
           <h1 className="reveal font-display text-[clamp(2.75rem,8vw,5.5rem)] leading-[0.95] font-normal tracking-tight text-balance">
             Brian Patrick Kemper
           </h1>
+          <div
+            aria-hidden="true"
+            className="reveal reveal-delay-1 h-1 w-16 bg-accent"
+          />
           <p className="reveal reveal-delay-1 max-w-xl text-lg leading-relaxed text-gray dark:text-muted">
             I'm a{" "}
             <span className="font-bold text-night dark:text-day">
@@ -45,14 +50,7 @@ function Home() {
             user experience.
           </p>
           <p className="reveal reveal-delay-2">
-            <a
-              className="inline-flex border border-night bg-transparent px-7 py-3 text-sm font-medium tracking-wide text-night transition-[color,background-color,border-color,transform] duration-300 ease-out hover:border-accent hover:bg-accent hover:text-accent-ink focus-visible:border-accent focus-visible:bg-accent focus-visible:text-accent-ink active:scale-[0.98] dark:border-day dark:text-day dark:hover:border-accent dark:hover:bg-accent dark:hover:text-accent-ink dark:focus-visible:border-accent dark:focus-visible:bg-accent dark:focus-visible:text-accent-ink"
-              href="//www.linkedin.com/in/brianpatrickkemper/"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Connect
-            </a>
+            <MagneticConnect />
           </p>
         </section>
 
