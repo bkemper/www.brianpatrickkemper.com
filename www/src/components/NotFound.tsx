@@ -14,10 +14,11 @@ export default function NotFound() {
 
       <main className="relative z-10 flex flex-1 flex-col items-center justify-center gap-6 px-6 py-16 text-center md:px-12 lg:px-20">
         <h1 className="reveal font-display text-[clamp(1.75rem,4vw,2.75rem)] leading-tight font-normal tracking-tight text-balance">
-          Page not found
+          Where you going?
         </h1>
         <p className="reveal reveal-delay-1 max-w-md text-lg leading-relaxed text-gray dark:text-muted">
-          Nothing lives at this address. Head home and pick up from there.
+          This page does not exist. Return{" "}
+          <Link href="/">home</Link> when ready.
         </p>
       </main>
 
