@@ -63,6 +63,15 @@ export class AmplifyStack extends Stack {
       }),
     );
 
+    // Unknown paths → prerendered 404 page (Amplify Hosting custom 404).
+    site.addCustomRule(
+      new amplify.CustomRule({
+        source: "/<*>",
+        target: "/404.html",
+        status: amplify.RedirectStatus.NOT_FOUND,
+      }),
+    );
+
     const main = site.addBranch("main", {
       branchName: "main",
       autoBuild: true,

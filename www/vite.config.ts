@@ -10,6 +10,8 @@ export default defineConfig({
   plugins: [
     tanstackStart({
       prerender: {
+        // Emit /404 as 404.html (Amplify custom-404 target), not 404/index.html.
+        autoSubfolderIndex: false,
         crawlLinks: false,
         enabled: true,
         failOnError: true,

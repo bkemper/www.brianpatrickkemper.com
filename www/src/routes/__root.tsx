@@ -6,6 +6,7 @@ import {
 } from "@tanstack/react-router";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import type { ReactNode } from "react";
+import NotFound from "../components/NotFound";
 import OfflineOverlay from "../components/OfflineOverlay";
 import { WindowContextProvider } from "../context/WindowContext";
 import appCss from "../styles.css?url";
@@ -32,6 +33,7 @@ export const Route = createRootRoute({
     ],
   }),
   component: RootComponent,
+  notFoundComponent: NotFound,
 });
 
 function RootComponent() {

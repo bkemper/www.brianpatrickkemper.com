@@ -153,6 +153,19 @@ test("favicon and public logos are served at their current paths", async ({
   }
 });
 
+test("prerendered /404.html shows the not-found page", async ({ page }) => {
+  const response = await page.goto("/404.html");
+
+  expect(response?.ok()).toBe(true);
+  await expect(
+    page.getByRole("heading", { level: 1, name: "Page not found" }),
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: "Go home" })).toHaveAttribute(
+    "href",
+    "/",
+  );
+});
+
 test("an unknown path returns a real 404", async ({ request }) => {
   const response = await request.get("/does-not-exist");
 
