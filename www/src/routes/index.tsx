@@ -18,6 +18,10 @@ function Home() {
     <div className="bg-day text-night dark:bg-night dark:text-day relative min-h-[100dvh] min-w-screen">
       <div
         aria-hidden="true"
+        className="atmosphere-wash pointer-events-none fixed inset-0 z-0"
+      />
+      <div
+        aria-hidden="true"
         className="paper-grain pointer-events-none fixed inset-0 z-50"
       />
 
@@ -27,29 +31,45 @@ function Home() {
       </header>
 
       <main className="relative z-10">
-        <section className="flex flex-col gap-8 px-6 pb-16 pt-6 md:px-12 md:pb-24 md:pt-10 lg:max-w-4xl lg:px-20">
-          <h1 className="font-display text-[clamp(2.75rem,8vw,5.5rem)] leading-[0.95] font-normal tracking-tight text-balance">
-            Brian Patrick Kemper
-          </h1>
-          <p className="max-w-xl text-lg leading-relaxed text-gray dark:text-muted">
-            I'm a{" "}
-            <span className="font-bold text-night dark:text-day">
-              Product Software Engineer
-            </span>{" "}
-            building digital products that make work life easier by
-            understanding your domain and leading teams to deliver a thoughtful
-            user experience.
-          </p>
-          <p>
-            <a
-              className="inline-flex border border-night bg-transparent px-7 py-3 text-sm font-medium tracking-wide text-night transition-colors duration-500 ease-out hover:bg-night hover:text-day focus-visible:bg-night focus-visible:text-day dark:border-day dark:text-day dark:hover:bg-day dark:hover:text-night dark:focus-visible:bg-day dark:focus-visible:text-night"
-              href="//www.linkedin.com/in/brianpatrickkemper/"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Connect
-            </a>
-          </p>
+        <section className="grid items-center gap-10 px-6 pb-16 pt-6 md:grid-cols-12 md:gap-12 md:px-12 md:pb-24 md:pt-8 lg:px-20">
+          <div className="flex flex-col gap-8 md:col-span-6 lg:col-span-5 lg:max-w-xl">
+            <h1 className="reveal font-display text-[clamp(2.5rem,6.5vw,4.75rem)] leading-[0.95] font-normal tracking-tight text-balance">
+              Brian Patrick Kemper
+            </h1>
+            <p className="reveal reveal-delay-1 max-w-xl text-lg leading-relaxed text-gray dark:text-muted">
+              I'm a{" "}
+              <span className="font-bold text-night dark:text-day">
+                Product Software Engineer
+              </span>{" "}
+              building digital products that make work life easier by
+              understanding your domain and leading teams to deliver a thoughtful
+              user experience.
+            </p>
+            <p className="reveal reveal-delay-2">
+              <a
+                className="inline-flex border border-night bg-transparent px-7 py-3 text-sm font-medium tracking-wide text-night transition-[color,background-color,border-color,transform] duration-300 ease-out hover:border-accent hover:bg-accent hover:text-accent-ink focus-visible:border-accent focus-visible:bg-accent focus-visible:text-accent-ink active:scale-[0.98] dark:border-day dark:text-day dark:hover:border-accent dark:hover:bg-accent dark:hover:text-accent-ink dark:focus-visible:border-accent dark:focus-visible:bg-accent dark:focus-visible:text-accent-ink"
+                href="//www.linkedin.com/in/brianpatrickkemper/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Connect
+              </a>
+            </p>
+          </div>
+
+          <div className="reveal reveal-delay-3 md:col-span-6 lg:col-span-7">
+            <figure className="relative aspect-[4/5] w-full overflow-hidden md:aspect-[5/6] lg:ml-auto lg:max-w-xl">
+              <img
+                alt="A calm desk workspace with soft natural light"
+                className="h-full w-full object-cover"
+                decoding="async"
+                fetchPriority="high"
+                height={1500}
+                src="/hero-desk.jpg"
+                width={1200}
+              />
+            </figure>
+          </div>
         </section>
 
         <section className="border-t border-night/15 px-6 py-16 md:px-12 md:py-20 lg:px-20 dark:border-day/15">
