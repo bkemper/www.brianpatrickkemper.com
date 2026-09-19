@@ -3,6 +3,7 @@ import Clock from "../components/Clock";
 import DarkModeToggle from "../components/DarkModeToggle";
 import Link from "../components/Link";
 import LogoLink from "../components/LogoLink";
+import MagneticConnect from "../components/MagneticConnect";
 import FacetLogo from "../components/logos/FacetLogo";
 import PieInsuranceLogo from "../components/logos/PieInsuranceLogo";
 import SparkpostLogo from "../components/logos/SparkpostLogo";
@@ -41,14 +42,7 @@ function Home() {
             user experience.
           </p>
           <p>
-            <a
-              className="inline-flex border border-night bg-transparent px-7 py-3 text-sm font-medium tracking-wide text-night transition-colors duration-500 ease-out hover:bg-night hover:text-day focus-visible:bg-night focus-visible:text-day dark:border-day dark:text-day dark:hover:bg-day dark:hover:text-night dark:focus-visible:bg-day dark:focus-visible:text-night"
-              href="//www.linkedin.com/in/brianpatrickkemper/"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Connect
-            </a>
+            <MagneticConnect />
           </p>
         </section>
 
