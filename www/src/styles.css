@@ -40,7 +40,7 @@
   --color-gray: hsl(231 10% 45%);
   --color-muted: hsl(231 10% 75%);
   --color-night: hsl(220 46% 16%);
-  /* Single accent: complementary yellow-gold to the day/night blues (hue ~220 → ~40) */
+  /* Complementary yellow for atmosphere wash only */
   --color-accent: hsl(43 90% 42%);
   --color-accent-ink: hsl(43 30% 98%);
 
@@ -101,12 +101,12 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--color-night);
     outline-offset: 3px;
   }
 
   [data-color-scheme="dark"] :focus-visible {
-    outline-color: var(--color-accent);
+    outline-color: var(--color-day);
   }
 
   @media (prefers-reduced-motion: reduce) {
