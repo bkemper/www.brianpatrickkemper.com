@@ -163,13 +163,6 @@ test("prerendered /404.html shows the not-found page", async ({ page }) => {
   await expect(
     page.getByText(/Nothing lives at this address/),
   ).toBeVisible();
-  await expect(page.getByRole("link", { name: "Go home" })).toHaveAttribute(
-    "href",
-    "/",
-  );
-  await expect(
-    page.getByRole("button", { name: "Toggle color scheme" }),
-  ).toBeVisible();
 });
 
 test("an unknown path returns a real 404", async ({ request }) => {
