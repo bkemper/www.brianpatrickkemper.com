@@ -31,7 +31,7 @@ function Home() {
       </header>
 
       <main className="relative z-10">
-        <section className="flex flex-col gap-8 border-l-4 border-accent px-6 pb-16 pt-6 md:px-12 md:pb-24 md:pt-10 lg:max-w-4xl lg:px-20">
+        <section className="flex flex-col gap-8 px-6 pb-16 pt-6 md:px-12 md:pb-24 md:pt-10 lg:max-w-4xl lg:px-20">
           <h1 className="reveal font-display text-[clamp(2.75rem,8vw,5.5rem)] leading-[0.95] font-normal tracking-tight text-balance">
             Brian Patrick Kemper
           </h1>
