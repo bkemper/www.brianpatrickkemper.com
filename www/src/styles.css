@@ -40,9 +40,9 @@
   --color-gray: hsl(231 10% 45%);
   --color-muted: hsl(231 10% 75%);
   --color-night: hsl(220 46% 16%);
-  /* Single accent: burnt orange, locked for CTA only */
-  --color-accent: hsl(16 62% 46%);
-  --color-accent-ink: hsl(16 70% 96%);
+  /* Single accent: hotter burnt orange for punch */
+  --color-accent: hsl(14 72% 44%);
+  --color-accent-ink: hsl(14 70% 97%);
 
   --font-sans: var(--font-outfit);
   --font-display: var(--font-outfit);
@@ -101,12 +101,12 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-night);
+    outline: 2px solid var(--color-accent);
     outline-offset: 3px;
   }
 
   [data-color-scheme="dark"] :focus-visible {
-    outline-color: var(--color-day);
+    outline-color: var(--color-accent);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -142,28 +142,38 @@
   .atmosphere-wash {
     background:
       radial-gradient(
-        ellipse 70% 55% at 12% 18%,
-        hsl(220 46% 16% / 0.07),
-        transparent 62%
+        ellipse 75% 60% at 8% 12%,
+        hsl(220 46% 16% / 0.1),
+        transparent 58%
       ),
       radial-gradient(
-        ellipse 50% 40% at 92% 8%,
-        hsl(16 62% 46% / 0.05),
-        transparent 55%
+        ellipse 55% 45% at 88% 10%,
+        hsl(14 72% 44% / 0.14),
+        transparent 52%
+      ),
+      radial-gradient(
+        ellipse 40% 35% at 70% 70%,
+        hsl(14 72% 44% / 0.06),
+        transparent 60%
       );
   }
 
   [data-color-scheme="dark"] .atmosphere-wash {
     background:
       radial-gradient(
-        ellipse 70% 55% at 12% 18%,
-        hsl(220 100% 98% / 0.06),
-        transparent 62%
+        ellipse 75% 60% at 8% 12%,
+        hsl(220 100% 98% / 0.07),
+        transparent 58%
       ),
       radial-gradient(
-        ellipse 50% 40% at 92% 8%,
-        hsl(16 62% 46% / 0.1),
-        transparent 55%
+        ellipse 55% 45% at 88% 10%,
+        hsl(14 72% 50% / 0.22),
+        transparent 52%
+      ),
+      radial-gradient(
+        ellipse 40% 35% at 70% 70%,
+        hsl(14 72% 44% / 0.1),
+        transparent 60%
       );
   }
 
