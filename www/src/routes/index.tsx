@@ -13,6 +13,22 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
+
+const focusItems = [
+  {
+    title: "Domain-first products",
+    body: "Map the real work, then shape software that fits how teams already operate.",
+  },
+  {
+    title: "Led delivery",
+    body: "Align engineers and stakeholders on outcomes, then ship with a clear bar for quality.",
+  },
+  {
+    title: "Thoughtful UX",
+    body: "Prefer calm interfaces, obvious paths, and details that reduce daily friction.",
+  },
+] as const;
+
 function Home() {
   return (
     <div className="bg-day text-night dark:bg-night dark:text-day relative min-h-[100dvh] min-w-screen">
@@ -50,6 +66,30 @@ function Home() {
               Connect
             </a>
           </p>
+        </section>
+
+
+        <section className="border-t border-night/15 px-6 py-16 md:px-12 md:py-20 lg:px-20 dark:border-day/15">
+          <div className="reveal-on-scroll grid gap-10 md:grid-cols-12 md:gap-8">
+            <h2 className="font-display text-3xl tracking-tight md:col-span-4 md:text-4xl">
+              How I work
+            </h2>
+            <ul className="divide-y divide-night/15 dark:divide-day/15 md:col-span-8">
+              {focusItems.map((item) => (
+                <li
+                  key={item.title}
+                  className="grid gap-2 py-6 first:pt-0 last:pb-0 md:grid-cols-12 md:gap-6"
+                >
+                  <p className="text-sm font-medium tracking-wide text-night dark:text-day md:col-span-4">
+                    {item.title}
+                  </p>
+                  <p className="max-w-prose text-base leading-relaxed text-gray dark:text-muted md:col-span-8">
+                    {item.body}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </section>
 
         <section className="border-t border-night/15 px-6 py-16 md:px-12 md:py-20 lg:px-20 dark:border-day/15">
