@@ -55,10 +55,13 @@ export class AmplifyStack extends Stack {
     site.node.tryRemoveChild("Role");
 
     // Apex → www permanent redirect (canonical origin is www; ADR 0002).
+    // Amplify ignores domain+path sources (e.g. `https://apex/<*>`) without
+    // error; domain-only sources append the request path automatically.
+    // https://docs.aws.amazon.com/amplify/latest/userguide/redirect-rewrite-examples.html
     site.addCustomRule(
       new amplify.CustomRule({
-        source: `https://${SITE_DOMAIN_NAME}/<*>`,
-        target: `https://www.${SITE_DOMAIN_NAME}/<*>`,
+        source: `https://${SITE_DOMAIN_NAME}`,
+        target: `https://www.${SITE_DOMAIN_NAME}`,
         status: amplify.RedirectStatus.PERMANENT_REDIRECT,
       }),
     );
