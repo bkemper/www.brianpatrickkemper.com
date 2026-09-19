@@ -40,6 +40,9 @@
   --color-gray: hsl(231 10% 45%);
   --color-muted: hsl(231 10% 75%);
   --color-night: hsl(220 46% 16%);
+  /* Single accent: burnt orange, locked for CTA */
+  --color-accent: hsl(16 62% 46%);
+  --color-accent-ink: hsl(16 70% 96%);
 
   --font-sans: var(--font-outfit);
   --font-display: var(--font-outfit);
