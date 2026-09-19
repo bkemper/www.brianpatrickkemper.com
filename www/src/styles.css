@@ -40,9 +40,9 @@
   --color-gray: hsl(231 10% 45%);
   --color-muted: hsl(231 10% 75%);
   --color-night: hsl(220 46% 16%);
-  /* Single accent: hotter burnt orange for punch */
-  --color-accent: hsl(14 72% 44%);
-  --color-accent-ink: hsl(14 70% 97%);
+  /* Single accent: complementary yellow-gold to the day/night blues (hue ~220 → ~40) */
+  --color-accent: hsl(43 90% 42%);
+  --color-accent-ink: hsl(43 30% 98%);
 
   --font-sans: var(--font-outfit);
   --font-display: var(--font-outfit);
@@ -148,12 +148,12 @@
       ),
       radial-gradient(
         ellipse 55% 45% at 88% 10%,
-        hsl(14 72% 44% / 0.14),
+        hsl(43 90% 50% / 0.18),
         transparent 52%
       ),
       radial-gradient(
         ellipse 40% 35% at 70% 70%,
-        hsl(14 72% 44% / 0.06),
+        hsl(43 90% 42% / 0.08),
         transparent 60%
       );
   }
@@ -167,12 +167,12 @@
       ),
       radial-gradient(
         ellipse 55% 45% at 88% 10%,
-        hsl(14 72% 50% / 0.22),
+        hsl(43 90% 55% / 0.22),
         transparent 52%
       ),
       radial-gradient(
         ellipse 40% 35% at 70% 70%,
-        hsl(14 72% 44% / 0.1),
+        hsl(43 90% 42% / 0.12),
         transparent 60%
       );
   }
