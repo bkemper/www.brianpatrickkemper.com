@@ -18,6 +18,10 @@ function Home() {
     <div className="bg-day text-night dark:bg-night dark:text-day relative min-h-[100dvh] min-w-screen">
       <div
         aria-hidden="true"
+        className="atmosphere-wash pointer-events-none fixed inset-0 z-0"
+      />
+      <div
+        aria-hidden="true"
         className="paper-grain pointer-events-none fixed inset-0 z-50"
       />
 
