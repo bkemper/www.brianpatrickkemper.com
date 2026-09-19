@@ -18,6 +18,10 @@ function Home() {
     <div className="bg-day text-night dark:bg-night dark:text-day relative min-h-[100dvh] min-w-screen">
       <div
         aria-hidden="true"
+        className="atmosphere-wash pointer-events-none fixed inset-0 z-0"
+      />
+      <div
+        aria-hidden="true"
         className="paper-grain pointer-events-none fixed inset-0 z-50"
       />
 
@@ -52,7 +56,7 @@ function Home() {
           </p>
         </section>
 
-        <section className="border-t border-night/15 px-6 py-16 md:px-12 md:py-20 lg:px-20 dark:border-day/15">
+        <section className="border-y border-dashed border-night/15 px-6 py-16 md:px-12 md:py-20 lg:px-20 dark:border-day/15">
           <h2 className="sr-only">Company Logos</h2>
           <ul className="reveal-on-scroll flex flex-wrap items-center gap-x-10 gap-y-8 md:justify-between">
             <li>
@@ -99,7 +103,7 @@ function Home() {
         </section>
       </main>
 
-      <footer className="relative z-10 border-t border-night/15 px-6 py-12 md:px-12 lg:px-20 dark:border-day/15">
+      <footer className="relative z-10 px-6 py-12 md:px-12 lg:px-20">
         <ul className="flex gap-4 text-sm text-gray">
           <li>
             {new Date().getFullYear()} &copy;{" "}
