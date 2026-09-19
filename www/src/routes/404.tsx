@@ -9,7 +9,7 @@ export const Route = createFileRoute("/404")({
       { title: "Page not found · Brian Patrick Kemper" },
       {
         name: "description",
-        content: "That path doesn't exist on this Site.",
+        content: "Nothing lives at this address.",
       },
       { name: "robots", content: "noindex, follow" },
     ],
