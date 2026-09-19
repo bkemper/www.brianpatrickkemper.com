@@ -18,6 +18,10 @@ function Home() {
     <div className="bg-day text-night dark:bg-night dark:text-day relative min-h-[100dvh] min-w-screen">
       <div
         aria-hidden="true"
+        className="atmosphere-wash pointer-events-none fixed inset-0 z-0"
+      />
+      <div
+        aria-hidden="true"
         className="paper-grain pointer-events-none fixed inset-0 z-50"
       />
 
@@ -28,10 +32,10 @@ function Home() {
 
       <main className="relative z-10">
         <section className="flex flex-col gap-8 px-6 pb-16 pt-6 md:px-12 md:pb-24 md:pt-10 lg:max-w-4xl lg:px-20">
-          <h1 className="font-display text-[clamp(2.75rem,8vw,5.5rem)] leading-[0.95] font-normal tracking-tight text-balance">
+          <h1 className="reveal font-display text-[clamp(2.75rem,8vw,5.5rem)] leading-[0.95] font-normal tracking-tight text-balance">
             Brian Patrick Kemper
           </h1>
-          <p className="max-w-xl text-lg leading-relaxed text-gray dark:text-muted">
+          <p className="reveal reveal-delay-1 max-w-xl text-lg leading-relaxed text-gray dark:text-muted">
             I'm a{" "}
             <span className="font-bold text-night dark:text-day">
               Product Software Engineer
@@ -40,9 +44,9 @@ function Home() {
             understanding your domain and leading teams to deliver a thoughtful
             user experience.
           </p>
-          <p>
+          <p className="reveal reveal-delay-2">
             <a
-              className="inline-flex border border-night bg-transparent px-7 py-3 text-sm font-medium tracking-wide text-night transition-colors duration-500 ease-out hover:bg-night hover:text-day focus-visible:bg-night focus-visible:text-day dark:border-day dark:text-day dark:hover:bg-day dark:hover:text-night dark:focus-visible:bg-day dark:focus-visible:text-night"
+              className="inline-flex border border-night bg-transparent px-7 py-3 text-sm font-medium tracking-wide text-night transition-[color,background-color,border-color,transform] duration-300 ease-out hover:border-accent hover:bg-accent hover:text-accent-ink focus-visible:border-accent focus-visible:bg-accent focus-visible:text-accent-ink active:scale-[0.98] dark:border-day dark:text-day dark:hover:border-accent dark:hover:bg-accent dark:hover:text-accent-ink dark:focus-visible:border-accent dark:focus-visible:bg-accent dark:focus-visible:text-accent-ink"
               href="//www.linkedin.com/in/brianpatrickkemper/"
               rel="noopener noreferrer"
               target="_blank"

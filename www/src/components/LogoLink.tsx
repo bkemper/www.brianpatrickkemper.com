@@ -16,11 +16,14 @@ const LogoLink = ({ "aria-label": ariaLabel, children, href }: LogoLinkProps) =>
         py-1
         text-5xl
         text-muted
-        transition-colors
+        opacity-55
+        transition-[color,opacity]
         duration-500
         ease-out
         hover:text-night
+        hover:opacity-100
         focus-visible:text-night
+        focus-visible:opacity-100
         dark:hover:text-day
         dark:focus-visible:text-day
         md:text-6xl
