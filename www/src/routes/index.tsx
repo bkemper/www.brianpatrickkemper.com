@@ -46,7 +46,7 @@ function Home() {
           </p>
           <p>
             <a
-              className="inline-flex border border-night bg-transparent px-7 py-3 text-sm font-medium tracking-wide text-night transition-colors duration-500 ease-out hover:bg-night hover:text-day focus-visible:bg-night focus-visible:text-day dark:border-day dark:text-day dark:hover:bg-day dark:hover:text-night dark:focus-visible:bg-day dark:focus-visible:text-night"
+              className="inline-flex border border-night bg-night px-7 py-3 text-sm font-medium tracking-wide text-day transition-colors duration-500 ease-out hover:bg-transparent hover:text-night focus-visible:bg-transparent focus-visible:text-night dark:border-day dark:bg-day dark:text-night dark:hover:bg-transparent dark:hover:text-day dark:focus-visible:bg-transparent dark:focus-visible:text-day"
               href="//www.linkedin.com/in/brianpatrickkemper/"
               rel="noopener noreferrer"
               target="_blank"
