@@ -107,6 +107,18 @@ test("prerendered / document metadata matches the public Site", async ({
 
   const canonical = page.locator('link[rel="canonical"]');
   await expect(canonical).toHaveAttribute("href", `${canonicalOrigin}/`);
+
+  const ogTitle = page.locator('meta[property="og:title"]');
+  await expect(ogTitle).toHaveAttribute("content", "Brian Patrick Kemper");
+
+  const ogUrl = page.locator('meta[property="og:url"]');
+  await expect(ogUrl).toHaveAttribute("content", `${canonicalOrigin}/`);
+
+  const ogImage = page.locator('meta[property="og:image"]');
+  await expect(ogImage).toHaveAttribute(
+    "content",
+    `${canonicalOrigin}/logo.png`,
+  );
 });
 
 test("/robots.txt allows / and names the canonical sitemap", async ({
@@ -129,6 +141,8 @@ test("/sitemap.xml lists only / on the canonical origin", async ({
   expect(response.ok()).toBe(true);
   const body = await response.text();
   expect(body).toContain(`<loc>${canonicalOrigin}/</loc>`);
+  expect(body).toContain("<changefreq>daily</changefreq>");
+  expect(body).toContain("<priority>1.0</priority>");
   expect(body).not.toContain("https://brianpatrickkemper.com/</loc>");
   expect(body.match(/<loc>/g)?.length).toBe(1);
 });
