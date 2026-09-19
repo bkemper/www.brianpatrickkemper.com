@@ -143,17 +143,17 @@
     background:
       radial-gradient(
         ellipse 75% 60% at 8% 12%,
-        hsl(220 46% 16% / 0.1),
+        hsl(220 46% 16% / 0.05),
         transparent 58%
       ),
       radial-gradient(
         ellipse 55% 45% at 88% 10%,
-        hsl(43 90% 50% / 0.18),
+        hsl(43 90% 50% / 0.08),
         transparent 52%
       ),
       radial-gradient(
         ellipse 40% 35% at 70% 70%,
-        hsl(43 90% 42% / 0.08),
+        hsl(43 90% 42% / 0.04),
         transparent 60%
       );
   }
@@ -162,17 +162,17 @@
     background:
       radial-gradient(
         ellipse 75% 60% at 8% 12%,
-        hsl(220 100% 98% / 0.07),
+        hsl(220 100% 98% / 0.04),
         transparent 58%
       ),
       radial-gradient(
         ellipse 55% 45% at 88% 10%,
-        hsl(43 90% 55% / 0.22),
+        hsl(43 90% 55% / 0.1),
         transparent 52%
       ),
       radial-gradient(
         ellipse 40% 35% at 70% 70%,
-        hsl(43 90% 42% / 0.12),
+        hsl(43 90% 42% / 0.05),
         transparent 60%
       );
   }
