@@ -10,8 +10,6 @@ export default defineConfig({
   plugins: [
     tanstackStart({
       prerender: {
-        // Emit /not-found as not-found.html (Amplify custom-404 target), not not-found/index.html.
-        autoSubfolderIndex: false,
         crawlLinks: false,
         enabled: true,
         failOnError: true,
