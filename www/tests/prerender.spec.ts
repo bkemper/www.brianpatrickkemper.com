@@ -153,10 +153,8 @@ test("favicon and public logos are served at their current paths", async ({
   }
 });
 
-test("prerendered /not-found.html shows the not-found page", async ({
-  page,
-}) => {
-  const response = await page.goto("/not-found.html");
+test("prerendered /not-found shows the not-found page", async ({ page }) => {
+  const response = await page.goto("/not-found");
 
   expect(response?.ok()).toBe(true);
   await expect(
