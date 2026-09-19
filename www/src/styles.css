@@ -40,7 +40,7 @@
   --color-gray: hsl(231 10% 45%);
   --color-muted: hsl(231 10% 75%);
   --color-night: hsl(220 46% 16%);
-  /* Single accent: burnt orange, locked for CTA only */
+  /* Single accent: burnt orange */
   --color-accent: hsl(16 62% 46%);
   --color-accent-ink: hsl(16 70% 96%);
 
@@ -142,28 +142,28 @@
   .atmosphere-wash {
     background:
       radial-gradient(
-        ellipse 70% 55% at 12% 18%,
-        hsl(220 46% 16% / 0.07),
-        transparent 62%
+        ellipse 80% 65% at 0% 0%,
+        hsl(220 46% 16% / 0.09),
+        transparent 55%
       ),
       radial-gradient(
-        ellipse 50% 40% at 92% 8%,
-        hsl(16 62% 46% / 0.05),
-        transparent 55%
+        ellipse 60% 50% at 100% 0%,
+        hsl(16 62% 46% / 0.1),
+        transparent 50%
       );
   }
 
   [data-color-scheme="dark"] .atmosphere-wash {
     background:
       radial-gradient(
-        ellipse 70% 55% at 12% 18%,
-        hsl(220 100% 98% / 0.06),
-        transparent 62%
+        ellipse 80% 65% at 0% 0%,
+        hsl(220 100% 98% / 0.07),
+        transparent 55%
       ),
       radial-gradient(
-        ellipse 50% 40% at 92% 8%,
-        hsl(16 62% 46% / 0.1),
-        transparent 55%
+        ellipse 60% 50% at 100% 0%,
+        hsl(16 62% 46% / 0.16),
+        transparent 50%
       );
   }
 
