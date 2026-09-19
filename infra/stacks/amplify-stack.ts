@@ -63,11 +63,11 @@ export class AmplifyStack extends Stack {
       }),
     );
 
-    // Unknown paths → prerendered not-found page (Amplify Hosting custom 404).
+    // Unknown paths → clean /not-found (Amplify Hosting custom 404).
     site.addCustomRule(
       new amplify.CustomRule({
         source: "/<*>",
-        target: "/not-found.html",
+        target: "/not-found",
         status: amplify.RedirectStatus.NOT_FOUND,
       }),
     );
